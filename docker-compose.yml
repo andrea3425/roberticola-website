@@ -1,0 +1,19 @@
+services:
+  roberticola-website:
+    build: .
+    container_name: roberticola-website
+    restart: unless-stopped
+    environment:
+      # Letti dal reverse proxy condiviso (nginx-proxy + acme-companion)
+      # definito nel repo infra separato, non qui.
+      VIRTUAL_HOST: roberticola.it,www.roberticola.it
+      LETSENCRYPT_HOST: roberticola.it,www.roberticola.it
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    # Rete creata dal repo infra (docker-compose del reverse proxy condiviso).
+    # Deve avere lo stesso nome li' dentro, es:
+    #   docker network create proxy
+    external: true
