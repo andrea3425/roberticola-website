@@ -54,7 +54,7 @@ const SERVIZI = [
   },
   {
     titolo: 'Giochi',
-    testo: 'Gratta e vinci, Lotto, SuperEnalotto e ricevitoria.',
+    testo: 'Gratta e vinci, Lotto e ricevitoria.',
     icona: '<path d="M12 3 4 9v6l8 6 8-6V9Z"/><path d="M12 3v18M4 9l8 6 8-6"/>',
   },
   {
