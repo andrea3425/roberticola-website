@@ -1,0 +1,1 @@
+sono un utente non tecnico quindi ti spiegherò quello che volgio fare e tu lo dovrai fare e mi dovrai rispondere ad alto livello. 

@@ -91,26 +91,128 @@ function orariTableHtml() {
   `).join('');
 }
 
+function orariGrandeHtml() {
+  const oggi = new Date().getDay();
+  const intestazioni = ORARI.map((r, i) => `<th class="${i === oggi ? 'oggi' : ''}">${r.giorno}</th>`).join('');
+  const celle = ORARI.map((r, i) => `
+    <td class="${i === oggi ? 'oggi' : ''}">${r.fasce.map(([a, b]) => `${formatOra(a)}&ndash;${formatOra(b)}`).join('<br>')}</td>
+  `).join('');
+  return `
+    <table class="orari-table">
+      <thead><tr>${intestazioni}</tr></thead>
+      <tbody><tr>${celle}</tr></tbody>
+    </table>
+  `;
+}
+
 const MAPS_QUERY = encodeURIComponent('Via Marmorale, 73, 02013 Antrodoco RI');
+
+const formatPrezzo = (prezzo) =>
+  prezzo == null ? 'Prezzo su richiesta' : prezzo.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+
+const PRODOTTI_FLAT = SEZIONI_GALLERIA.flatMap(s => s.prodotti);
+
+function prodottoCardHtml(prodotto) {
+  const [primaImmagine] = prodotto.immagini;
+  const index = PRODOTTI_FLAT.indexOf(prodotto);
+
+  return `
+    <article class="prodotto-card" data-prodotto-index="${index}">
+      <div class="prodotto-immagine">
+        <img src="${primaImmagine}" alt="${prodotto.titolo}">
+      </div>
+      <div class="prodotto-caption">
+        <h4>${prodotto.titolo}</h4>
+        <p class="prodotto-prezzo${prodotto.prezzo == null ? ' su-richiesta' : ''}">${formatPrezzo(prodotto.prezzo)}</p>
+      </div>
+    </article>
+  `;
+}
+
+function categoriaCardHtml(sezione) {
+  const copertina = sezione.prodotti[0]?.immagini[0];
+  const n = sezione.prodotti.length;
+  return `
+    <a href="#/galleria/${sezione.id}" class="categoria-card">
+      <div class="categoria-immagine">
+        ${copertina ? `<img src="${copertina}" alt="${sezione.titolo}">` : ''}
+      </div>
+      <div class="categoria-caption">
+        <h4>${sezione.titolo}</h4>
+        <p>${n} prodott${n === 1 ? 'o' : 'i'}</p>
+      </div>
+    </a>
+  `;
+}
+
+function galleriaIndiceHtml() {
+  return `
+    <section class="page page-gallery">
+      <div class="section-inner">
+        <p class="eyebrow">Uno sguardo dentro</p>
+        <h2>Prodotti</h2>
+        <p class="section-lead">Tutto ciò che cerchi, un mondo di idee da scoprire!</p>
+        <div class="categorie-grid">
+          ${SEZIONI_GALLERIA.map(categoriaCardHtml).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function galleriaSezioneHtml(sezione) {
+  const n = sezione.prodotti.length;
+  return `
+    <section class="page page-gallery page-gallery-sezione">
+      <div class="section-inner">
+        <a href="#/galleria" class="galleria-indietro">&larr; Tutte le categorie</a>
+        <p class="eyebrow">Categoria</p>
+        <h2>${sezione.titolo}</h2>
+        <p class="section-lead">${n} prodott${n === 1 ? 'o' : 'i'} in questa categoria.</p>
+        <div class="prodotti-grid">
+          ${sezione.prodotti.map(prodottoCardHtml).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function dividerHtml() {
+  return `
+    <div class="sezione-divider" aria-hidden="true">
+      <svg viewBox="0 0 300 20" preserveAspectRatio="none">
+        <path class="divider-linea-1" d="M0,7 C40,-2 60,16 100,7 C140,-2 160,16 200,7 C240,-2 260,16 300,7" />
+        <path class="divider-linea-2" d="M0,13 C40,4 60,22 100,13 C140,4 160,22 200,13 C240,4 260,22 300,13" />
+      </svg>
+    </div>
+  `;
+}
 
 const pages = {
   '/': () => {
     const stato = statoApertura();
     return `
     <section id="hero" class="hero">
-      <div class="hero-inner">
-        <img src="public/logo_icona.png" alt="" class="hero-icon" aria-hidden="true">
-        <p class="badge ${stato.aperto ? 'badge-open' : 'badge-closed'}">${stato.testo}</p>
-        <h1>Roberticola</h1>
-        <p class="hero-tagline">Edicola e tabacchi ad Antrodoco, di fiducia da sempre.</p>
-        <div class="hero-actions">
-          <a href="tel:+390746578079" class="btn btn-primary">Chiama ora</a>
-          <a href="#/" data-scroll="contatti" class="btn btn-ghost">Vieni a trovarci</a>
+      <div class="hero-media" aria-hidden="true">
+        <img src="public/immagine-home.png" alt="" class="hero-media-img">
+      </div>
+      <div class="hero-content">
+        <div class="hero-inner">
+          <h1>Roberticola</h1>
+          <p class="hero-tagline">Crea, colora, gioca!</p>
+          <div class="hero-actions">
+            <a href="#/" data-scroll="contatti" class="btn btn-casella btn-contattaci">Contattaci</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}" target="_blank" rel="noopener" class="btn btn-casella btn-chiama">Vieni a trovarci</a>
+          </div>
+          <p class="badge ${stato.aperto ? 'badge-open' : 'badge-closed'}">${stato.testo}</p>
         </div>
       </div>
     </section>
 
+    ${dividerHtml()}
+
     <section id="servizi" class="servizi">
+      <img src="public/logo_icona-viola.png" alt="" class="section-watermark">
       <div class="section-inner">
         <p class="eyebrow">Cosa trovi da noi</p>
         <h2>I nostri servizi</h2>
@@ -121,7 +223,10 @@ const pages = {
       </div>
     </section>
 
+    ${dividerHtml()}
+
     <section id="contatti" class="contatti">
+      <img src="public/logo_icona-viola.png" alt="" class="section-watermark">
       <div class="section-inner">
         <p class="eyebrow">Dove siamo</p>
         <h2>Contatti</h2>
@@ -142,12 +247,6 @@ const pages = {
               </div>
             </dl>
 
-            <table class="orari-table">
-              <tbody>
-                ${orariTableHtml()}
-              </tbody>
-            </table>
-
             <a href="https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}" target="_blank" rel="noopener" class="btn btn-primary btn-block">Ottieni indicazioni</a>
           </div>
 
@@ -160,20 +259,16 @@ const pages = {
             </iframe>
           </div>
         </div>
+
+        <div class="contatti-orari">
+          <img src="public/logo_icona-viola.png" alt="" class="contatti-orari-watermark">
+          <p class="contatti-orari-titolo">Orari di apertura</p>
+          ${orariGrandeHtml()}
+        </div>
       </div>
     </section>
   `;
   },
-  '/galleria': () => `
-    <section class="page page-gallery">
-      <div class="section-inner">
-        <p class="eyebrow">Uno sguardo dentro</p>
-        <h2>Galleria</h2>
-        <p class="section-lead">Presto qui trovi qualche scatto del negozio.</p>
-        <div class="gallery-grid"></div>
-      </div>
-    </section>
-  `,
 };
 
 function currentPath() {
@@ -193,11 +288,93 @@ function closeNav() {
   document.body.classList.remove('nav-locked');
 }
 
+function updateLogoColor(theme) {
+  const suffix = theme === 'home' ? 'teal' : 'viola';
+  document.getElementById('logo-icon-img').src = `public/logo_icona-${suffix}.png`;
+  document.getElementById('logo-text-img').src = `public/logo_scritta-${suffix}.png`;
+}
+
+let modalProdotto = null;
+let modalIndiceFoto = 0;
+
+function aggiornaModal() {
+  if (!modalProdotto) return;
+  const img = document.getElementById('prodotto-modal-img');
+  img.src = modalProdotto.immagini[modalIndiceFoto];
+  img.alt = modalProdotto.titolo;
+  document.getElementById('prodotto-modal-titolo').textContent = modalProdotto.titolo;
+  document.getElementById('prodotto-modal-prezzo').textContent = formatPrezzo(modalProdotto.prezzo);
+
+  const multi = modalProdotto.immagini.length > 1;
+  document.querySelector('.prodotto-modal-prev').hidden = !multi;
+  document.querySelector('.prodotto-modal-next').hidden = !multi;
+
+  const miniature = document.getElementById('prodotto-modal-miniature');
+  miniature.innerHTML = multi
+    ? modalProdotto.immagini.map((src, i) => `
+        <button type="button" class="${i === modalIndiceFoto ? 'active' : ''}" data-indice="${i}" aria-label="Foto ${i + 1}">
+          <img src="${src}" alt="">
+        </button>
+      `).join('')
+    : '';
+}
+
+function apriModal(prodotto) {
+  modalProdotto = prodotto;
+  modalIndiceFoto = 0;
+  aggiornaModal();
+  document.getElementById('prodotto-modal').hidden = false;
+  document.body.classList.add('modal-open');
+}
+
+function chiudiModal() {
+  document.getElementById('prodotto-modal').hidden = true;
+  document.body.classList.remove('modal-open');
+  modalProdotto = null;
+}
+
+function modalVai(delta) {
+  if (!modalProdotto) return;
+  const n = modalProdotto.immagini.length;
+  modalIndiceFoto = (modalIndiceFoto + delta + n) % n;
+  aggiornaModal();
+}
+
+function initDividers() {
+  const dividers = document.querySelectorAll('.sezione-divider');
+  if (!dividers.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-vista');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  dividers.forEach(d => obs.observe(d));
+}
+
 function render() {
   const path = currentPath();
-  const view = pages[path] || pages['/'];
-  app.innerHTML = view();
-  updateActiveNav(path in pages ? path : '/');
+  const inGalleria = path === '/galleria' || path.startsWith('/galleria/');
+
+  let html;
+  if (path === '/galleria') {
+    html = galleriaIndiceHtml();
+  } else if (path.startsWith('/galleria/')) {
+    const sezione = SEZIONI_GALLERIA.find(s => s.id === path.slice('/galleria/'.length));
+    html = sezione ? galleriaSezioneHtml(sezione) : galleriaIndiceHtml();
+  } else {
+    html = pages['/']();
+  }
+
+  app.innerHTML = html;
+  updateActiveNav(inGalleria ? '/galleria' : '/');
+  const theme = inGalleria ? 'secondary' : 'home';
+  document.body.dataset.theme = theme;
+  updateLogoColor(theme);
+  window.scrollTo({ top: 0 });
+  initDividers();
 }
 
 window.addEventListener('hashchange', render);
@@ -235,7 +412,30 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   document.body.addEventListener('click', (e) => {
-    if (e.target.closest('a[data-route]')) closeNav();
+    if (e.target.closest('a[href^="#/"]')) closeNav();
+  });
+
+  document.body.addEventListener('click', (e) => {
+    const card = e.target.closest('.prodotto-card');
+    if (!card) return;
+    const prodotto = PRODOTTI_FLAT[Number(card.dataset.prodottoIndex)];
+    if (prodotto) apriModal(prodotto);
+  });
+
+  const prodottoModal = document.getElementById('prodotto-modal');
+  prodottoModal.addEventListener('click', (e) => {
+    if (e.target.closest('[data-modal-close]')) { chiudiModal(); return; }
+    if (e.target.closest('.prodotto-modal-prev')) { modalVai(-1); return; }
+    if (e.target.closest('.prodotto-modal-next')) { modalVai(1); return; }
+    const miniatura = e.target.closest('.prodotto-modal-miniature button');
+    if (miniatura) { modalIndiceFoto = Number(miniatura.dataset.indice); aggiornaModal(); }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (prodottoModal.hidden) return;
+    if (e.key === 'Escape') chiudiModal();
+    if (e.key === 'ArrowLeft') modalVai(-1);
+    if (e.key === 'ArrowRight') modalVai(1);
   });
 
   const header = document.getElementById('site-header');

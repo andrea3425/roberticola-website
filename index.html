@@ -8,14 +8,14 @@
   <link rel="icon" href="public/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-theme="home">
   <header id="site-header">
     <a href="#/" class="logo-link">
-      <img src="public/logo_icona.png" alt="" class="logo-icon">
-      <img src="public/logo_scritta.png" alt="Roberticola" class="logo">
+      <img src="public/logo_icona-teal.png" alt="" class="logo-icon" id="logo-icon-img">
+      <img src="public/logo_scritta-teal.png" alt="Roberticola" class="logo" id="logo-text-img">
     </a>
 
     <button id="nav-toggle" class="nav-toggle" aria-label="Apri il menu" aria-expanded="false" aria-controls="site-nav">
@@ -26,7 +26,7 @@
       <a href="#/" data-route="/">Home</a>
       <a href="#/" data-scroll="servizi">Servizi</a>
       <a href="#/" data-scroll="contatti">Contatti</a>
-      <a href="#/galleria" data-route="/galleria">Galleria</a>
+      <a href="#/galleria" data-route="/galleria" class="nav-prodotti">Prodotti</a>
     </nav>
   </header>
 
@@ -50,6 +50,24 @@
     <p class="footer-copy">&copy; <span id="footer-year"></span> Roberticola &mdash; Roberto Marinelli</p>
   </footer>
 
+  <div id="prodotto-modal" class="prodotto-modal" hidden>
+    <div class="prodotto-modal-backdrop" data-modal-close></div>
+    <div class="prodotto-modal-content">
+      <button type="button" class="prodotto-modal-chiudi" data-modal-close aria-label="Chiudi">&times;</button>
+      <div class="prodotto-modal-immagine">
+        <button type="button" class="prodotto-modal-nav prodotto-modal-prev" aria-label="Foto precedente">&#8249;</button>
+        <img src="" alt="" id="prodotto-modal-img">
+        <button type="button" class="prodotto-modal-nav prodotto-modal-next" aria-label="Foto successiva">&#8250;</button>
+      </div>
+      <div class="prodotto-modal-miniature" id="prodotto-modal-miniature"></div>
+      <div class="prodotto-modal-info">
+        <h3 id="prodotto-modal-titolo"></h3>
+        <p class="prodotto-prezzo" id="prodotto-modal-prezzo"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/prodotti.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
