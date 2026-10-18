@@ -401,7 +401,7 @@ function initDividers() {
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.01, rootMargin: '0px 0px 200px 0px' });
   dividers.forEach(d => obs.observe(d));
 }
 
