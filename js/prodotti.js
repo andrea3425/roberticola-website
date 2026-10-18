@@ -533,11 +533,6 @@ const SEZIONI_GALLERIA = [
     copertina: 'gallery/evidenziatori/set-1.png',
     prodotti: [
       {
-        titolo: 'Evidenziatore — Modello 26',
-        prezzo: null,
-        immagini: ['gallery/evidenziatori/26.png'],
-      },
-      {
         titolo: 'Evidenziatore ',
         prezzo: 1.00,
         immagini: ['gallery/evidenziatori/evi-1.png', 'gallery/evidenziatori/evi-2.png', 'gallery/evidenziatori/evi-3.png', 'gallery/evidenziatori/evi-4.png', 'gallery/evidenziatori/evi-5.png', 'gallery/evidenziatori/evi-6.png', 'gallery/evidenziatori/evi-7.png', 'gallery/evidenziatori/evi-8.png', 'gallery/evidenziatori/evi-9.png', 'gallery/evidenziatori/evi-10.png', 'gallery/evidenziatori/evi-11.png', 'gallery/evidenziatori/evi-12.png', 'gallery/evidenziatori/evi-13.png', 'gallery/evidenziatori/evi-14.png', 'gallery/evidenziatori/evi-15.png', 'gallery/evidenziatori/evi-16.png', 'gallery/evidenziatori/evi-17.png', 'gallery/evidenziatori/evi-18.png'],
@@ -580,7 +575,7 @@ const SEZIONI_GALLERIA = [
       },
       {
         titolo: 'Gomma pane',
-        prezzo: null,
+        prezzo: 1.00,
         immagini: ['gallery/gomme/pane-1.png'],
       },
       {
@@ -636,7 +631,7 @@ const SEZIONI_GALLERIA = [
       },
       {
         titolo: 'Marker permanent - piatto',
-        prezzo: null,
+        prezzo: 2.00,
         immagini: ['gallery/marker/piatto-1.png', 'gallery/marker/piatto-2.png', 'gallery/marker/piatto-3.png'],
       },
       {
@@ -806,12 +801,7 @@ const SEZIONI_GALLERIA = [
       {
         titolo: 'Matitotto Tinta unita kids — 10 pz',
         prezzo: 12.00,
-        immagini: ['gallery/pastelli/matititto-1.png'],
-      },
-      {
-        titolo: 'Matitotto Tinta unita kids - 10 pz',
-        prezzo: 12.00,
-        immagini: ['gallery/pastelli/matitotto-2.png'],
+        immagini: ['gallery/pastelli/matititto-1.png', 'gallery/pastelli/matitotto-2.png'],
       },
       {
         titolo: 'Pastelli cera olio — 12 pz',
@@ -913,12 +903,7 @@ const SEZIONI_GALLERIA = [
       {
         titolo: 'Penna — Gelyx',
         prezzo: 2.00,
-        immagini: ['gallery/penne/gelix-4.png', 'gallery/penne/gelix-7.png'],
-      },
-      {
-        titolo: 'Penna — Gelyx',
-        prezzo: 2.00,
-        immagini: ['gallery/penne/gelyx-1.png', 'gallery/penne/gelyx-2.png', 'gallery/penne/gelyx-3.png', 'gallery/penne/gelyx-5.png', 'gallery/penne/gelyx-6.png'],
+        immagini: ['gallery/penne/gelyx-1.png', 'gallery/penne/gelyx-2.png', 'gallery/penne/gelyx-3.png', 'gallery/penne/gelix-4.png', 'gallery/penne/gelyx-5.png', 'gallery/penne/gelyx-6.png', 'gallery/penne/gelix-7.png'],
       },
       {
         titolo: 'Penna set Glittergel - 10 pz',
@@ -1077,7 +1062,7 @@ const SEZIONI_GALLERIA = [
       {
         titolo: 'Poshette Hawaii - azzurra',
         prezzo: 18.00,
-        immagini: ['gallery/borse/17.png'],
+        immagini: ['gallery/borse/lilla-1.png', 'gallery/borse/17.png'],
       },
       {
         titolo: 'Beauty appendibile in neoprene - blu',
@@ -1093,11 +1078,6 @@ const SEZIONI_GALLERIA = [
         titolo: 'Borsa con manici - lilla',
         prezzo: 38.00,
         immagini: ['gallery/borse/grande-1.png', 'gallery/borse/grande-2.png'],
-      },
-      {
-        titolo: 'Poshette Hawaii - azzurra',
-        prezzo: 18.00,
-        immagini: ['gallery/borse/lilla-1.png'],
       },
       {
         titolo: 'Borsa con manici - rosa',
