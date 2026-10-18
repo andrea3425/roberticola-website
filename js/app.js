@@ -166,7 +166,7 @@ function galleriaIndiceHtml() {
         <div class="categorie-grid">
           ${SEZIONI_GALLERIA.map(categoriaCardHtml).join('')}
         </div>
-        <p class="galleria-acquisto">Vuoi acquistare qualcosa online? <a href="#/" data-scroll="contatti">Contattaci</a> e ti aiuteremo con il tuo ordine!</p>
+        <p class="galleria-acquisto">Vuoi acquistare qualcosa online? <a href="#/" data-scroll="contatti">Contattaci</a></p>
       </div>
     </section>
   `;
