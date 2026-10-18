@@ -201,11 +201,11 @@ body[data-theme="secondary"] .logo {
   transform: scaleX(1);
 }
 
-#site-nav a.nav-prodotti {
+#site-nav a.nav-evidenza {
   font-weight: 800;
 }
 
-body[data-theme="home"] #site-nav a.nav-prodotti {
+body[data-theme="home"] #site-nav a.nav-evidenza {
   color: var(--verde-menta);
 }
 
@@ -377,14 +377,14 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
 
 .hero-actions {
   margin-top: 2.5rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 220px);
   gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
-.hero-actions-novita {
-  margin-top: 1rem;
+/* Novità sotto, lunga quanto Contattaci + Prodotti insieme. */
+.hero-actions .btn-novita {
+  grid-column: 1 / -1;
 }
 
 .btn-casella {
@@ -392,14 +392,22 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
   box-shadow: var(--shadow-soft);
 }
 
-.btn-contattaci,
 .btn-novita {
   background: var(--viola-orchidea);
 }
 
-.btn-contattaci:hover,
 .btn-novita:hover {
   background: color-mix(in srgb, var(--viola-orchidea) 80%, black 20%);
+}
+
+.btn-contattaci {
+  background: #ffffff;
+  color: var(--verde-turchese);
+}
+
+.btn-contattaci:hover {
+  background: var(--verde-tenue);
+  color: var(--verde-petrolio);
 }
 
 .btn-prodotti {
@@ -408,6 +416,10 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
 
 .btn-prodotti:hover {
   background: var(--verde-turchese);
+}
+
+.hero-watermark {
+  display: none;
 }
 
 /* ---------- Transizioni tra sezioni ---------- */
@@ -505,7 +517,10 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
 }
 
 .servizi .section-lead {
-  font-style: italic;
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  max-width: 52ch;
 }
 
 .servizi .section-inner,
@@ -763,6 +778,23 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
   font-size: clamp(1.3rem, 3vw, 1.7rem);
   color: #ffffff;
   max-width: 52ch;
+}
+
+.galleria-acquisto {
+  display: inline-block;
+  margin-top: 2.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #ffffff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  color: var(--viola-profondo);
+  font-weight: 600;
+  max-width: 60ch;
+}
+
+.galleria-acquisto a {
+  color: var(--viola-acceso);
+  font-weight: 700;
 }
 
 .galleria-indietro {
@@ -1245,6 +1277,8 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
     align-items: center;
     justify-content: center;
     gap: 1.6rem;
+    height: 100vh;
+    height: 100dvh;
     background: var(--header-bg);
     overflow: hidden;
     opacity: 0;
@@ -1264,12 +1298,13 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 440px;
-    max-width: none;
+    width: 150vw;
+    max-width: 720px;
     transform: translate(-50%, -50%);
-    opacity: 0.16;
+    opacity: 0.14;
+    filter: brightness(0.55);
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   #site-nav a {
@@ -1301,12 +1336,62 @@ body[data-theme="home"] #site-nav a.nav-prodotti {
     bottom: -6px;
   }
 
+  #site-nav a {
+    z-index: 1;
+  }
+
+  body[data-theme="home"] #site-nav a.nav-evidenza {
+    color: var(--viola-lilla);
+  }
+
+  body[data-theme="secondary"] #site-nav a.nav-evidenza {
+    color: var(--viola-orchidea);
+  }
+
+  /* Home su telefono: niente foto, sfondo viola con logo scuro in filigrana
+     e le caselle subito in vista. */
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: calc(100svh - 76px);
+  }
+
+  .hero-media {
+    display: none;
+  }
+
+  .hero .hero-watermark {
+    display: block;
+    top: 50%;
+    width: 150vw;
+    max-width: 620px;
+    opacity: 0.12;
+  }
+
+  .hero-content {
+    padding: 2.5rem 1.25rem 3rem;
+  }
+
+  .contatti-instagram-testo strong {
+    color: var(--verde-turchese);
+  }
+
+  .categoria-caption h4,
+  .prodotto-caption h4 {
+    font-size: 0.98rem;
+  }
+
+  .categoria-caption,
+  .prodotto-caption {
+    padding: 0.75rem 0.8rem 0.9rem;
+  }
+
   .section-inner {
     padding: 3.5rem 1.25rem;
   }
 
   .hero-actions {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     width: 100%;
     max-width: 320px;
   }

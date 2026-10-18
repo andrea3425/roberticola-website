@@ -251,53 +251,165 @@ const SEZIONI_GALLERIA = [
     ],
   },
   {
-    id: 'borse',
-    titolo: 'Borse',
+    id: 'zaini',
+    titolo: 'Zaini',
     prodotti: [
       {
-        titolo: 'Borsa — Modello 17',
+        titolo: 'Zaino — Asilo',
         prezzo: null,
-        immagini: ['gallery/borse/17.png'],
+        immagini: ['gallery/zaini/asilo-1.png', 'gallery/zaini/asilo-2.png'],
       },
       {
-        titolo: 'Borsa — Bagno',
+        titolo: 'Zaino — Azzurro',
         prezzo: null,
-        immagini: ['gallery/borse/bagno-1.png', 'gallery/borse/bagno-2.png'],
+        immagini: ['gallery/zaini/azzurro-1.png', 'gallery/zaini/azzurro-2.png'],
       },
       {
-        titolo: 'Borsa — Fiori',
+        titolo: 'Zaino — Crazy',
         prezzo: null,
-        immagini: ['gallery/borse/fiori-1.png'],
+        immagini: ['gallery/zaini/crazy-1.png', 'gallery/zaini/crazy-2.png'],
       },
       {
-        titolo: 'Borsa — Grande',
+        titolo: 'Zaino — Doppio',
         prezzo: null,
-        immagini: ['gallery/borse/grande-1.png', 'gallery/borse/grande-2.png'],
+        immagini: ['gallery/zaini/doppio-1.png', 'gallery/zaini/doppio-2.png', 'gallery/zaini/doppio-3.png'],
       },
       {
-        titolo: 'Borsa — Lilla',
+        titolo: 'Zaino — Elefante',
         prezzo: null,
-        immagini: ['gallery/borse/lilla-1.png'],
+        immagini: ['gallery/zaini/elefante-1.png', 'gallery/zaini/elefante-2.png'],
       },
       {
-        titolo: 'Borsa — Manico',
+        titolo: 'Zaino — Foca',
         prezzo: null,
-        immagini: ['gallery/borse/manico-1.png', 'gallery/borse/manico-2.png', 'gallery/borse/manico-3.png'],
+        immagini: ['gallery/zaini/foca-1.png', 'gallery/zaini/foca-2.png', 'gallery/zaini/foca-3.png'],
       },
       {
-        titolo: 'Borsa — Moon',
+        titolo: 'Zaino — Giraffa',
         prezzo: null,
-        immagini: ['gallery/borse/moon-1.png', 'gallery/borse/moon-2.png', 'gallery/borse/moon-3.png'],
+        immagini: ['gallery/zaini/giraffa-1.png', 'gallery/zaini/giraffa-2.png', 'gallery/zaini/giraffa-3.png'],
       },
       {
-        titolo: 'Borsa — Multi',
+        titolo: 'Zaino — Girl',
         prezzo: null,
-        immagini: ['gallery/borse/multi-1.png', 'gallery/borse/multi-2.png'],
+        immagini: ['gallery/zaini/girl-1.png', 'gallery/zaini/girl-2.png', 'gallery/zaini/girl-3.png'],
       },
       {
-        titolo: 'Borsa — Poshette',
+        titolo: 'Zaino — Glitter',
         prezzo: null,
-        immagini: ['gallery/borse/poshette-1.png', 'gallery/borse/poshette-2.png'],
+        immagini: ['gallery/zaini/glitter-1.png', 'gallery/zaini/glitter-2.png'],
+      },
+      {
+        titolo: 'Zaino — Ippo',
+        prezzo: null,
+        immagini: ['gallery/zaini/ippo-1.png', 'gallery/zaini/ippo-2.png', 'gallery/zaini/ippo-3.png'],
+      },
+      {
+        titolo: 'Zaino — Mostro',
+        prezzo: null,
+        immagini: ['gallery/zaini/mostro-1.png', 'gallery/zaini/mostro-2.png'],
+      },
+      {
+        titolo: 'Zaino — Rosso',
+        prezzo: null,
+        immagini: ['gallery/zaini/rosso-1.png', 'gallery/zaini/rosso-2.png'],
+      },
+      {
+        titolo: 'Zaino — Stuble',
+        prezzo: null,
+        immagini: ['gallery/zaini/stuble-1.png'],
+      },
+      {
+        titolo: 'Zaino — Tigre',
+        prezzo: null,
+        immagini: ['gallery/zaini/tigre-1.png', 'gallery/zaini/tigre-2.png', 'gallery/zaini/tigre-3.png'],
+      },
+      {
+        titolo: 'Zaino — Unicorn',
+        prezzo: null,
+        immagini: ['gallery/zaini/unicorn-1.png', 'gallery/zaini/unicorn-2.png'],
+      },
+    ],
+  },
+  {
+    id: 'idee-regalo',
+    titolo: 'Idee regalo',
+    copertina: 'gallery/set e gift box/misto-1.png',
+    prodotti: [
+      {
+        titolo: 'Set — Borraccia',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/borraccia-1.png'],
+      },
+      {
+        titolo: 'Set — Desk',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/desk-1.png'],
+      },
+      {
+        titolo: 'Set — Forbici',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/forbici-1.png'],
+      },
+      {
+        titolo: 'Set — Metro',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/metro-1.png', 'gallery/set e gift box/metro-2.png', 'gallery/set e gift box/metro-3.png', 'gallery/set e gift box/metro-4.png'],
+      },
+      {
+        titolo: 'Set — Misto',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/misto-1.png'],
+      },
+      {
+        titolo: 'Set — Postit',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/postit-1.png', 'gallery/set e gift box/postit-2.png', 'gallery/set e gift box/postit-3.png'],
+      },
+      {
+        titolo: 'Set — Roller Fruit',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/roller-fruit-1.png'],
+      },
+      {
+        titolo: 'Set — Rotolo',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/rotolo-1.png', 'gallery/set e gift box/rotolo-2.png'],
+      },
+      {
+        titolo: 'Set — Scotch',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/scotch-1.png'],
+      },
+      {
+        titolo: 'Set — Set',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/set-1.png'],
+      },
+      {
+        titolo: 'Set — Set Penne',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/set-penne-1.png'],
+      },
+      {
+        titolo: 'Set — Tavoletta',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/tavoletta-1.png', 'gallery/set e gift box/tavoletta-2.png', 'gallery/set e gift box/tavoletta-3.png'],
+      },
+      {
+        titolo: 'Set — Timbrini',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/timbrini-1.png'],
+      },
+      {
+        titolo: 'Set — Tovaglietta',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/tovaglietta-1.png', 'gallery/set e gift box/tovaglietta-2.png', 'gallery/set e gift box/tovaglietta-5.png'],
+      },
+      {
+        titolo: 'Set — Tovagliettta',
+        prezzo: null,
+        immagini: ['gallery/set e gift box/tovagliettta-3.png', 'gallery/set e gift box/tovagliettta-4.png'],
       },
     ],
   },
@@ -418,6 +530,7 @@ const SEZIONI_GALLERIA = [
   {
     id: 'evidenziatori',
     titolo: 'Evidenziatori',
+    copertina: 'gallery/evidenziatori/set-1.png',
     prodotti: [
       {
         titolo: 'Evidenziatore — Modello 26',
@@ -602,6 +715,7 @@ const SEZIONI_GALLERIA = [
   {
     id: 'pasta-modellabile',
     titolo: 'Pasta Modellabile',
+    copertina: 'gallery/pasta modellabile/unicorn-1.png',
     prodotti: [
       {
         titolo: 'Pasta modellabile — Animal',
@@ -925,87 +1039,6 @@ const SEZIONI_GALLERIA = [
     ],
   },
   {
-    id: 'set-gift-box',
-    titolo: 'Set e Gift Box',
-    prodotti: [
-      {
-        titolo: 'Set — Borraccia',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/borraccia-1.png'],
-      },
-      {
-        titolo: 'Set — Desk',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/desk-1.png'],
-      },
-      {
-        titolo: 'Set — Forbici',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/forbici-1.png'],
-      },
-      {
-        titolo: 'Set — Metro',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/metro-1.png', 'gallery/set e gift box/metro-2.png', 'gallery/set e gift box/metro-3.png', 'gallery/set e gift box/metro-4.png'],
-      },
-      {
-        titolo: 'Set — Misto',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/misto-1.png'],
-      },
-      {
-        titolo: 'Set — Postit',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/postit-1.png', 'gallery/set e gift box/postit-2.png', 'gallery/set e gift box/postit-3.png'],
-      },
-      {
-        titolo: 'Set — Roller Fruit',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/roller-fruit-1.png'],
-      },
-      {
-        titolo: 'Set — Rotolo',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/rotolo-1.png', 'gallery/set e gift box/rotolo-2.png'],
-      },
-      {
-        titolo: 'Set — Scotch',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/scotch-1.png'],
-      },
-      {
-        titolo: 'Set — Set',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/set-1.png'],
-      },
-      {
-        titolo: 'Set — Set Penne',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/set-penne-1.png'],
-      },
-      {
-        titolo: 'Set — Tavoletta',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/tavoletta-1.png', 'gallery/set e gift box/tavoletta-2.png', 'gallery/set e gift box/tavoletta-3.png'],
-      },
-      {
-        titolo: 'Set — Timbrini',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/timbrini-1.png'],
-      },
-      {
-        titolo: 'Set — Tovaglietta',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/tovaglietta-1.png', 'gallery/set e gift box/tovaglietta-2.png', 'gallery/set e gift box/tovaglietta-5.png'],
-      },
-      {
-        titolo: 'Set — Tovagliettta',
-        prezzo: null,
-        immagini: ['gallery/set e gift box/tovagliettta-3.png', 'gallery/set e gift box/tovagliettta-4.png'],
-      },
-    ],
-  },
-  {
     id: 'temperini',
     titolo: 'Temperini',
     prodotti: [
@@ -1037,83 +1070,54 @@ const SEZIONI_GALLERIA = [
     ],
   },
   {
-    id: 'zaini',
-    titolo: 'Zaini',
+    id: 'borse',
+    titolo: 'Borse',
+    copertina: 'gallery/borse/manico-1.png',
     prodotti: [
       {
-        titolo: 'Zaino — Asilo',
+        titolo: 'Borsa — Modello 17',
         prezzo: null,
-        immagini: ['gallery/zaini/asilo-1.png', 'gallery/zaini/asilo-2.png'],
+        immagini: ['gallery/borse/17.png'],
       },
       {
-        titolo: 'Zaino — Azzurro',
+        titolo: 'Borsa — Bagno',
         prezzo: null,
-        immagini: ['gallery/zaini/azzurro-1.png', 'gallery/zaini/azzurro-2.png'],
+        immagini: ['gallery/borse/bagno-1.png', 'gallery/borse/bagno-2.png'],
       },
       {
-        titolo: 'Zaino — Crazy',
+        titolo: 'Borsa — Fiori',
         prezzo: null,
-        immagini: ['gallery/zaini/crazy-1.png', 'gallery/zaini/crazy-2.png'],
+        immagini: ['gallery/borse/fiori-1.png'],
       },
       {
-        titolo: 'Zaino — Doppio',
+        titolo: 'Borsa — Grande',
         prezzo: null,
-        immagini: ['gallery/zaini/doppio-1.png', 'gallery/zaini/doppio-2.png', 'gallery/zaini/doppio-3.png'],
+        immagini: ['gallery/borse/grande-1.png', 'gallery/borse/grande-2.png'],
       },
       {
-        titolo: 'Zaino — Elefante',
+        titolo: 'Borsa — Lilla',
         prezzo: null,
-        immagini: ['gallery/zaini/elefante-1.png', 'gallery/zaini/elefante-2.png'],
+        immagini: ['gallery/borse/lilla-1.png'],
       },
       {
-        titolo: 'Zaino — Foca',
+        titolo: 'Borsa — Manico',
         prezzo: null,
-        immagini: ['gallery/zaini/foca-1.png', 'gallery/zaini/foca-2.png', 'gallery/zaini/foca-3.png'],
+        immagini: ['gallery/borse/manico-1.png', 'gallery/borse/manico-2.png', 'gallery/borse/manico-3.png'],
       },
       {
-        titolo: 'Zaino — Giraffa',
+        titolo: 'Borsa — Moon',
         prezzo: null,
-        immagini: ['gallery/zaini/giraffa-1.png', 'gallery/zaini/giraffa-2.png', 'gallery/zaini/giraffa-3.png'],
+        immagini: ['gallery/borse/moon-1.png', 'gallery/borse/moon-2.png', 'gallery/borse/moon-3.png'],
       },
       {
-        titolo: 'Zaino — Girl',
+        titolo: 'Borsa — Multi',
         prezzo: null,
-        immagini: ['gallery/zaini/girl-1.png', 'gallery/zaini/girl-2.png', 'gallery/zaini/girl-3.png'],
+        immagini: ['gallery/borse/multi-1.png', 'gallery/borse/multi-2.png'],
       },
       {
-        titolo: 'Zaino — Glitter',
+        titolo: 'Borsa — Poshette',
         prezzo: null,
-        immagini: ['gallery/zaini/glitter-1.png', 'gallery/zaini/glitter-2.png'],
-      },
-      {
-        titolo: 'Zaino — Ippo',
-        prezzo: null,
-        immagini: ['gallery/zaini/ippo-1.png', 'gallery/zaini/ippo-2.png', 'gallery/zaini/ippo-3.png'],
-      },
-      {
-        titolo: 'Zaino — Mostro',
-        prezzo: null,
-        immagini: ['gallery/zaini/mostro-1.png', 'gallery/zaini/mostro-2.png'],
-      },
-      {
-        titolo: 'Zaino — Rosso',
-        prezzo: null,
-        immagini: ['gallery/zaini/rosso-1.png', 'gallery/zaini/rosso-2.png'],
-      },
-      {
-        titolo: 'Zaino — Stuble',
-        prezzo: null,
-        immagini: ['gallery/zaini/stuble-1.png'],
-      },
-      {
-        titolo: 'Zaino — Tigre',
-        prezzo: null,
-        immagini: ['gallery/zaini/tigre-1.png', 'gallery/zaini/tigre-2.png', 'gallery/zaini/tigre-3.png'],
-      },
-      {
-        titolo: 'Zaino — Unicorn',
-        prezzo: null,
-        immagini: ['gallery/zaini/unicorn-1.png', 'gallery/zaini/unicorn-2.png'],
+        immagini: ['gallery/borse/poshette-1.png', 'gallery/borse/poshette-2.png'],
       },
     ],
   },

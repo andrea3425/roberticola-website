@@ -141,7 +141,7 @@ function prodottoCardHtml(prodotto) {
 }
 
 function categoriaCardHtml(sezione) {
-  const copertina = sezione.prodotti[0]?.immagini[0];
+  const copertina = sezione.copertina ?? sezione.prodotti[0]?.immagini[0];
   return `
     <a href="#/galleria/${sezione.id}" class="categoria-card">
       <div class="categoria-immagine">
@@ -165,6 +165,7 @@ function galleriaIndiceHtml() {
         <div class="categorie-grid">
           ${SEZIONI_GALLERIA.map(categoriaCardHtml).join('')}
         </div>
+        <p class="galleria-acquisto">Vuoi acquistare qualcosa online? <a href="#/" data-scroll="contatti">Contattaci</a> e ti aiuteremo con il tuo ordine!</p>
       </div>
     </section>
   `;
@@ -217,6 +218,7 @@ const pages = {
   '/': () => {
     return `
     <section id="hero" class="hero">
+      <img src="public/logo_icona-viola.png" alt="" class="section-watermark hero-watermark" aria-hidden="true">
       <div class="hero-media" aria-hidden="true">
         <img src="public/immagine-home.png" alt="" class="hero-media-img">
       </div>
@@ -227,8 +229,6 @@ const pages = {
           <div class="hero-actions">
             <a href="#/" data-scroll="contatti" class="btn btn-casella btn-contattaci">Contattaci</a>
             <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
-          </div>
-          <div class="hero-actions hero-actions-novita">
             <a href="#/novita" class="btn btn-casella btn-novita">Novit&agrave;</a>
           </div>
         </div>
