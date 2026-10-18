@@ -818,21 +818,6 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   max-width: 52ch;
 }
 
-.badge-tinta {
-  position: absolute;
-  top: 5rem;
-  right: 2rem;
-  padding: 0.3rem 0.9rem;
-  border: 1.5px solid var(--viola-acceso);
-  border-radius: 999px;
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--viola-acceso);
-}
-
 .galleria-acquisto {
   display: inline-block;
   margin-top: 2.5rem;
@@ -1594,12 +1579,6 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
 
   .page-gallery .section-watermark {
     top: 170px;
-  }
-
-  .badge-tinta {
-    top: 1.25rem;
-    right: 1.25rem;
-    font-size: 0.72rem;
   }
 
   .prodotto-modal-nav {
