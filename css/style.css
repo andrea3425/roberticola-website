@@ -443,7 +443,7 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   stroke-dasharray: 700;
   stroke-dashoffset: 700;
   will-change: stroke-dashoffset;
-  transition: stroke-dashoffset 1.2s ease;
+  transition: stroke-dashoffset 2s ease;
 }
 
 .sezione-divider .divider-linea-1 {
@@ -455,7 +455,7 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
 .sezione-divider .divider-linea-2 {
   stroke: var(--verde-acqua);
   stroke-width: 2.5;
-  transition-delay: 0.15s;
+  transition-delay: 0.25s;
 }
 
 .sezione-divider.in-vista path {
@@ -1374,9 +1374,10 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   }
 
   .section-watermark {
-    top: 155px;
-    width: 300px;
-    opacity: 0.16;
+    top: 150px;
+    width: 130vw;
+    max-width: 480px;
+    opacity: 0.13;
   }
 
   .prodotto-modal-nav {
