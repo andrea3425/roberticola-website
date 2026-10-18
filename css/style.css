@@ -760,8 +760,20 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
 /* ---------- Galleria ---------- */
 
 .page-gallery {
+  position: relative;
+  overflow: hidden;
   background: var(--section-bg);
   min-height: calc(100vh - 160px);
+}
+
+.page-gallery .section-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.page-gallery .section-watermark {
+  top: 300px;
+  width: 560px;
 }
 
 .page-gallery .eyebrow {
@@ -1378,6 +1390,10 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
     width: 130vw;
     max-width: 480px;
     opacity: 0.13;
+  }
+
+  .page-gallery .section-watermark {
+    top: 170px;
   }
 
   .prodotto-modal-nav {

@@ -158,6 +158,7 @@ function categoriaCardHtml(sezione) {
 function galleriaIndiceHtml() {
   return `
     <section class="page page-gallery">
+      <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
       <div class="section-inner">
         <p class="eyebrow">Uno sguardo dentro</p>
         <h2>Prodotti</h2>
@@ -174,6 +175,7 @@ function galleriaIndiceHtml() {
 function novitaPaginaHtml() {
   return `
     <section class="page page-gallery page-novita">
+      <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
       <div class="section-inner">
         <p class="eyebrow">Cosa c'&egrave; di nuovo</p>
         <h2>Novit&agrave;</h2>
@@ -190,6 +192,7 @@ function galleriaSezioneHtml(sezione) {
   const n = sezione.prodotti.length;
   return `
     <section class="page page-gallery page-gallery-sezione">
+      <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
       <div class="section-inner">
         <a href="#/galleria" class="galleria-indietro">&larr; Tutte le categorie</a>
         <p class="eyebrow">Categoria</p>
