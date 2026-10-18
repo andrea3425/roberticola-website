@@ -160,6 +160,7 @@ function galleriaIndiceHtml() {
     <section class="page page-gallery">
       <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
       <div class="section-inner">
+        <p class="badge-tinta">Punto Tinta Unita Shop</p>
         <p class="eyebrow">Uno sguardo dentro</p>
         <h2>Prodotti</h2>
         <p class="section-lead">Tutto ciò che cerchi, un mondo di idee da scoprire!</p>
