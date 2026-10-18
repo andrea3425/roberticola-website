@@ -29,6 +29,9 @@
 
   --verde-chiarissimo: #f4fffc;
   --verde-acqua-chiaro: #5ef5e2;
+
+  /* Sfondo dentro una categoria di Prodotti */
+  --verde-categoria: color-mix(in srgb, var(--verde-turchese) 70%, var(--verde-acqua) 30%);
 }
 
 /* ---------- Tema per pagina ----------
@@ -76,6 +79,28 @@ body[data-theme="secondary"] {
   --ring-color: rgba(136, 0, 230, 0.25);
 }
 
+/* Dentro una singola categoria di Prodotti i colori si invertono
+   (sfondo del colore del logo, logo del colore dello sfondo), per far capire che si è
+   "entrati" in un livello più profondo. */
+body[data-theme="secondary"].in-categoria {
+  --section-bg: var(--verde-categoria);
+  --chrome-bg: var(--verde-petrolio);
+  --chrome-text: var(--verde-menta);
+  --nav-color: #ffffff;
+}
+
+body[data-theme="secondary"].in-categoria .logo {
+  color: var(--verde-acqua);
+}
+
+body[data-theme="secondary"].in-categoria #site-nav a.nav-evidenza {
+  color: var(--viola-acceso);
+}
+
+body[data-theme="secondary"].in-categoria #site-nav a.nav-evidenza::after {
+  background: var(--viola-acceso);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -90,7 +115,7 @@ body {
   color: var(--ink);
   background: var(--section-bg);
   -webkit-font-smoothing: antialiased;
-  transition: background 0.25s ease;
+  transition: background 0.5s ease;
 }
 
 body.nav-locked,
@@ -924,6 +949,105 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   color: var(--ink-soft);
 }
 
+/* Pagina della singola categoria: colori invertiti. Le variabili stanno
+   sulla sezione stessa, così durante la transizione la pagina vecchia e
+   quella nuova mantengono ciascuna i propri colori. */
+.page-gallery-sezione {
+  --section-bg: var(--verde-categoria);
+  --faint-color: #ffffff;
+}
+
+.page-gallery-sezione h2 {
+  color: var(--viola-acceso);
+}
+
+.page-gallery-sezione .galleria-indietro {
+  color: var(--viola-acceso);
+}
+
+.page-gallery .section-watermark-chiaro {
+  filter: brightness(1.15);
+  opacity: 0.45;
+}
+
+/* Transizione entrando/uscendo da una categoria: lo schermo diventa tutto
+   viola, le due linee ondulate della home lo attraversano e, appena sono
+   passate, il viola svanisce e si è già nella pagina nuova.
+   Entrando le linee vanno da sinistra a destra, tornando al contrario. */
+#app.in-transizione {
+  position: relative;
+  overflow: clip;
+}
+
+.pagina-uscente {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.velo-transizione {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: var(--viola-acceso);
+  pointer-events: none;
+  animation: velo 1.4s ease both;
+}
+
+@keyframes velo {
+  0% { opacity: 0; }
+  11% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.linee-transizione {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 90px;
+  transform: translateY(-50%);
+}
+
+.velo-transizione.indietro .linee-transizione {
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.linee-transizione svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.linee-transizione path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 5px;
+  stroke-dasharray: var(--lunghezza);
+  stroke-dashoffset: var(--lunghezza);
+  animation: linea-attraversa 0.95s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
+}
+
+.linee-transizione .linea-1 {
+  stroke: #ffffff;
+  opacity: 0.85;
+}
+
+.linee-transizione .linea-2 {
+  stroke: var(--verde-acqua);
+  animation-delay: 0.23s;
+}
+
+@keyframes linea-attraversa {
+  0% { stroke-dashoffset: var(--lunghezza); }
+  50% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: calc(var(--lunghezza) * -1); }
+}
+
 /* ---------- Novit&agrave; ---------- */
 
 .novita-grid {
@@ -1067,6 +1191,67 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   max-height: 72vh;
   object-fit: contain;
   padding: 2rem;
+  /* Lo zoom col dito lo gestiamo noi, non il browser. */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+
+.prodotto-modal-immagine img.anima {
+  transition: transform 0.25s ease;
+}
+
+/* Computer: pulsante "Ingrandisci" e foto ingrandita sotto al cursore */
+.prodotto-modal-ingrandisci {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .prodotto-modal-ingrandisci {
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.1rem;
+    border: none;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--viola-acceso);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .prodotto-modal-ingrandisci svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .prodotto-modal-ingrandisci:hover,
+  .prodotto-modal-ingrandisci[aria-pressed="true"] {
+    background: var(--viola-acceso);
+    color: #ffffff;
+  }
+
+  .prodotto-modal-immagine img {
+    transition: transform 0.2s ease;
+  }
+
+  .prodotto-modal-immagine img.lente-attiva {
+    cursor: zoom-in;
+  }
+
+  .prodotto-modal-immagine img.zoom-cursore {
+    transform: scale(2.2);
+  }
 }
 
 .prodotto-modal-nav {

@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roberticola — Edicola e Tabacchi ad Antrodoco</title>
   <meta name="description" content="Roberticola, edicola e tabacchi di Roberto Marinelli a Via Marmorale 73, Antrodoco (RI). Giornali, tabacchi, valori bollati, giochi, ricariche e molto altro.">
-  <link rel="icon" href="public/favicon.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="public/favicon-viola-48.png?v=4">
+  <link rel="icon" type="image/png" sizes="512x512" href="public/favicon-viola.png?v=4">
   <link rel="apple-touch-icon" href="public/favicon.png">
   <meta property="og:title" content="Roberticola — Edicola e Tabacchi ad Antrodoco">
   <meta property="og:description" content="Roberticola, edicola e tabacchi di Roberto Marinelli a Via Marmorale 73, Antrodoco (RI).">
@@ -17,13 +18,13 @@
     "@type": "Organization",
     "name": "Roberticola",
     "url": "https://roberticola.it/",
-    "logo": "https://roberticola.it/public/favicon.png"
+    "logo": "https://roberticola.it/public/favicon-viola.png"
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20261018d">
+  <link rel="stylesheet" href="css/style.css?v=20261018q">
 </head>
 <body data-theme="home">
   <header id="site-header">
@@ -75,6 +76,10 @@
         <button type="button" class="prodotto-modal-nav prodotto-modal-prev" aria-label="Foto precedente">&#8249;</button>
         <img src="" alt="" id="prodotto-modal-img">
         <button type="button" class="prodotto-modal-nav prodotto-modal-next" aria-label="Foto successiva">&#8250;</button>
+        <button type="button" class="prodotto-modal-ingrandisci" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5M11 8v6M8 11h6"/></svg>
+          <span>Ingrandisci</span>
+        </button>
       </div>
       <div class="prodotto-modal-miniature" id="prodotto-modal-miniature"></div>
       <div class="prodotto-modal-info">
@@ -85,6 +90,6 @@
   </div>
 
   <script src="js/prodotti.js?v=20261018b"></script>
-  <script src="js/app.js?v=20261018c"></script>
+  <script src="js/app.js?v=20261018k"></script>
 </body>
 </html>

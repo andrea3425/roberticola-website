@@ -192,7 +192,7 @@ function galleriaSezioneHtml(sezione) {
   const n = sezione.prodotti.length;
   return `
     <section class="page page-gallery page-gallery-sezione">
-      <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
+      <img src="public/logo_icona-teal.png" alt="" class="section-watermark section-watermark-chiaro">
       <div class="section-inner">
         <a href="#/galleria" class="galleria-indietro">&larr; Tutte le categorie</a>
         <p class="eyebrow">Categoria</p>
@@ -340,8 +340,8 @@ function closeNav() {
   document.body.classList.remove('nav-locked');
 }
 
-function updateLogoColor(theme) {
-  const suffix = theme === 'home' ? 'teal' : 'viola';
+function updateLogoColor(theme, inCategoria) {
+  const suffix = theme === 'home' || inCategoria ? 'teal' : 'viola';
   document.getElementById('logo-icon-img').src = `public/logo_icona-${suffix}.png`;
   document.getElementById('logo-text-img').src = `public/logo_scritta-${suffix}.png`;
 }
@@ -351,6 +351,7 @@ let modalIndiceFoto = 0;
 
 function aggiornaModal() {
   if (!modalProdotto) return;
+  resetZoom();
   const img = document.getElementById('prodotto-modal-img');
   img.src = modalProdotto.immagini[modalIndiceFoto];
   img.alt = modalProdotto.titolo;
@@ -375,6 +376,7 @@ function aggiornaModal() {
 
 function apriModal(prodotto) {
   modalProdotto = prodotto;
+  impostaLente(false);
   modalIndiceFoto = 0;
   aggiornaModal();
   document.getElementById('prodotto-modal').hidden = false;
@@ -394,6 +396,166 @@ function modalVai(delta) {
   aggiornaModal();
 }
 
+// ---------- Zoom e scorrimento della foto nella finestra prodotto ----------
+// Telefono: pizzica per ingrandire, doppio tocco per ingrandire/ridurre,
+// trascina col dito per cambiare foto (o per spostarti se ingrandita).
+// Computer: dopo aver premuto "Ingrandisci", passando col cursore sulla
+// foto la si vede ingrandita.
+
+const ZOOM_MAX = 4;
+const ZOOM_DOPPIO_TOCCO = 2.5;
+let zoom = { scala: 1, x: 0, y: 0 };
+
+function applicaZoom(anima) {
+  const img = document.getElementById('prodotto-modal-img');
+  img.classList.toggle('anima', !!anima);
+  img.style.transform = zoom.scala === 1 && zoom.x === 0 && zoom.y === 0
+    ? ''
+    : `translate(${zoom.x}px, ${zoom.y}px) scale(${zoom.scala})`;
+}
+
+function resetZoom() {
+  zoom = { scala: 1, x: 0, y: 0 };
+  const img = document.getElementById('prodotto-modal-img');
+  img.classList.remove('zoom-cursore');
+  applicaZoom(false);
+}
+
+function impostaLente(attiva) {
+  const bottone = document.querySelector('.prodotto-modal-ingrandisci');
+  const img = document.getElementById('prodotto-modal-img');
+  bottone.setAttribute('aria-pressed', String(attiva));
+  bottone.querySelector('span').textContent = attiva ? 'Riduci' : 'Ingrandisci';
+  img.classList.toggle('lente-attiva', attiva);
+  if (!attiva) img.classList.remove('zoom-cursore');
+}
+
+function limitaSpostamento(box) {
+  const maxX = (box.width * (zoom.scala - 1)) / 2;
+  const maxY = (box.height * (zoom.scala - 1)) / 2;
+  zoom.x = Math.max(-maxX, Math.min(maxX, zoom.x));
+  zoom.y = Math.max(-maxY, Math.min(maxY, zoom.y));
+}
+
+function initZoomFoto() {
+  const area = document.querySelector('.prodotto-modal-immagine');
+  const img = document.getElementById('prodotto-modal-img');
+
+  // Posizione di un punto rispetto al centro dell'area foto.
+  const relativo = (t, box) => ({ x: t.clientX - box.left - box.width / 2, y: t.clientY - box.top - box.height / 2 });
+  const distanza = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+
+  let gesto = null;
+  let ultimoTocco = { tempo: 0, x: 0, y: 0 };
+
+  area.addEventListener('touchstart', (e) => {
+    if (e.target.closest('button')) return;
+    const box = area.getBoundingClientRect();
+    if (e.touches.length === 2) {
+      const [a, b] = e.touches;
+      const centro = relativo({ clientX: (a.clientX + b.clientX) / 2, clientY: (a.clientY + b.clientY) / 2 }, box);
+      gesto = {
+        tipo: 'pizzico', box, distanza0: distanza(a, b), scala0: zoom.scala,
+        // Punto della foto che sta sotto le dita: deve restare lì mentre si ingrandisce.
+        puntoFoto: { x: (centro.x - zoom.x) / zoom.scala, y: (centro.y - zoom.y) / zoom.scala },
+      };
+    } else if (e.touches.length === 1) {
+      const t = e.touches[0];
+      gesto = { tipo: 'trascina', box, inizio: { x: t.clientX, y: t.clientY }, x0: zoom.x, y0: zoom.y, dx: 0, dy: 0 };
+    }
+    applicaZoom(false);
+  }, { passive: true });
+
+  area.addEventListener('touchmove', (e) => {
+    if (!gesto) return;
+    e.preventDefault();
+    if (gesto.tipo === 'pizzico' && e.touches.length === 2) {
+      const [a, b] = e.touches;
+      const centro = relativo({ clientX: (a.clientX + b.clientX) / 2, clientY: (a.clientY + b.clientY) / 2 }, gesto.box);
+      zoom.scala = Math.max(1, Math.min(ZOOM_MAX, gesto.scala0 * distanza(a, b) / gesto.distanza0));
+      zoom.x = centro.x - gesto.puntoFoto.x * zoom.scala;
+      zoom.y = centro.y - gesto.puntoFoto.y * zoom.scala;
+      limitaSpostamento(gesto.box);
+      applicaZoom(false);
+    } else if (gesto.tipo === 'trascina' && e.touches.length === 1) {
+      const t = e.touches[0];
+      gesto.dx = t.clientX - gesto.inizio.x;
+      gesto.dy = t.clientY - gesto.inizio.y;
+      if (zoom.scala > 1) {
+        zoom.x = gesto.x0 + gesto.dx;
+        zoom.y = gesto.y0 + gesto.dy;
+        limitaSpostamento(gesto.box);
+      } else if (modalProdotto.immagini.length > 1) {
+        // Foto non ingrandita: la foto segue il dito per far capire che si può scorrere.
+        zoom.x = gesto.dx;
+      }
+      applicaZoom(false);
+    }
+  }, { passive: false });
+
+  area.addEventListener('touchend', (e) => {
+    if (!gesto || e.touches.length > 0) {
+      // Da due dita a una: si continua come trascinamento della foto ingrandita.
+      if (gesto && e.touches.length === 1) {
+        const t = e.touches[0];
+        gesto = { tipo: 'trascina', box: gesto.box, inizio: { x: t.clientX, y: t.clientY }, x0: zoom.x, y0: zoom.y, dx: 0, dy: 0 };
+      }
+      return;
+    }
+    const g = gesto;
+    gesto = null;
+
+    if (g.tipo === 'trascina' && zoom.scala === 1) {
+      const swipe = Math.abs(g.dx) > 50 && Math.abs(g.dx) > Math.abs(g.dy);
+      if (swipe && modalProdotto.immagini.length > 1) {
+        modalVai(g.dx < 0 ? 1 : -1);
+        return;
+      }
+    }
+
+    // Doppio tocco: ingrandisce nel punto toccato, oppure torna normale.
+    const tap = g.tipo === 'trascina' && Math.abs(g.dx) < 10 && Math.abs(g.dy) < 10;
+    if (tap) {
+      const ora = Date.now();
+      const vicino = Math.hypot(g.inizio.x - ultimoTocco.x, g.inizio.y - ultimoTocco.y) < 30;
+      if (ora - ultimoTocco.tempo < 300 && vicino) {
+        if (zoom.scala > 1) {
+          zoom = { scala: 1, x: 0, y: 0 };
+        } else {
+          const p = relativo({ clientX: g.inizio.x, clientY: g.inizio.y }, g.box);
+          zoom = { scala: ZOOM_DOPPIO_TOCCO, x: -p.x * (ZOOM_DOPPIO_TOCCO - 1), y: -p.y * (ZOOM_DOPPIO_TOCCO - 1) };
+          limitaSpostamento(g.box);
+        }
+        ultimoTocco = { tempo: 0, x: 0, y: 0 };
+        applicaZoom(true);
+        return;
+      }
+      ultimoTocco = { tempo: ora, x: g.inizio.x, y: g.inizio.y };
+    }
+
+    if (zoom.scala <= 1.02) zoom = { scala: 1, x: 0, y: 0 };
+    applicaZoom(true);
+  });
+
+  // Computer: lente d'ingrandimento che segue il cursore.
+  const conMouse = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const bottoneLente = document.querySelector('.prodotto-modal-ingrandisci');
+  bottoneLente.addEventListener('click', () => {
+    impostaLente(bottoneLente.getAttribute('aria-pressed') !== 'true');
+  });
+  img.addEventListener('mousemove', (e) => {
+    if (!conMouse.matches || !img.classList.contains('lente-attiva')) return;
+    const box = img.getBoundingClientRect();
+    const x = ((e.clientX - box.left) / box.width) * 100;
+    const y = ((e.clientY - box.top) / box.height) * 100;
+    img.style.transformOrigin = `${x}% ${y}%`;
+    img.classList.add('zoom-cursore');
+  });
+  img.addEventListener('mouseleave', () => {
+    img.classList.remove('zoom-cursore');
+  });
+}
+
 function initDividers() {
   const dividers = document.querySelectorAll('.sezione-divider');
   if (!dividers.length) return;
@@ -408,8 +570,74 @@ function initDividers() {
   dividers.forEach(d => obs.observe(d));
 }
 
+let pathPrecedente = null;
+
+const profonditaPagina = (path) => (path.startsWith('/galleria/') ? 2 : 1);
+
+// Tra l'elenco delle categorie e una categoria (in entrambi i sensi) lo
+// schermo diventa tutto viola e le due linee ondulate della home lo
+// attraversano. Finché il viola non copre tutto resta visibile una copia
+// ferma della pagina vecchia; quando il viola svanisce si è nella nuova.
+function preparaTransizioneCategoria(path) {
+  const prima = pathPrecedente;
+  const traCategorie = prima !== null && prima !== path &&
+    (prima === '/galleria' || prima.startsWith('/galleria/')) &&
+    (path === '/galleria' || path.startsWith('/galleria/'));
+  if (!traCategorie || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+
+  const vecchia = app.querySelector('.page-gallery');
+  if (!vecchia) return null;
+  const copia = vecchia.cloneNode(true);
+  copia.classList.add('pagina-uscente');
+  copia.style.background = getComputedStyle(vecchia).backgroundColor;
+  const verso = profonditaPagina(path) > profonditaPagina(prima) ? 'avanti' : 'indietro';
+  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso };
+}
+
+function avviaTransizioneCategoria(transizione) {
+  if (!transizione) return;
+  const { copia, topSchermo, verso } = transizione;
+  copia.style.top = `${topSchermo - app.getBoundingClientRect().top}px`;
+  app.prepend(copia);
+  app.classList.add('in-transizione');
+
+  document.querySelector('.velo-transizione')?.remove();
+  const velo = document.createElement('div');
+  velo.className = `velo-transizione ${verso}`;
+  velo.setAttribute('aria-hidden', 'true');
+
+  // Le onde sono disegnate alla larghezza reale dello schermo, così la
+  // linea attraversa tutto lo schermo con lo spessore giusto.
+  const w = window.innerWidth;
+  const onda = (y) => {
+    let d = `M0,${y}`;
+    for (let x = 0; x < w; x += 200) d += ` C${x + 70},${y - 22} ${x + 130},${y + 22} ${x + 200},${y}`;
+    return d;
+  };
+  velo.innerHTML = `
+    <div class="linee-transizione">
+      <svg viewBox="0 0 ${w} 90" preserveAspectRatio="none">
+        <path class="linea-1" d="${onda(38)}" />
+        <path class="linea-2" d="${onda(54)}" />
+      </svg>
+    </div>
+  `;
+  document.body.appendChild(velo);
+  velo.querySelectorAll('path').forEach(p => p.style.setProperty('--lunghezza', `${Math.ceil(p.getTotalLength()) + 10}px`));
+
+  // Quando il viola copre tutto, la copia della pagina vecchia non serve più.
+  setTimeout(() => {
+    copia.remove();
+    app.classList.remove('in-transizione');
+  }, 180);
+  velo.addEventListener('animationend', (e) => {
+    if (e.target === velo) velo.remove();
+  });
+}
+
 function render() {
   const path = currentPath();
+  const inCategoria = path.startsWith('/galleria/');
   const inGalleria = path === '/galleria' || path.startsWith('/galleria/');
   const inNovita = path === '/novita';
 
@@ -425,12 +653,16 @@ function render() {
     html = pages['/']();
   }
 
+  const transizione = preparaTransizioneCategoria(path);
   app.innerHTML = html;
+  pathPrecedente = path;
   updateActiveNav(inGalleria ? '/galleria' : (inNovita ? '/novita' : '/'));
   const theme = inGalleria || inNovita ? 'secondary' : 'home';
   document.body.dataset.theme = theme;
-  updateLogoColor(theme);
-  window.scrollTo({ top: 0 });
+  document.body.classList.toggle('in-categoria', inCategoria);
+  updateLogoColor(theme, inCategoria);
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  avviaTransizioneCategoria(transizione);
   initDividers();
 }
 
@@ -485,6 +717,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const novita = NOVITA[Number(card.dataset.novitaIndex)];
     if (novita) apriModal(novita);
   });
+
+  initZoomFoto();
 
   const prodottoModal = document.getElementById('prodotto-modal');
   prodottoModal.addEventListener('click', (e) => {
