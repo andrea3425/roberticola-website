@@ -17,25 +17,6 @@ function formatOra(minuti) {
   return m === 0 ? `${h}` : `${h}:${String(m).padStart(2, '0')}`;
 }
 
-function statoApertura() {
-  const now = new Date();
-  const giornoOggi = now.getDay();
-  const minutiOra = now.getHours() * 60 + now.getMinutes();
-  const fasceOggi = ORARI[giornoOggi].fasce;
-
-  for (const [inizio, fine] of fasceOggi) {
-    if (minutiOra >= inizio && minutiOra < fine) {
-      return { aperto: true, testo: `Aperto ora &middot; chiude alle ${formatOra(fine)}` };
-    }
-  }
-
-  const prossima = fasceOggi.find(([inizio]) => minutiOra < inizio);
-  if (prossima) {
-    return { aperto: false, testo: `Chiuso ora &middot; apre alle ${formatOra(prossima[0])}` };
-  }
-  return { aperto: false, testo: 'Chiuso ora' };
-}
-
 const SERVIZI = [
   {
     titolo: 'Edicola',
@@ -79,6 +60,36 @@ function serviziGridHtml() {
       <p>${s.testo}</p>
     </article>
   `).join('');
+}
+
+const NOVITA = [
+  {
+    titolo: 'Halloween da Roberticola',
+    data: '31 Ottobre',
+    sommario: 'Dolcetto o scherzetto... e un gioco in pi&ugrave;! Caramelle, sorprese e divertimento per tutti i bambini.',
+    immagini: ['gallery/novita/halloween-locandina.png', 'gallery/novita/halloween-regolamento.png'],
+  },
+];
+
+function novitaCardHtml(novita, index) {
+  const [copertina] = novita.immagini;
+  return `
+    <article class="novita-card" data-novita-index="${index}">
+      <div class="novita-immagine">
+        <img src="${copertina}" alt="${novita.titolo}">
+      </div>
+      <div class="novita-caption">
+        ${novita.data ? `<p class="novita-data">${novita.data}</p>` : ''}
+        <h4>${novita.titolo}</h4>
+        <p class="novita-sommario">${novita.sommario}</p>
+        <p class="link-scopri novita-scopri">Scopri di pi&ugrave; <span aria-hidden="true">&rsaquo;</span></p>
+      </div>
+    </article>
+  `;
+}
+
+function novitaGridHtml() {
+  return NOVITA.map(novitaCardHtml).join('');
 }
 
 function orariTableHtml() {
@@ -131,7 +142,6 @@ function prodottoCardHtml(prodotto) {
 
 function categoriaCardHtml(sezione) {
   const copertina = sezione.prodotti[0]?.immagini[0];
-  const n = sezione.prodotti.length;
   return `
     <a href="#/galleria/${sezione.id}" class="categoria-card">
       <div class="categoria-immagine">
@@ -139,7 +149,7 @@ function categoriaCardHtml(sezione) {
       </div>
       <div class="categoria-caption">
         <h4>${sezione.titolo}</h4>
-        <p>${n} prodott${n === 1 ? 'o' : 'i'}</p>
+        <p class="link-scopri categoria-scopri">Scopri di pi&ugrave; <span aria-hidden="true">&rsaquo;</span></p>
       </div>
     </a>
   `;
@@ -154,6 +164,21 @@ function galleriaIndiceHtml() {
         <p class="section-lead">Tutto ciò che cerchi, un mondo di idee da scoprire!</p>
         <div class="categorie-grid">
           ${SEZIONI_GALLERIA.map(categoriaCardHtml).join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function novitaPaginaHtml() {
+  return `
+    <section class="page page-gallery page-novita">
+      <div class="section-inner">
+        <p class="eyebrow">Cosa c'&egrave; di nuovo</p>
+        <h2>Novit&agrave;</h2>
+        <p class="section-lead">Eventi, giochi e sorprese da Roberticola.</p>
+        <div class="novita-grid">
+          ${novitaGridHtml()}
         </div>
       </div>
     </section>
@@ -190,7 +215,6 @@ function dividerHtml() {
 
 const pages = {
   '/': () => {
-    const stato = statoApertura();
     return `
     <section id="hero" class="hero">
       <div class="hero-media" aria-hidden="true">
@@ -202,9 +226,11 @@ const pages = {
           <p class="hero-tagline">Crea, colora, gioca!</p>
           <div class="hero-actions">
             <a href="#/" data-scroll="contatti" class="btn btn-casella btn-contattaci">Contattaci</a>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}" target="_blank" rel="noopener" class="btn btn-casella btn-chiama">Vieni a trovarci</a>
+            <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
           </div>
-          <p class="badge ${stato.aperto ? 'badge-open' : 'badge-closed'}">${stato.testo}</p>
+          <div class="hero-actions hero-actions-novita">
+            <a href="#/novita" class="btn btn-casella btn-novita">Novit&agrave;</a>
+          </div>
         </div>
       </div>
     </section>
@@ -231,23 +257,39 @@ const pages = {
         <p class="eyebrow">Dove siamo</p>
         <h2>Contatti</h2>
         <div class="contatti-grid">
-          <div class="contatti-card">
-            <dl>
-              <div class="contatti-riga">
-                <dt>Indirizzo</dt>
-                <dd><a href="https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}" target="_blank" rel="noopener">Via Marmorale, 73<br>02013 Antrodoco (RI)</a></dd>
-              </div>
-              <div class="contatti-riga">
-                <dt>Telefono</dt>
-                <dd><a href="tel:+390746578079">0746 578079</a></dd>
-              </div>
-              <div class="contatti-riga">
-                <dt>Email</dt>
-                <dd><a href="mailto:roberticola70@gmail.com">roberticola70@gmail.com</a></dd>
-              </div>
-            </dl>
+          <div class="contatti-colonna">
+            <div class="contatti-card">
+              <dl>
+                <div class="contatti-riga">
+                  <dt>Indirizzo</dt>
+                  <dd><a href="https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}" target="_blank" rel="noopener">Via Marmorale, 73<br>02013 Antrodoco (RI)</a></dd>
+                </div>
+                <div class="contatti-riga">
+                  <dt>Telefono</dt>
+                  <dd><a href="tel:+390746578079">0746 578079</a></dd>
+                </div>
+                <div class="contatti-riga">
+                  <dt>Email</dt>
+                  <dd><a href="mailto:roberticola70@gmail.com">roberticola70@gmail.com</a></dd>
+                </div>
+              </dl>
 
-            <a href="https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}" target="_blank" rel="noopener" class="btn btn-primary btn-block">Ottieni indicazioni</a>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=${MAPS_QUERY}" target="_blank" rel="noopener" class="btn btn-primary btn-block">Ottieni indicazioni</a>
+            </div>
+
+            <a href="https://www.instagram.com/roberticola_store/" target="_blank" rel="noopener" class="contatti-instagram">
+              <span class="contatti-instagram-icona" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.3" cy="6.7" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="contatti-instagram-testo">
+                Seguici su Instagram<br>
+                <strong>@roberticola_store</strong>
+              </span>
+            </a>
           </div>
 
           <div class="contatti-mappa">
@@ -259,10 +301,17 @@ const pages = {
             </iframe>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="contatti-orari">
-          <img src="public/logo_icona-viola.png" alt="" class="contatti-orari-watermark">
-          <p class="contatti-orari-titolo">Orari di apertura</p>
+    ${dividerHtml()}
+
+    <section id="orari" class="orari">
+      <img src="public/logo_icona-viola.png" alt="" class="section-watermark">
+      <div class="section-inner">
+        <p class="eyebrow">Quando trovarci</p>
+        <h2>Orari di apertura</h2>
+        <div class="orari-tabella-wrap">
           ${orariGrandeHtml()}
         </div>
       </div>
@@ -303,7 +352,9 @@ function aggiornaModal() {
   img.src = modalProdotto.immagini[modalIndiceFoto];
   img.alt = modalProdotto.titolo;
   document.getElementById('prodotto-modal-titolo').textContent = modalProdotto.titolo;
-  document.getElementById('prodotto-modal-prezzo').textContent = formatPrezzo(modalProdotto.prezzo);
+  const prezzoEl = document.getElementById('prodotto-modal-prezzo');
+  prezzoEl.hidden = modalProdotto.prezzo === undefined;
+  if (!prezzoEl.hidden) prezzoEl.textContent = formatPrezzo(modalProdotto.prezzo);
 
   const multi = modalProdotto.immagini.length > 1;
   document.querySelector('.prodotto-modal-prev').hidden = !multi;
@@ -357,6 +408,7 @@ function initDividers() {
 function render() {
   const path = currentPath();
   const inGalleria = path === '/galleria' || path.startsWith('/galleria/');
+  const inNovita = path === '/novita';
 
   let html;
   if (path === '/galleria') {
@@ -364,13 +416,15 @@ function render() {
   } else if (path.startsWith('/galleria/')) {
     const sezione = SEZIONI_GALLERIA.find(s => s.id === path.slice('/galleria/'.length));
     html = sezione ? galleriaSezioneHtml(sezione) : galleriaIndiceHtml();
+  } else if (inNovita) {
+    html = novitaPaginaHtml();
   } else {
     html = pages['/']();
   }
 
   app.innerHTML = html;
-  updateActiveNav(inGalleria ? '/galleria' : '/');
-  const theme = inGalleria ? 'secondary' : 'home';
+  updateActiveNav(inGalleria ? '/galleria' : (inNovita ? '/novita' : '/'));
+  const theme = inGalleria || inNovita ? 'secondary' : 'home';
   document.body.dataset.theme = theme;
   updateLogoColor(theme);
   window.scrollTo({ top: 0 });
@@ -420,6 +474,13 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!card) return;
     const prodotto = PRODOTTI_FLAT[Number(card.dataset.prodottoIndex)];
     if (prodotto) apriModal(prodotto);
+  });
+
+  document.body.addEventListener('click', (e) => {
+    const card = e.target.closest('.novita-card');
+    if (!card) return;
+    const novita = NOVITA[Number(card.dataset.novitaIndex)];
+    if (novita) apriModal(novita);
   });
 
   const prodottoModal = document.getElementById('prodotto-modal');
