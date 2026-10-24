@@ -1278,4 +1278,34 @@ const OFFERTE = [
     prezzoOfferta: 11.90,
     immagini: ['gallery/offerte/triplo-fucsia-1.png', 'gallery/offerte/triplo-fucsia-2.png', 'gallery/offerte/triplo-fucsia-3.png'],
   },
+  {
+    titolo: 'Astuccio pesce con scatola da 5 matitoni e temperino',
+    prezzo: 15.00,
+    prezzoOfferta: 12.00,
+    immagini: ['gallery/offerte/Astuccio-pesce-1.png', 'gallery/offerte/astuccio-pesce-2.png'],
+  },
+  {
+    titolo: 'Astuccio skyroll accessoriato - rosso',
+    prezzo: 25.00,
+    prezzoOfferta: 20.00,
+    immagini: ['gallery/offerte/Astuccio-skyroll-accessoriato-1.png', 'gallery/offerte/Astuccio-skyroll-accessoriato-2.png'],
+  },
+  {
+    titolo: 'Astuccio skyroll accessoriato - nero',
+    prezzo: 25.00,
+    prezzoOfferta: 20.00,
+    immagini: ['gallery/offerte/Astuccio-skyroll-accessoriato-nero-1.png', 'gallery/offerte/Astuccio-skyroll-accessoriato-nero-2.png'],
+  },
+  {
+    titolo: 'Valigetta accessoriata deluxe',
+    prezzo: 100.00,
+    prezzoOfferta: 80.00,
+    immagini: ['gallery/offerte/deluxe-1.png', 'gallery/offerte/deluxe-2.png'],
+  },
+  {
+    titolo: 'Scatola 72 pastelli - mina 4.2mm',
+    prezzo: 40.00,
+    prezzoOfferta: 32.00,
+    immagini: ['gallery/offerte/pastelli-72.png'],
+  },
 ];

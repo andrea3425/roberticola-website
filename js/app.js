@@ -218,9 +218,9 @@ function offertePaginaHtml() {
       <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
       <div class="section-inner">
         <a href="#/" class="galleria-indietro">&larr; Torna alla Home</a>
-        <p class="eyebrow">Approfittane</p>
+        <p class="eyebrow">Speciale Halloween</p>
         <h2>Offerte</h2>
-        <p class="section-lead">Prodotti scontati, finch&eacute; durano!</p>
+        <p class="section-lead">Sconti da paura: solo dolcetti, niente scherzetti!</p>
         ${contenuto}
       </div>
     </section>
@@ -273,7 +273,7 @@ const pages = {
             <svg class="deco deco-stella deco-stella-1" viewBox="-8 -8 16 16" aria-hidden="true"><path d="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8 Z"/></svg>
             <svg class="deco deco-stella deco-stella-2" viewBox="-8 -8 16 16" aria-hidden="true"><path d="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8 Z"/></svg>
           </h1>
-          <p class="hero-tagline">Crea, colora, gioca!</p>
+          <p class="hero-tagline">Crea, colora&hellip; e fai paura!</p>
           <div class="hero-actions">
             <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
             <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
