@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360">
+  <g fill="#08695f" stroke="#08695f" fill-opacity="0.2" stroke-opacity="0.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Pipistrello -->
+    <path stroke="none" transform="translate(70 60) rotate(-8)" d="M0 -3 L-3 -9 L-1.5 -6.5 Q0 -7.5 1.5 -6.5 L3 -9 L0 -3 Z M0 6 C-4 1 -8 0 -10 3 C-11 -1 -14 -2 -17 0 C-17 -4 -20 -7 -25 -7 C-20 -12 -11 -12 -5 -6 Q0 -9 5 -6 C11 -12 20 -12 25 -7 C20 -7 17 -4 17 0 C14 -2 11 -1 10 3 C8 0 4 1 0 6 Z"/>
+    <!-- Zucca -->
+    <path stroke="none" fill-rule="evenodd" transform="translate(255 95)" d="M-24 2 C-24 -12 -13 -18 0 -18 C13 -18 24 -12 24 2 C24 15 13 20 0 20 C-13 20 -24 15 -24 2 Z M-13 -3 L-5 -3 L-9 -10 Z M5 -3 L13 -3 L9 -10 Z M-14 5 L-9 8 L-5 5 L0 8 L5 5 L9 8 L14 5 C11 13 -11 13 -14 5 Z"/>
+    <path fill="none" stroke-width="3" transform="translate(255 95)" d="M0 -18 C0 -23 2 -26 5 -27"/>
+    <!-- Fantasmino -->
+    <path stroke="none" fill-rule="evenodd" transform="translate(110 205) rotate(6)" d="M-15 20 L-15 -3 C-15 -14 -8 -20 0 -20 C8 -20 15 -14 15 -3 L15 20 L10 15 L5 20 L0 15 L-5 20 L-10 15 Z M-7 -6 A3 4 0 1 0 -6.99 -6 Z M7 -6 A3 4 0 1 0 7.01 -6 Z"/>
+    <!-- Luna -->
+    <path stroke="none" transform="translate(305 250)" d="M4 -18 A18 18 0 1 0 18 8 A14 14 0 1 1 4 -18 Z"/>
+    <!-- Ragnatela nell'angolo -->
+    <g fill="none" stroke-width="1.6" transform="translate(0 360)">
+      <path d="M0 0 L0 -70 M0 0 L35 -61 M0 0 L61 -35 M0 0 L70 0"/>
+      <path d="M0 -24 Q10 -16 12 -21 Q17 -13 21 -12 Q18 -6 24 0"/>
+      <path d="M0 -46 Q17 -35 23 -40 Q30 -27 40 -23 Q37 -12 46 0"/>
+      <path d="M0 -66 Q25 -52 33 -57 Q44 -40 57 -33 Q54 -18 66 0"/>
+    </g>
+    <!-- Ragnetto appeso -->
+    <g transform="translate(200 250)">
+      <path fill="none" stroke-width="1.4" d="M0 -60 L0 -6"/>
+      <path fill="none" stroke-width="1.8" d="M-4 -1 L-11 -6 L-14 -1 M-4 2 L-12 2 L-15 7 M4 -1 L11 -6 L14 -1 M4 2 L12 2 L15 7 M-3 4 L-9 9 L-10 13 M3 4 L9 9 L10 13"/>
+      <ellipse stroke="none" cx="0" cy="2" rx="6" ry="7"/>
+    </g>
+    <!-- Caramella -->
+    <g transform="translate(140 315) rotate(-20)" stroke="none">
+      <ellipse cx="0" cy="0" rx="10" ry="7"/>
+      <path d="M-9 0 L-19 -7 L-19 7 Z M9 0 L19 -7 L19 7 Z"/>
+    </g>
+    <!-- Stelline -->
+    <path stroke="none" d="M170 30 Q171.5 36 177 37.5 Q171.5 39 170 45 Q168.5 39 163 37.5 Q168.5 36 170 30 Z"/>
+    <path stroke="none" d="M330 165 Q331 169 335 170 Q331 171 330 175 Q329 171 325 170 Q329 169 330 165 Z"/>
+    <path stroke="none" d="M30 150 Q31 154 35 155 Q31 156 30 160 Q29 156 25 155 Q29 154 30 150 Z"/>
+    <path stroke="none" d="M260 330 Q261.5 335 266 336.5 Q261.5 338 260 343 Q258.5 338 254 336.5 Q258.5 335 260 330 Z"/>
+    <!-- Pipistrello piccolo -->
+    <path stroke="none" transform="translate(185 140) scale(0.6) rotate(10)" d="M0 -3 L-3 -9 L-1.5 -6.5 Q0 -7.5 1.5 -6.5 L3 -9 L0 -3 Z M0 6 C-4 1 -8 0 -10 3 C-11 -1 -14 -2 -17 0 C-17 -4 -20 -7 -25 -7 C-20 -12 -11 -12 -5 -6 Q0 -9 5 -6 C11 -12 20 -12 25 -7 C20 -7 17 -4 17 0 C14 -2 11 -1 10 3 C8 0 4 1 0 6 Z"/>
+  </g>
+</svg>

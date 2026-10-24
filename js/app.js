@@ -121,20 +121,41 @@ const MAPS_QUERY = encodeURIComponent('Via Marmorale, 73, 02013 Antrodoco RI');
 const formatPrezzo = (prezzo) =>
   prezzo == null ? 'Prezzo su richiesta' : prezzo.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
 
-const PRODOTTI_FLAT = SEZIONI_GALLERIA.flatMap(s => s.prodotti);
+const PRODOTTI_FLAT = [...SEZIONI_GALLERIA.flatMap(s => s.prodotti), ...OFFERTE];
+
+// Prezzo di un prodotto: se è in offerta, il prezzo di base barrato e accanto
+// quello scontato.
+function prezzoHtml(prodotto) {
+  if (prodotto.prezzoOfferta == null) return formatPrezzo(prodotto.prezzo);
+  return `<s class="prezzo-barrato">${formatPrezzo(prodotto.prezzo)}</s> <span class="prezzo-offerta">${formatPrezzo(prodotto.prezzoOfferta)}</span>`;
+}
+
+// Etichetta sulla foto dei prodotti in offerta: almeno -20%, oppure lo
+// sconto vero se è più alto.
+const SCONTO_MINIMO = 20;
+
+function etichettaSconto(prodotto) {
+  if (!OFFERTE.includes(prodotto)) return null;
+  const vero = prodotto.prezzo && prodotto.prezzoOfferta != null
+    ? Math.round((1 - prodotto.prezzoOfferta / prodotto.prezzo) * 100)
+    : 0;
+  return `-${Math.max(SCONTO_MINIMO, vero)}%`;
+}
 
 function prodottoCardHtml(prodotto) {
   const [primaImmagine] = prodotto.immagini;
   const index = PRODOTTI_FLAT.indexOf(prodotto);
+  const sconto = etichettaSconto(prodotto);
 
   return `
     <article class="prodotto-card" data-prodotto-index="${index}">
       <div class="prodotto-immagine">
         <img src="${primaImmagine}" alt="${prodotto.titolo}">
+        ${sconto ? `<span class="badge-sconto">${sconto}</span>` : ''}
       </div>
       <div class="prodotto-caption">
         <h4>${prodotto.titolo}</h4>
-        <p class="prodotto-prezzo${prodotto.prezzo == null ? ' su-richiesta' : ''}">${formatPrezzo(prodotto.prezzo)}</p>
+        <p class="prodotto-prezzo${prodotto.prezzo == null ? ' su-richiesta' : ''}">${prezzoHtml(prodotto)}</p>
       </div>
     </article>
   `;
@@ -188,6 +209,24 @@ function novitaPaginaHtml() {
   `;
 }
 
+function offertePaginaHtml() {
+  const contenuto = OFFERTE.length
+    ? `<div class="prodotti-grid">${OFFERTE.map(prodottoCardHtml).join('')}</div>`
+    : `<p class="offerte-vuota">Nuove offerte in arrivo, torna a trovarci presto!</p>`;
+  return `
+    <section class="page page-gallery page-offerte">
+      <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
+      <div class="section-inner">
+        <a href="#/" class="galleria-indietro">&larr; Torna alla Home</a>
+        <p class="eyebrow">Approfittane</p>
+        <h2>Offerte</h2>
+        <p class="section-lead">Prodotti scontati, finch&eacute; durano!</p>
+        ${contenuto}
+      </div>
+    </section>
+  `;
+}
+
 function galleriaSezioneHtml(sezione) {
   const n = sezione.prodotti.length;
   return `
@@ -223,14 +262,14 @@ const pages = {
     <section id="hero" class="hero">
       <img src="public/logo_icona-viola.png" alt="" class="section-watermark hero-watermark" aria-hidden="true">
       <div class="hero-media" aria-hidden="true">
-        <img src="public/immagine-home.png" alt="" class="hero-media-img">
+        <img src="public/immagine-halloween.jpg" alt="" class="hero-media-img">
       </div>
       <div class="hero-content">
         <div class="hero-inner">
           <h1>Roberticola</h1>
           <p class="hero-tagline">Crea, colora, gioca!</p>
           <div class="hero-actions">
-            <a href="#/" data-scroll="contatti" class="btn btn-casella btn-contattaci">Contattaci</a>
+            <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
             <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
             <a href="#/novita" class="btn btn-casella btn-novita">Novit&agrave;</a>
           </div>
@@ -358,7 +397,7 @@ function aggiornaModal() {
   document.getElementById('prodotto-modal-titolo').textContent = modalProdotto.titolo;
   const prezzoEl = document.getElementById('prodotto-modal-prezzo');
   prezzoEl.hidden = modalProdotto.prezzo === undefined;
-  if (!prezzoEl.hidden) prezzoEl.textContent = formatPrezzo(modalProdotto.prezzo);
+  if (!prezzoEl.hidden) prezzoEl.innerHTML = prezzoHtml(modalProdotto);
 
   const multi = modalProdotto.immagini.length > 1;
   document.querySelector('.prodotto-modal-prev').hidden = !multi;
@@ -589,7 +628,7 @@ function preparaTransizioneCategoria(path) {
   if (!vecchia) return null;
   const copia = vecchia.cloneNode(true);
   copia.classList.add('pagina-uscente');
-  copia.style.background = getComputedStyle(vecchia).backgroundColor;
+  copia.style.backgroundColor = getComputedStyle(vecchia).backgroundColor;
   const verso = profonditaPagina(path) > profonditaPagina(prima) ? 'avanti' : 'indietro';
   return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso };
 }
@@ -640,6 +679,7 @@ function render() {
   const inCategoria = path.startsWith('/galleria/');
   const inGalleria = path === '/galleria' || path.startsWith('/galleria/');
   const inNovita = path === '/novita';
+  const inOfferte = path === '/offerte';
 
   let html;
   if (path === '/galleria') {
@@ -649,6 +689,8 @@ function render() {
     html = sezione ? galleriaSezioneHtml(sezione) : galleriaIndiceHtml();
   } else if (inNovita) {
     html = novitaPaginaHtml();
+  } else if (inOfferte) {
+    html = offertePaginaHtml();
   } else {
     html = pages['/']();
   }
@@ -656,8 +698,8 @@ function render() {
   const transizione = preparaTransizioneCategoria(path);
   app.innerHTML = html;
   pathPrecedente = path;
-  updateActiveNav(inGalleria ? '/galleria' : (inNovita ? '/novita' : '/'));
-  const theme = inGalleria || inNovita ? 'secondary' : 'home';
+  updateActiveNav(inGalleria ? '/galleria' : (inNovita ? '/novita' : (inOfferte ? '/offerte' : '/')));
+  const theme = inGalleria || inNovita || inOfferte ? 'secondary' : 'home';
   document.body.dataset.theme = theme;
   document.body.classList.toggle('in-categoria', inCategoria);
   updateLogoColor(theme, inCategoria);

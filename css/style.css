@@ -417,12 +417,50 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   box-shadow: var(--shadow-soft);
 }
 
-.btn-contattaci {
-  background: var(--viola-orchidea);
+/* Offerte: giallo con scritta viola, testo più grande, etichetta "%"
+   e un leggero bagliore pulsante per farlo notare. */
+.btn-offerte {
+  position: relative;
+  background: #ffd23f;
+  color: var(--viola-acceso);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 0 rgba(255, 210, 63, 0.6), var(--shadow-soft);
+  animation: offerte-pulsa 2s ease-out infinite;
 }
 
-.btn-contattaci:hover {
-  background: color-mix(in srgb, var(--viola-orchidea) 80%, black 20%);
+.btn-offerte:hover {
+  background: #ffc107;
+}
+
+.btn-offerte::after {
+  content: '%';
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--viola-acceso);
+  font-size: 0.95rem;
+  font-weight: 800;
+  transform: rotate(12deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes offerte-pulsa {
+  0% { box-shadow: 0 0 0 0 rgba(255, 210, 63, 0.6), var(--shadow-soft); }
+  70% { box-shadow: 0 0 0 14px rgba(255, 210, 63, 0), var(--shadow-soft); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 210, 63, 0), var(--shadow-soft); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-offerte { animation: none; }
 }
 
 .btn-novita {
@@ -940,6 +978,38 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--viola-acceso);
+}
+
+.prezzo-barrato {
+  color: var(--ink);
+  font-weight: 500;
+  margin-right: 0.35rem;
+}
+
+.prezzo-offerta {
+  color: var(--viola-acceso);
+  font-weight: 800;
+}
+
+.badge-sconto {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--viola-acceso);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.offerte-vuota {
+  margin-top: 2.5rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--viola-profondo);
 }
 
 .prodotto-prezzo.su-richiesta {
@@ -1599,4 +1669,31 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
+}
+
+/* ---------- Halloween ----------
+   Disegnini di Halloween sullo sfondo, nei colori del logo: viola più scuro
+   in Home, verde più scuro nelle pagine interne. Lo sfondo resta fermo
+   rispetto allo schermo, così il motivo continua senza stacchi tra le sezioni.
+   Per toglierlo basta cancellare questo blocco. */
+body[data-theme="home"] {
+  --halloween-motivo: url('../public/halloween-viola.svg');
+}
+
+body[data-theme="secondary"],
+.page-gallery-sezione {
+  --halloween-motivo: url('../public/halloween-verde.svg');
+}
+
+body,
+.hero,
+.sezione-divider,
+.servizi,
+.contatti,
+.orari,
+.page-gallery {
+  background-image: var(--halloween-motivo);
+  background-repeat: repeat;
+  background-size: 470px 470px;
+  background-attachment: fixed;
 }

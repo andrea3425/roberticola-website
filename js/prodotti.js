@@ -1143,3 +1143,139 @@ const SEZIONI_GALLERIA = [
     ],
   },
 ];
+
+// Prodotti in offerta, mostrati nella pagina Offerte (raggiungibile solo dal
+// pulsante "Offerte" in Home, non dal menu). Ogni offerta ha il prezzo di base
+// (mostrato barrato) e il prezzo scontato. Le foto vanno in gallery/offerte/.
+//
+// Esempio:
+//   {
+//     titolo: 'Astuccio one time — Giallo',
+//     prezzo: 36.00,
+//     prezzoOfferta: 29.90,
+//     immagini: ['gallery/offerte/astuccio-giallo-1.png'],
+//   },
+
+// Nomi provvisori presi dai nomi delle foto: prezzi ancora da inserire.
+const OFFERTE = [
+  {
+    titolo: 'Pochette hawaii 3 in 1',
+    prezzo: 15.00,
+    prezzoOfferta: 12.00,
+    immagini: ['gallery/offerte/3in1-1.png', 'gallery/offerte/3in1-2.png'],
+  },
+  {
+    titolo: 'Astuccio bauletto jeans',
+    prezzo: 14.90,
+    prezzoOfferta: 11.90,
+    immagini: ['gallery/offerte/astuccio-bauletto-jeans-1.png', 'gallery/offerte/astuccio-bauletto-jeans-2.png'],
+  },
+  {
+    titolo: 'Pochette hawaii - azzurra',
+    prezzo: 18.00,
+    prezzoOfferta: 14.40,
+    immagini: ['gallery/offerte/azzurrohawaii-1.png', 'gallery/offerte/azzurrohawaii-2.png'],
+  },
+  {
+    titolo: 'Pochette hawaii - fucsia',
+    prezzo: 18.00,
+    prezzoOfferta: 14.40,
+    immagini: ['gallery/offerte/hawaii-1.png'],
+  },
+  {
+    titolo: 'Beauty appendibile in neoprene - blu',
+    prezzo: 18.00,
+    prezzoOfferta: 14.40,
+    immagini: ['gallery/offerte/bagno-1.png', 'gallery/offerte/bagno-2.png'],
+  },
+  {
+    titolo: 'Bauletto hawaii silicone - blu',
+    prezzo: 12.00,
+    prezzoOfferta: 8.00,
+    immagini: ['gallery/offerte/bauletto-blu-1.png', 'gallery/offerte/bauletto-blu-2.png'],
+  },
+  {
+    titolo: 'Bauletto girl',
+    prezzo: 14.90,
+    prezzoOfferta: 11.90,
+    immagini: ['gallery/offerte/bauletto-girl-1.png', 'gallery/offerte/bauletto-girl-2.png'],
+  },
+  {
+    titolo: 'Bauletto silicone - rosa',
+    prezzo: 12.80,
+    prezzoOfferta: 10.00,
+    immagini: ['gallery/offerte/bauletto-rosa-silicone-1.png', 'gallery/offerte/bauletto-rosa-silicone-2.png'],
+  },
+  {
+    titolo: 'Bauletto silicone con 6 pin - azzurro',
+    prezzo: 15.00,
+    prezzoOfferta: 12.00,
+    immagini: ['gallery/offerte/bauletto-silicone-1.png', 'gallery/offerte/bauletto-silicone-2.png'],
+  },
+  {
+    titolo: 'Bauletto hawaii silicone - verde',
+    prezzo: 12.00,
+    prezzoOfferta: 8.00,
+    immagini: ['gallery/offerte/bauletto-sil-1.png', 'gallery/offerte/beuletto-sil-2.png'],
+  },
+  {
+    titolo: 'Bauletto silicone con 5 pin - blu',
+    prezzo: 15.00,
+    prezzoOfferta: 12.00,
+    immagini: ['gallery/offerte/bauletto-silicone-blu.png'],
+  },
+  {
+    titolo: 'Astuccio verticale silicone - con pin',
+    prezzo: 18.00,
+    prezzoOfferta: 14.40,
+    immagini: ['gallery/offerte/verticale-silicone.png'],
+  },
+  {
+    titolo: 'Bustina hawaii - verde',
+    prezzo: 8.00,
+    prezzoOfferta: 6.40,
+    immagini: ['gallery/offerte/bustina-1.png', 'gallery/offerte/bustina-2.png'],
+  },
+  {
+    titolo: 'Astuccio flower accessoriato - pastelli e pennarelli brush',
+    prezzo: 21.90,
+    prezzoOfferta: 17.50,
+    immagini: ['gallery/offerte/flower-1.png', 'gallery/offerte/flower-2.png', 'gallery/offerte/flower-3.png', 'gallery/offerte/flower-4.png', 'gallery/offerte/flower-5.png'],
+  },
+  {
+    titolo: 'Pochette Hello Kitty - fucsia',
+    prezzo: 13.90,
+    prezzoOfferta: 11.10,
+    immagini: ['gallery/offerte/hk-1.png', 'gallery/offerte/hk-2.png', 'gallery/offerte/hk-3.png'],
+  },
+  {
+    titolo: 'Pochette Hello Kitty - Lilla',
+    prezzo: 13.90,
+    prezzoOfferta: 11.10,
+    immagini: ['gallery/offerte/lilla-1.png', 'gallery/offerte/lilla-2.png'],
+  },
+  {
+    titolo: 'Memo tag',
+    prezzo: 4.00,
+    prezzoOfferta: 2.99,
+    immagini: ['gallery/offerte/memo-tag-1.png'],
+  },
+  {
+    titolo: 'Notebook Tinta unita zoo',
+    prezzo: 4.00,
+    prezzoOfferta: 2.99,
+    immagini: ['gallery/offerte/notebook-zoo-1.png', 'gallery/offerte/notebook-zoo-2.png'],
+  },
+  {
+    titolo: 'Astuccio triplo Hello Kitty - lilla',
+    prezzo: 14.90,
+    prezzoOfferta: 11.90,
+    immagini: ['gallery/offerte/triplo-1.png', 'gallery/offerte/triplo-2.png', 'gallery/offerte/triplo-3.png'],
+  },
+  {
+    titolo: 'Astuccio triplo Hello Kitty - fucsia',
+    prezzo: 14.90,
+    prezzoOfferta: 11.90,
+    immagini: ['gallery/offerte/triplo-fucsia-1.png', 'gallery/offerte/triplo-fucsia-2.png', 'gallery/offerte/triplo-fucsia-3.png'],
+  },
+];
