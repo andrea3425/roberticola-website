@@ -1697,3 +1697,83 @@ body,
   background-size: 470px 470px;
   background-attachment: fixed;
 }
+
+/* Scritta "Roberticola" della Home in stile Halloween, con un pipistrello,
+   un ragnetto appeso e due stelline. */
+.hero h1.titolo-halloween {
+  position: relative;
+  display: inline-block;
+  font-family: 'Creepster', var(--font-logo);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 7.5vw, 5rem);
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-shadow: 0 3px 0 var(--viola-profondo), 0 0 18px rgba(94, 245, 226, 0.35);
+}
+
+.titolo-halloween .deco {
+  position: absolute;
+  pointer-events: none;
+}
+
+.deco-pipistrello {
+  width: 44px;
+  top: -30px;
+  left: 34%;
+  fill: var(--viola-profondo);
+  animation: deco-vola 3.2s ease-in-out infinite;
+}
+
+.deco-ragno {
+  width: 26px;
+  top: -34px;
+  right: -36px;
+  fill: var(--viola-profondo);
+  stroke: var(--viola-profondo);
+  stroke-linecap: round;
+  transform-origin: top center;
+  animation: deco-dondola 3.6s ease-in-out infinite;
+}
+
+.deco-ragno .filo {
+  fill: none;
+  stroke: var(--verde-tenue);
+  stroke-width: 1.2;
+  opacity: 0.7;
+}
+
+.deco-ragno .zampe {
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.deco-stella {
+  fill: #ffd23f;
+}
+
+.deco-stella-1 {
+  width: 14px;
+  top: -6px;
+  left: -16px;
+}
+
+.deco-stella-2 {
+  width: 10px;
+  top: -14px;
+  right: 18%;
+}
+
+@keyframes deco-vola {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+
+@keyframes deco-dondola {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deco-pipistrello,
+  .deco-ragno { animation: none; }
+}

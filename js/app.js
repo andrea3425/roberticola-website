@@ -266,7 +266,13 @@ const pages = {
       </div>
       <div class="hero-content">
         <div class="hero-inner">
-          <h1>Roberticola</h1>
+          <h1 class="titolo-halloween">
+            Roberticola
+            <svg class="deco deco-pipistrello" viewBox="-26 -13 52 22" aria-hidden="true"><path d="M0 -3 L-3 -9 L-1.5 -6.5 Q0 -7.5 1.5 -6.5 L3 -9 L0 -3 Z M0 6 C-4 1 -8 0 -10 3 C-11 -1 -14 -2 -17 0 C-17 -4 -20 -7 -25 -7 C-20 -12 -11 -12 -5 -6 Q0 -9 5 -6 C11 -12 20 -12 25 -7 C20 -7 17 -4 17 0 C14 -2 11 -1 10 3 C8 0 4 1 0 6 Z"/></svg>
+            <svg class="deco deco-ragno" viewBox="-16 -60 32 75" aria-hidden="true"><path class="filo" d="M0 -60 L0 -6"/><path class="zampe" d="M-4 -1 L-11 -6 L-14 -1 M-4 2 L-12 2 L-15 7 M4 -1 L11 -6 L14 -1 M4 2 L12 2 L15 7 M-3 4 L-9 9 L-10 13 M3 4 L9 9 L10 13"/><ellipse cx="0" cy="2" rx="6" ry="7"/></svg>
+            <svg class="deco deco-stella deco-stella-1" viewBox="-8 -8 16 16" aria-hidden="true"><path d="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8 Z"/></svg>
+            <svg class="deco deco-stella deco-stella-2" viewBox="-8 -8 16 16" aria-hidden="true"><path d="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8 Z"/></svg>
+          </h1>
           <p class="hero-tagline">Crea, colora, gioca!</p>
           <div class="hero-actions">
             <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
