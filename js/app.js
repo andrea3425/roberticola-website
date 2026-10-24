@@ -617,39 +617,78 @@ function initDividers() {
 
 let pathPrecedente = null;
 
-const profonditaPagina = (path) => (path.startsWith('/galleria/') ? 2 : 1);
+const profonditaPagina = (path) => (path === '/' ? 0 : path.startsWith('/galleria/') ? 2 : 1);
+const inGalleriaPath = (path) => path === '/galleria' || path.startsWith('/galleria/');
+const traHomeEOfferte = (a, b) => (a === '/' && b === '/offerte') || (a === '/offerte' && b === '/');
 
 // Tra l'elenco delle categorie e una categoria (in entrambi i sensi) lo
 // schermo diventa tutto viola e le due linee ondulate della home lo
 // attraversano. Finché il viola non copre tutto resta visibile una copia
 // ferma della pagina vecchia; quando il viola svanisce si è nella nuova.
+// Lo stesso succede passando dalla Home alle Offerte e viceversa.
 function preparaTransizioneCategoria(path) {
   const prima = pathPrecedente;
   const traCategorie = prima !== null && prima !== path &&
-    (prima === '/galleria' || prima.startsWith('/galleria/')) &&
-    (path === '/galleria' || path.startsWith('/galleria/'));
-  if (!traCategorie || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+    inGalleriaPath(prima) && inGalleriaPath(path);
+  if (!(traCategorie || traHomeEOfferte(prima, path)) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
 
-  const vecchia = app.querySelector('.page-gallery');
-  if (!vecchia) return null;
-  const copia = vecchia.cloneNode(true);
+  let vecchia;
+  let copia;
+  if (prima === '/') {
+    // La Home è fatta di più sezioni: le copio tutte dentro un contenitore
+    // che mantiene i colori della Home anche dopo il cambio di tema.
+    vecchia = app.firstElementChild;
+    if (!vecchia) return null;
+    copia = document.createElement('div');
+    copia.classList.add('tema-home');
+    [...app.children].forEach(el => copia.appendChild(el.cloneNode(true)));
+  } else {
+    vecchia = app.querySelector('.page-gallery');
+    if (!vecchia) return null;
+    copia = vecchia.cloneNode(true);
+  }
   copia.classList.add('pagina-uscente');
   copia.style.backgroundColor = getComputedStyle(vecchia).backgroundColor;
   const verso = profonditaPagina(path) > profonditaPagina(prima) ? 'avanti' : 'indietro';
-  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso };
+  const halloween = traHomeEOfferte(prima, path);
+  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso, halloween };
+}
+
+// Transizione Halloween tra Home e Offerte: notte viola, una grande luna
+// che sorge e uno stormo di pipistrelli che la attraversa.
+const PIPISTRELLI_VELO = [
+  // [altezza in % dello schermo, larghezza in px, ritardo in s]
+  [30, 70, 0.12], [42, 46, 0.2], [24, 34, 0.28], [55, 58, 0.18],
+  [36, 90, 0.3], [62, 38, 0.36], [48, 30, 0.42], [20, 52, 0.4],
+];
+
+function veloHalloweenHtml() {
+  const pipistrelli = PIPISTRELLI_VELO.map(([y, w, d]) => `
+    <svg class="velo-pipistrello" viewBox="-26 -13 52 22" style="top:${y}%;width:${w}px;animation-delay:${d}s">
+      <path d="M0 -3 L-3 -9 L-1.5 -6.5 Q0 -7.5 1.5 -6.5 L3 -9 L0 -3 Z M0 6 C-4 1 -8 0 -10 3 C-11 -1 -14 -2 -17 0 C-17 -4 -20 -7 -25 -7 C-20 -12 -11 -12 -5 -6 Q0 -9 5 -6 C11 -12 20 -12 25 -7 C20 -7 17 -4 17 0 C14 -2 11 -1 10 3 C8 0 4 1 0 6 Z"/>
+    </svg>`).join('');
+  return `<div class="velo-luna"></div><div class="velo-stormo">${pipistrelli}</div>`;
 }
 
 function avviaTransizioneCategoria(transizione) {
   if (!transizione) return;
-  const { copia, topSchermo, verso } = transizione;
+  const { copia, topSchermo, verso, halloween } = transizione;
   copia.style.top = `${topSchermo - app.getBoundingClientRect().top}px`;
   app.prepend(copia);
   app.classList.add('in-transizione');
 
   document.querySelector('.velo-transizione')?.remove();
   const velo = document.createElement('div');
-  velo.className = `velo-transizione ${verso}`;
+  velo.className = `velo-transizione ${verso}${halloween ? ' halloween' : ''}`;
   velo.setAttribute('aria-hidden', 'true');
+
+  if (halloween) {
+    velo.innerHTML = veloHalloweenHtml();
+    document.body.appendChild(velo);
+    rimuoviVelo(velo, copia);
+    return;
+  }
 
   // Le onde sono disegnate alla larghezza reale dello schermo, così la
   // linea attraversa tutto lo schermo con lo spessore giusto.
@@ -669,8 +708,12 @@ function avviaTransizioneCategoria(transizione) {
   `;
   document.body.appendChild(velo);
   velo.querySelectorAll('path').forEach(p => p.style.setProperty('--lunghezza', `${Math.ceil(p.getTotalLength()) + 10}px`));
+  rimuoviVelo(velo, copia);
+}
 
-  // Quando il viola copre tutto, la copia della pagina vecchia non serve più.
+// Quando il viola copre tutto, la copia della pagina vecchia non serve più;
+// il velo si toglie da solo alla fine della sua animazione.
+function rimuoviVelo(velo, copia) {
   setTimeout(() => {
     copia.remove();
     app.classList.remove('in-transizione');

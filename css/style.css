@@ -41,7 +41,8 @@
    minore importanza, le tonalità più piene/scure per quelli di maggiore
    importanza. */
 
-body[data-theme="home"] {
+body[data-theme="home"],
+.pagina-uscente.tema-home {
   --section-bg: var(--viola-acceso);
   --chrome-bg: var(--viola-profondo);
   --chrome-text: var(--verde-acqua);
@@ -1118,6 +1119,66 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   100% { stroke-dashoffset: calc(var(--lunghezza) * -1); }
 }
 
+/* Variante Halloween (Home <-> Offerte): notte viola scura, luna gialla che
+   sorge al centro e pipistrelli che attraversano lo schermo. */
+.velo-transizione.halloween {
+  background: radial-gradient(circle at 50% 45%, #4b1a7d 0%, var(--viola-profondo) 70%);
+  overflow: hidden;
+}
+
+.velo-luna {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: min(42vw, 240px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 35%, #fff2b8 0%, #ffd23f 55%, #f5b700 100%);
+  box-shadow: 0 0 70px 24px rgba(255, 210, 63, 0.35);
+  animation: luna-sorge 1.4s ease both;
+}
+
+@keyframes luna-sorge {
+  0% { opacity: 0; transform: translate(-50%, -30%) scale(0.6); }
+  35% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.velo-stormo {
+  position: absolute;
+  inset: 0;
+}
+
+.velo-transizione.halloween.indietro .velo-stormo {
+  transform: scaleX(-1);
+}
+
+.velo-pipistrello {
+  position: absolute;
+  left: 0;
+  fill: #14041f;
+  animation: pipistrello-attraversa 1s cubic-bezier(0.45, 0, 0.55, 1) both;
+}
+
+.velo-pipistrello path {
+  transform-origin: center;
+  animation: pipistrello-ali 0.16s ease-in-out infinite alternate;
+}
+
+@keyframes pipistrello-attraversa {
+  0% { transform: translate(-25vw, 0); }
+  25% { transform: translate(15vw, -18px); }
+  50% { transform: translate(50vw, 10px); }
+  75% { transform: translate(85vw, -14px); }
+  100% { transform: translate(125vw, 0); }
+}
+
+@keyframes pipistrello-ali {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0.55); }
+}
+
 /* ---------- Novit&agrave; ---------- */
 
 .novita-grid {
@@ -1676,7 +1737,8 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
    in Home, verde più scuro nelle pagine interne. Lo sfondo resta fermo
    rispetto allo schermo, così il motivo continua senza stacchi tra le sezioni.
    Per toglierlo basta cancellare questo blocco. */
-body[data-theme="home"] {
+body[data-theme="home"],
+.pagina-uscente.tema-home {
   --halloween-motivo: url('../public/halloween-viola.svg');
 }
 
