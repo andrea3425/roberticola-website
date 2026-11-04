@@ -1799,9 +1799,9 @@ body {
 }
 
 /* Sulle pagine con lo sfondo chiaro (Prodotti, Novità, Offerte) i disegni
-   sono viola scuro come il logo. */
+   sono verde acqua scuro, come il logo in filigrana. */
 body[data-theme="secondary"]:not(.in-categoria) {
-  --motivo-inverno: url('../public/inverno-viola.svg');
+  --motivo-inverno: url('../public/inverno-verde.svg');
 }
 
 body,
