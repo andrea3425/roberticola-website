@@ -1158,6 +1158,39 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   padding: 0.9rem;
 }
 
+/* Eventi già passati: in un riquadro separato sotto, con la foto
+   scurita e in grigio. Cliccando si vede comunque la locandina. */
+.novita-archivio {
+  margin-top: 3.5rem;
+  padding: 1.75rem 1.75rem 2rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px dashed rgba(255, 255, 255, 0.7);
+}
+
+.novita-archivio h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--viola-profondo);
+}
+
+.novita-archivio .novita-grid {
+  margin-top: 1.25rem;
+}
+
+.novita-passata .novita-immagine img {
+  filter: grayscale(1) brightness(0.6);
+  transition: filter 0.22s ease;
+}
+
+.novita-passata:hover .novita-immagine img {
+  filter: grayscale(0.6) brightness(0.8);
+}
+
+.novita-passata .novita-data {
+  color: #6b6b6b;
+}
+
 .novita-caption {
   background: #ffffff;
   border-top: 1px solid var(--border);
@@ -1491,6 +1524,7 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   }
 
   .hero-media-img {
+    object-position: center 20%;
     -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
   }

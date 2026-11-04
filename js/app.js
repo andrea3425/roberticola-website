@@ -62,24 +62,38 @@ function serviziGridHtml() {
   `).join('');
 }
 
+// Novità ed eventi. "fine" è l'ultimo giorno dell'evento (anno-mese-giorno):
+// dal giorno dopo l'evento passa da solo tra gli "Eventi passati", con la
+// foto in grigio (cliccando si vede ancora la locandina originale).
+// Le novità senza "fine" restano sempre in alto.
 const NOVITA = [
   {
     titolo: 'Halloween da Roberticola',
     data: '31 Ottobre',
+    fine: '2026-10-31',
     sommario: 'Dolcetto o scherzetto... e un gioco in pi&ugrave;! Caramelle, sorprese e divertimento per tutti i bambini.',
     immagini: ['gallery/novita/halloween-locandina.png', 'gallery/novita/halloween-regolamento.png'],
   },
 ];
 
-function novitaCardHtml(novita, index) {
+function eventoPassato(novita) {
+  if (!novita.fine) return false;
+  const oggi = new Date();
+  const [a, m, g] = novita.fine.split('-').map(Number);
+  return new Date(a, m - 1, g + 1) <= oggi;
+}
+
+function novitaCardHtml(novita) {
   const [copertina] = novita.immagini;
+  const index = NOVITA.indexOf(novita);
+  const passato = eventoPassato(novita);
   return `
-    <article class="novita-card" data-novita-index="${index}">
+    <article class="novita-card${passato ? ' novita-passata' : ''}" data-novita-index="${index}">
       <div class="novita-immagine">
         <img src="${copertina}" alt="${novita.titolo}">
       </div>
       <div class="novita-caption">
-        ${novita.data ? `<p class="novita-data">${novita.data}</p>` : ''}
+        ${passato ? '<p class="novita-data">Evento concluso</p>' : (novita.data ? `<p class="novita-data">${novita.data}</p>` : '')}
         <h4>${novita.titolo}</h4>
         <p class="novita-sommario">${novita.sommario}</p>
         <p class="link-scopri novita-scopri">Scopri di pi&ugrave; <span aria-hidden="true">&rsaquo;</span></p>
@@ -89,7 +103,17 @@ function novitaCardHtml(novita, index) {
 }
 
 function novitaGridHtml() {
-  return NOVITA.map(novitaCardHtml).join('');
+  const prossime = NOVITA.filter(n => !eventoPassato(n));
+  const passate = NOVITA.filter(eventoPassato);
+  const inArrivo = prossime.length
+    ? `<div class="novita-grid">${prossime.map(novitaCardHtml).join('')}</div>`
+    : `<p class="offerte-vuota">Nuovi eventi in arrivo, torna a trovarci presto!</p>`;
+  const archivio = passate.length ? `
+    <div class="novita-archivio">
+      <h3>Eventi passati</h3>
+      <div class="novita-grid">${passate.map(novitaCardHtml).join('')}</div>
+    </div>` : '';
+  return inArrivo + archivio;
 }
 
 function orariTableHtml() {
@@ -201,9 +225,7 @@ function novitaPaginaHtml() {
         <p class="eyebrow">Cosa c'&egrave; di nuovo</p>
         <h2>Novit&agrave;</h2>
         <p class="section-lead">Eventi, giochi e sorprese da Roberticola.</p>
-        <div class="novita-grid">
-          ${novitaGridHtml()}
-        </div>
+        ${novitaGridHtml()}
       </div>
     </section>
   `;
@@ -262,7 +284,7 @@ const pages = {
     <section id="hero" class="hero">
       <img src="public/logo_icona-viola.png" alt="" class="section-watermark hero-watermark" aria-hidden="true">
       <div class="hero-media" aria-hidden="true">
-        <img src="public/immagine-home.png" alt="" class="hero-media-img">
+        <img src="public/immagine-home-inverno.jpg" alt="" class="hero-media-img">
       </div>
       <div class="hero-content">
         <div class="hero-inner">
