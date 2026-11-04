@@ -1121,48 +1121,85 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   100% { stroke-dashoffset: calc(var(--lunghezza) * -1); }
 }
 
-/* Variante invernale, passando da una sezione all'altra: notte blu, un
-   grande fiocco di neve al centro e tanti fiocchi che cadono. */
+/* Variante invernale, passando da una sezione all'altra (solo colori del
+   sito): viola, un fiocco di neve disegnato con le due linee bianca e verde
+   acqua, neve leggera e un cumulo di neve che sale dal basso. */
 .velo-transizione.inverno {
-  background: radial-gradient(circle at 50% 40%, #3b5fb8 0%, #1d2a6b 55%, var(--viola-profondo) 100%);
+  background: linear-gradient(180deg, var(--viola-profondo) 0%, var(--viola-acceso) 100%);
   overflow: hidden;
 }
 
-.velo-fiocco {
+.velo-neve-punto {
   position: absolute;
-  top: -40px;
-  color: #ffffff;
-  opacity: 0.9;
-  animation: fiocco-cade 1.15s ease-in both;
+  top: -12px;
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: neve-cade 1.2s linear both;
 }
 
-.velo-fiocco svg,
-.velo-fiocco-grande svg {
-  display: block;
-  width: 100%;
-  height: auto;
+@keyframes neve-cade {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-40px, 105vh); }
 }
 
-@keyframes fiocco-cade {
-  from { transform: translateY(0) rotate(0deg); }
-  to { transform: translateY(110vh) rotate(var(--giro)); }
-}
-
-.velo-fiocco-grande {
+.velo-fiocco-disegnato {
   position: absolute;
   left: 50%;
-  top: 50%;
-  width: min(36vw, 200px);
-  color: #ffffff;
-  filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.6));
-  animation: fiocco-grande 1.4s ease both;
+  top: 45%;
+  width: min(40vw, 220px);
+  overflow: visible;
+  transform: translate(-50%, -50%);
+  animation: fiocco-gira 1.4s ease-in-out both;
 }
 
-@keyframes fiocco-grande {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(-60deg); }
-  35% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-  80% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(20deg); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1) rotate(30deg); }
+.velo-fiocco-disegnato path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: fiocco-disegna 0.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
+}
+
+.velo-fiocco-disegnato .tratto-1 {
+  stroke: var(--verde-acqua);
+  stroke-width: 11px;
+  animation-delay: 0.28s;
+}
+
+.velo-fiocco-disegnato .tratto-2 {
+  stroke: #ffffff;
+  stroke-width: 5px;
+}
+
+@keyframes fiocco-disegna {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fiocco-gira {
+  0% { opacity: 1; transform: translate(-50%, -50%) rotate(-30deg) scale(0.85); }
+  80% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotate(8deg) scale(1.05); }
+}
+
+.velo-cumulo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 22vh;
+  animation: cumulo-sale 1.4s ease both;
+}
+
+.velo-cumulo .cumulo-1 { fill: var(--verde-menta); }
+.velo-cumulo .cumulo-2 { fill: var(--verde-tenue); }
+
+@keyframes cumulo-sale {
+  0% { transform: translateY(100%); }
+  40% { transform: translateY(0); }
+  80% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
 }
 
 /* ---------- Novit&agrave; ---------- */

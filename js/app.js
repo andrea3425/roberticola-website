@@ -672,23 +672,34 @@ function preparaTransizioneCategoria(path) {
   return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso, inverno };
 }
 
-// Transizione invernale: notte blu, un grande fiocco di neve che compare al
-// centro e tanti fiocchi che cadono.
-const FIOCCO_SVG = `<svg viewBox="-20 -20 40 40"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M0 -17 L0 17 M-14.7 -8.5 L14.7 8.5 M-14.7 8.5 L14.7 -8.5"/>
-  <path d="M-4.5 -13 L0 -8.5 L4.5 -13 M-4.5 13 L0 8.5 L4.5 13 M-13.5 -2.6 L-7.4 -4.3 L-9 -10.4 M13.5 2.6 L7.4 4.3 L9 10.4 M-13.5 2.6 L-7.4 4.3 L-9 10.4 M13.5 -2.6 L7.4 -4.3 L9 -10.4"/>
-</g></svg>`;
-
+// Transizione invernale, nei colori del sito: lo schermo diventa viola, un
+// grande fiocco di neve si disegna al centro con le due linee (bianca e
+// verde acqua) come le onde della Home, cade una neve leggera e dal basso
+// sale un cumulo di neve.
 function veloInvernoHtml() {
+  const colori = ['#ffffff', 'var(--verde-menta)', 'var(--viola-lilla)'];
   let neve = '';
-  for (let i = 0; i < 28; i++) {
-    const x = Math.round(Math.random() * 100);
-    const size = 10 + Math.round(Math.random() * 26);
-    const ritardo = (Math.random() * 0.35).toFixed(2);
-    const giri = Math.random() < 0.5 ? -1 : 1;
-    neve += `<span class="velo-fiocco" style="left:${x}%;width:${size}px;animation-delay:${ritardo}s;--giro:${giri * 180}deg">${FIOCCO_SVG}</span>`;
+  for (let i = 0; i < 40; i++) {
+    const x = (Math.random() * 100).toFixed(1);
+    const size = 4 + Math.round(Math.random() * 8);
+    const ritardo = (Math.random() * 0.4).toFixed(2);
+    const colore = colori[i % colori.length];
+    neve += `<span class="velo-neve-punto" style="left:${x}%;width:${size}px;height:${size}px;background:${colore};animation-delay:${ritardo}s"></span>`;
   }
-  return `<div class="velo-neve">${neve}</div><div class="velo-fiocco-grande">${FIOCCO_SVG}</div>`;
+  const bracci = 'M0 -60 L0 60 M-52 -30 L52 30 M-52 30 L52 -30 ' +
+    'M-14 -46 L0 -32 L14 -46 M-14 46 L0 32 L14 46 ' +
+    'M-47 -11 L-28 -16 L-33 -35 M47 11 L28 16 L33 35 ' +
+    'M-47 11 L-28 16 L-33 35 M47 -11 L28 -16 L33 -35';
+  return `
+    <div class="velo-neve">${neve}</div>
+    <svg class="velo-fiocco-disegnato" viewBox="-70 -70 140 140">
+      <path class="tratto-1" pathLength="100" d="${bracci}"/>
+      <path class="tratto-2" pathLength="100" d="${bracci}"/>
+    </svg>
+    <svg class="velo-cumulo" viewBox="0 0 1200 160" preserveAspectRatio="none">
+      <path class="cumulo-1" d="M0 70 C150 20 300 20 450 60 C600 100 750 30 900 50 C1050 70 1130 40 1200 55 L1200 160 L0 160 Z"/>
+      <path class="cumulo-2" d="M0 105 C180 70 330 120 520 95 C700 70 860 125 1020 100 C1110 88 1160 95 1200 100 L1200 160 L0 160 Z"/>
+    </svg>`;
 }
 
 function avviaTransizioneCategoria(transizione) {
