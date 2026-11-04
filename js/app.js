@@ -121,7 +121,7 @@ const MAPS_QUERY = encodeURIComponent('Via Marmorale, 73, 02013 Antrodoco RI');
 const formatPrezzo = (prezzo) =>
   prezzo == null ? 'Prezzo su richiesta' : prezzo.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
 
-const PRODOTTI_FLAT = [...SEZIONI_GALLERIA.flatMap(s => s.prodotti), ...OFFERTE];
+const PRODOTTI_FLAT = SEZIONI_GALLERIA.flatMap(s => s.prodotti);
 
 // Prezzo di un prodotto: se è in offerta, il prezzo di base barrato e accanto
 // quello scontato.
@@ -135,7 +135,7 @@ function prezzoHtml(prodotto) {
 const SCONTO_MINIMO = 20;
 
 function etichettaSconto(prodotto) {
-  if (!OFFERTE.includes(prodotto)) return null;
+  if (prodotto.prezzoOfferta == null) return null;
   const vero = prodotto.prezzo && prodotto.prezzoOfferta != null
     ? Math.round((1 - prodotto.prezzoOfferta / prodotto.prezzo) * 100)
     : 0;
@@ -218,9 +218,9 @@ function offertePaginaHtml() {
       <img src="public/logo_icona-teal.png" alt="" class="section-watermark">
       <div class="section-inner">
         <a href="#/" class="galleria-indietro">&larr; Torna alla Home</a>
-        <p class="eyebrow">Speciale Halloween</p>
+        <p class="eyebrow">Prezzi speciali</p>
         <h2>Offerte</h2>
-        <p class="section-lead">Sconti da paura: solo dolcetti, niente scherzetti!</p>
+        <p class="section-lead">I nostri prodotti in offerta, a prezzi scontati per poco tempo!</p>
         ${contenuto}
       </div>
     </section>
@@ -262,18 +262,12 @@ const pages = {
     <section id="hero" class="hero">
       <img src="public/logo_icona-viola.png" alt="" class="section-watermark hero-watermark" aria-hidden="true">
       <div class="hero-media" aria-hidden="true">
-        <img src="public/immagine-halloween.jpg" alt="" class="hero-media-img">
+        <img src="public/immagine-home.png" alt="" class="hero-media-img">
       </div>
       <div class="hero-content">
         <div class="hero-inner">
-          <h1 class="titolo-halloween">
-            Roberticola
-            <svg class="deco deco-pipistrello" viewBox="-26 -13 52 22" aria-hidden="true"><path d="M0 -3 L-3 -9 L-1.5 -6.5 Q0 -7.5 1.5 -6.5 L3 -9 L0 -3 Z M0 6 C-4 1 -8 0 -10 3 C-11 -1 -14 -2 -17 0 C-17 -4 -20 -7 -25 -7 C-20 -12 -11 -12 -5 -6 Q0 -9 5 -6 C11 -12 20 -12 25 -7 C20 -7 17 -4 17 0 C14 -2 11 -1 10 3 C8 0 4 1 0 6 Z"/></svg>
-            <svg class="deco deco-ragno" viewBox="-16 -60 32 75" aria-hidden="true"><path class="filo" d="M0 -60 L0 -6"/><path class="zampe" d="M-4 -1 L-11 -6 L-14 -1 M-4 2 L-12 2 L-15 7 M4 -1 L11 -6 L14 -1 M4 2 L12 2 L15 7 M-3 4 L-9 9 L-10 13 M3 4 L9 9 L10 13"/><ellipse cx="0" cy="2" rx="6" ry="7"/></svg>
-            <svg class="deco deco-stella deco-stella-1" viewBox="-8 -8 16 16" aria-hidden="true"><path d="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8 Z"/></svg>
-            <svg class="deco deco-stella deco-stella-2" viewBox="-8 -8 16 16" aria-hidden="true"><path d="M0 -8 Q1 -1 8 0 Q1 1 0 8 Q-1 1 -8 0 Q-1 -1 0 -8 Z"/></svg>
-          </h1>
-          <p class="hero-tagline">Crea, colora&hellip; e fai paura!</p>
+          <h1>Roberticola</h1>
+          <p class="hero-tagline">Crea, colora, gioca!</p>
           <div class="hero-actions">
             <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
             <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
@@ -651,44 +645,20 @@ function preparaTransizioneCategoria(path) {
   copia.classList.add('pagina-uscente');
   copia.style.backgroundColor = getComputedStyle(vecchia).backgroundColor;
   const verso = profonditaPagina(path) > profonditaPagina(prima) ? 'avanti' : 'indietro';
-  const halloween = traHomeEOfferte(prima, path);
-  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso, halloween };
-}
-
-// Transizione Halloween tra Home e Offerte: notte viola, una grande luna
-// che sorge e uno stormo di pipistrelli che la attraversa.
-const PIPISTRELLI_VELO = [
-  // [altezza in % dello schermo, larghezza in px, ritardo in s]
-  [30, 70, 0.12], [42, 46, 0.2], [24, 34, 0.28], [55, 58, 0.18],
-  [36, 90, 0.3], [62, 38, 0.36], [48, 30, 0.42], [20, 52, 0.4],
-];
-
-function veloHalloweenHtml() {
-  const pipistrelli = PIPISTRELLI_VELO.map(([y, w, d]) => `
-    <svg class="velo-pipistrello" viewBox="-26 -13 52 22" style="top:${y}%;width:${w}px;animation-delay:${d}s">
-      <path d="M0 -3 L-3 -9 L-1.5 -6.5 Q0 -7.5 1.5 -6.5 L3 -9 L0 -3 Z M0 6 C-4 1 -8 0 -10 3 C-11 -1 -14 -2 -17 0 C-17 -4 -20 -7 -25 -7 C-20 -12 -11 -12 -5 -6 Q0 -9 5 -6 C11 -12 20 -12 25 -7 C20 -7 17 -4 17 0 C14 -2 11 -1 10 3 C8 0 4 1 0 6 Z"/>
-    </svg>`).join('');
-  return `<div class="velo-luna"></div><div class="velo-stormo">${pipistrelli}</div>`;
+  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso };
 }
 
 function avviaTransizioneCategoria(transizione) {
   if (!transizione) return;
-  const { copia, topSchermo, verso, halloween } = transizione;
+  const { copia, topSchermo, verso } = transizione;
   copia.style.top = `${topSchermo - app.getBoundingClientRect().top}px`;
   app.prepend(copia);
   app.classList.add('in-transizione');
 
   document.querySelector('.velo-transizione')?.remove();
   const velo = document.createElement('div');
-  velo.className = `velo-transizione ${verso}${halloween ? ' halloween' : ''}`;
+  velo.className = `velo-transizione ${verso}`;
   velo.setAttribute('aria-hidden', 'true');
-
-  if (halloween) {
-    velo.innerHTML = veloHalloweenHtml();
-    document.body.appendChild(velo);
-    rimuoviVelo(velo, copia);
-    return;
-  }
 
   // Le onde sono disegnate alla larghezza reale dello schermo, così la
   // linea attraversa tutto lo schermo con lo spessore giusto.

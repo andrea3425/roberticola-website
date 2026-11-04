@@ -171,6 +171,96 @@ const SEZIONI_GALLERIA = [
         prezzo: 15.90,
         immagini: ['gallery/astucci/nero-1 (2).png'],
       },
+      {
+        titolo: 'Astuccio bauletto jeans',
+        prezzo: 14.90,
+        prezzoOfferta: 11.90,
+        immagini: ['gallery/offerte/astuccio-bauletto-jeans-1.png', 'gallery/offerte/astuccio-bauletto-jeans-2.png'],
+      },
+      {
+        titolo: 'Bauletto hawaii silicone - blu',
+        prezzo: 12.00,
+        prezzoOfferta: 8.00,
+        immagini: ['gallery/offerte/bauletto-blu-1.png', 'gallery/offerte/bauletto-blu-2.png'],
+      },
+      {
+        titolo: 'Bauletto girl',
+        prezzo: 14.90,
+        prezzoOfferta: 11.90,
+        immagini: ['gallery/offerte/bauletto-girl-1.png', 'gallery/offerte/bauletto-girl-2.png'],
+      },
+      {
+        titolo: 'Bauletto silicone - rosa',
+        prezzo: 12.80,
+        prezzoOfferta: 10.00,
+        immagini: ['gallery/offerte/bauletto-rosa-silicone-1.png', 'gallery/offerte/bauletto-rosa-silicone-2.png'],
+      },
+      {
+        titolo: 'Bauletto silicone con 6 pin - azzurro',
+        prezzo: 15.00,
+        prezzoOfferta: 12.00,
+        immagini: ['gallery/offerte/bauletto-silicone-1.png', 'gallery/offerte/bauletto-silicone-2.png'],
+      },
+      {
+        titolo: 'Bauletto hawaii silicone - verde',
+        prezzo: 12.00,
+        prezzoOfferta: 8.00,
+        immagini: ['gallery/offerte/bauletto-sil-1.png', 'gallery/offerte/beuletto-sil-2.png'],
+      },
+      {
+        titolo: 'Bauletto silicone con 5 pin - blu',
+        prezzo: 15.00,
+        prezzoOfferta: 12.00,
+        immagini: ['gallery/offerte/bauletto-silicone-blu.png'],
+      },
+      {
+        titolo: 'Astuccio verticale silicone - con pin',
+        prezzo: 18.00,
+        prezzoOfferta: 14.40,
+        immagini: ['gallery/offerte/verticale-silicone.png'],
+      },
+      {
+        titolo: 'Bustina hawaii - verde',
+        prezzo: 8.00,
+        prezzoOfferta: 6.40,
+        immagini: ['gallery/offerte/bustina-1.png', 'gallery/offerte/bustina-2.png'],
+      },
+      {
+        titolo: 'Astuccio flower accessoriato - pastelli e pennarelli brush',
+        prezzo: 21.90,
+        prezzoOfferta: 17.50,
+        immagini: ['gallery/offerte/flower-1.png', 'gallery/offerte/flower-2.png', 'gallery/offerte/flower-3.png', 'gallery/offerte/flower-4.png', 'gallery/offerte/flower-5.png'],
+      },
+      {
+        titolo: 'Astuccio triplo Hello Kitty - lilla',
+        prezzo: 14.90,
+        prezzoOfferta: 11.90,
+        immagini: ['gallery/offerte/triplo-1.png', 'gallery/offerte/triplo-2.png', 'gallery/offerte/triplo-3.png'],
+      },
+      {
+        titolo: 'Astuccio triplo Hello Kitty - fucsia',
+        prezzo: 14.90,
+        prezzoOfferta: 11.90,
+        immagini: ['gallery/offerte/triplo-fucsia-1.png', 'gallery/offerte/triplo-fucsia-2.png', 'gallery/offerte/triplo-fucsia-3.png'],
+      },
+      {
+        titolo: 'Astuccio pesce con scatola da 5 matitoni e temperino',
+        prezzo: 15.00,
+        prezzoOfferta: 12.00,
+        immagini: ['gallery/offerte/Astuccio-pesce-1.png', 'gallery/offerte/astuccio-pesce-2.png'],
+      },
+      {
+        titolo: 'Astuccio skyroll accessoriato - rosso',
+        prezzo: 25.00,
+        prezzoOfferta: 20.00,
+        immagini: ['gallery/offerte/Astuccio-skyroll-accessoriato-1.png', 'gallery/offerte/Astuccio-skyroll-accessoriato-2.png'],
+      },
+      {
+        titolo: 'Astuccio skyroll accessoriato - nero',
+        prezzo: 25.00,
+        prezzoOfferta: 20.00,
+        immagini: ['gallery/offerte/Astuccio-skyroll-accessoriato-nero-1.png', 'gallery/offerte/Astuccio-skyroll-accessoriato-nero-2.png'],
+      },
     ],
   },
   {
@@ -211,6 +301,12 @@ const SEZIONI_GALLERIA = [
         titolo: 'Agenda giornaliera con penna',
         prezzo: 17.00,
         immagini: ['gallery/agende/rossa-1.png', 'gallery/agende/rossa-2.png', 'gallery/agende/rossa-3.png', 'gallery/agende/rossa-4.png', 'gallery/agende/rossa-5.png', 'gallery/agende/rossa-6.png', 'gallery/agende/rossa-7.png', 'gallery/agende/rossa-8.png'],
+      },
+      {
+        titolo: 'Notebook Tinta unita zoo',
+        prezzo: 4.00,
+        prezzoOfferta: 2.99,
+        immagini: ['gallery/offerte/notebook-zoo-1.png', 'gallery/offerte/notebook-zoo-2.png'],
       },
     ],
   },
@@ -410,6 +506,18 @@ const SEZIONI_GALLERIA = [
         titolo: 'Tovagliette da colazione - Animals 2  ',
         prezzo: 4.90,
         immagini: ['gallery/set e gift box/tovagliettta-3.png', 'gallery/set e gift box/tovagliettta-4.png'],
+      },
+      {
+        titolo: 'Memo tag',
+        prezzo: 4.00,
+        prezzoOfferta: 2.99,
+        immagini: ['gallery/offerte/memo-tag-1.png'],
+      },
+      {
+        titolo: 'Valigetta accessoriata deluxe',
+        prezzo: 100.00,
+        prezzoOfferta: 80.00,
+        immagini: ['gallery/offerte/deluxe-1.png', 'gallery/offerte/deluxe-2.png'],
       },
     ],
   },
@@ -828,6 +936,12 @@ const SEZIONI_GALLERIA = [
         prezzo: 13.00,
         immagini: ['gallery/pastelli/sparkle-1.png'],
       },
+      {
+        titolo: 'Scatola 72 pastelli - mina 4.2mm',
+        prezzo: 40.00,
+        prezzoOfferta: 32.00,
+        immagini: ['gallery/offerte/pastelli-72.png'],
+      },
     ],
   },
   {
@@ -1060,19 +1174,22 @@ const SEZIONI_GALLERIA = [
     copertina: 'gallery/borse/manico-1.png',
     prodotti: [
       {
-        titolo: 'Poshette Hawaii - azzurra',
+        titolo: 'Pochette hawaii - azzurra',
         prezzo: 18.00,
-        immagini: ['gallery/borse/lilla-1.png', 'gallery/borse/17.png'],
+        prezzoOfferta: 14.40,
+        immagini: ['gallery/offerte/azzurrohawaii-1.png', 'gallery/offerte/azzurrohawaii-2.png'],
       },
       {
         titolo: 'Beauty appendibile in neoprene - blu',
         prezzo: 18.00,
-        immagini: ['gallery/borse/bagno-1.png', 'gallery/borse/bagno-2.png'],
+        prezzoOfferta: 14.40,
+        immagini: ['gallery/offerte/bagno-1.png', 'gallery/offerte/bagno-2.png'],
       },
       {
-        titolo: 'Poshette Hawaii - fucsia',
+        titolo: 'Pochette hawaii - fucsia',
         prezzo: 18.00,
-        immagini: ['gallery/borse/fiori-1.png'],
+        prezzoOfferta: 14.40,
+        immagini: ['gallery/offerte/hawaii-1.png'],
       },
       {
         titolo: 'Borsa con manici - lilla',
@@ -1090,14 +1207,27 @@ const SEZIONI_GALLERIA = [
         immagini: ['gallery/borse/moon-1.png', 'gallery/borse/moon-2.png', 'gallery/borse/moon-3.png'],
       },
       {
-        titolo: 'Poshette 3 in 1 Hawaii',
+        titolo: 'Pochette hawaii 3 in 1',
         prezzo: 15.00,
-        immagini: ['gallery/borse/multi-1.png', 'gallery/borse/multi-2.png'],
+        prezzoOfferta: 12.00,
+        immagini: ['gallery/offerte/3in1-1.png', 'gallery/offerte/3in1-2.png'],
       },
       {
         titolo: 'Pouch',
         prezzo: 22.00,
         immagini: ['gallery/borse/poshette-1.png', 'gallery/borse/poshette-2.png'],
+      },
+      {
+        titolo: 'Pochette Hello Kitty - fucsia',
+        prezzo: 13.90,
+        prezzoOfferta: 11.10,
+        immagini: ['gallery/offerte/hk-1.png', 'gallery/offerte/hk-2.png', 'gallery/offerte/hk-3.png'],
+      },
+      {
+        titolo: 'Pochette Hello Kitty - Lilla',
+        prezzo: 13.90,
+        prezzoOfferta: 11.10,
+        immagini: ['gallery/offerte/lilla-1.png', 'gallery/offerte/lilla-2.png'],
       },
     ],
   },
@@ -1144,168 +1274,15 @@ const SEZIONI_GALLERIA = [
   },
 ];
 
-// Prodotti in offerta, mostrati nella pagina Offerte (raggiungibile solo dal
-// pulsante "Offerte" in Home, non dal menu). Ogni offerta ha il prezzo di base
-// (mostrato barrato) e il prezzo scontato. Le foto vanno in gallery/offerte/.
+// Prodotti in offerta: per mettere in offerta un prodotto basta aggiungergli
+// "prezzoOfferta" (il prezzo scontato) nella sua sezione qui sopra. Comparirà
+// nella sezione con il prezzo barrato e anche nella pagina Offerte.
 //
 // Esempio:
 //   {
 //     titolo: 'Astuccio one time — Giallo',
 //     prezzo: 36.00,
 //     prezzoOfferta: 29.90,
-//     immagini: ['gallery/offerte/astuccio-giallo-1.png'],
+//     immagini: ['gallery/astucci/giallo-1.png'],
 //   },
-
-// Nomi provvisori presi dai nomi delle foto: prezzi ancora da inserire.
-const OFFERTE = [
-  {
-    titolo: 'Pochette hawaii 3 in 1',
-    prezzo: 15.00,
-    prezzoOfferta: 12.00,
-    immagini: ['gallery/offerte/3in1-1.png', 'gallery/offerte/3in1-2.png'],
-  },
-  {
-    titolo: 'Astuccio bauletto jeans',
-    prezzo: 14.90,
-    prezzoOfferta: 11.90,
-    immagini: ['gallery/offerte/astuccio-bauletto-jeans-1.png', 'gallery/offerte/astuccio-bauletto-jeans-2.png'],
-  },
-  {
-    titolo: 'Pochette hawaii - azzurra',
-    prezzo: 18.00,
-    prezzoOfferta: 14.40,
-    immagini: ['gallery/offerte/azzurrohawaii-1.png', 'gallery/offerte/azzurrohawaii-2.png'],
-  },
-  {
-    titolo: 'Pochette hawaii - fucsia',
-    prezzo: 18.00,
-    prezzoOfferta: 14.40,
-    immagini: ['gallery/offerte/hawaii-1.png'],
-  },
-  {
-    titolo: 'Beauty appendibile in neoprene - blu',
-    prezzo: 18.00,
-    prezzoOfferta: 14.40,
-    immagini: ['gallery/offerte/bagno-1.png', 'gallery/offerte/bagno-2.png'],
-  },
-  {
-    titolo: 'Bauletto hawaii silicone - blu',
-    prezzo: 12.00,
-    prezzoOfferta: 8.00,
-    immagini: ['gallery/offerte/bauletto-blu-1.png', 'gallery/offerte/bauletto-blu-2.png'],
-  },
-  {
-    titolo: 'Bauletto girl',
-    prezzo: 14.90,
-    prezzoOfferta: 11.90,
-    immagini: ['gallery/offerte/bauletto-girl-1.png', 'gallery/offerte/bauletto-girl-2.png'],
-  },
-  {
-    titolo: 'Bauletto silicone - rosa',
-    prezzo: 12.80,
-    prezzoOfferta: 10.00,
-    immagini: ['gallery/offerte/bauletto-rosa-silicone-1.png', 'gallery/offerte/bauletto-rosa-silicone-2.png'],
-  },
-  {
-    titolo: 'Bauletto silicone con 6 pin - azzurro',
-    prezzo: 15.00,
-    prezzoOfferta: 12.00,
-    immagini: ['gallery/offerte/bauletto-silicone-1.png', 'gallery/offerte/bauletto-silicone-2.png'],
-  },
-  {
-    titolo: 'Bauletto hawaii silicone - verde',
-    prezzo: 12.00,
-    prezzoOfferta: 8.00,
-    immagini: ['gallery/offerte/bauletto-sil-1.png', 'gallery/offerte/beuletto-sil-2.png'],
-  },
-  {
-    titolo: 'Bauletto silicone con 5 pin - blu',
-    prezzo: 15.00,
-    prezzoOfferta: 12.00,
-    immagini: ['gallery/offerte/bauletto-silicone-blu.png'],
-  },
-  {
-    titolo: 'Astuccio verticale silicone - con pin',
-    prezzo: 18.00,
-    prezzoOfferta: 14.40,
-    immagini: ['gallery/offerte/verticale-silicone.png'],
-  },
-  {
-    titolo: 'Bustina hawaii - verde',
-    prezzo: 8.00,
-    prezzoOfferta: 6.40,
-    immagini: ['gallery/offerte/bustina-1.png', 'gallery/offerte/bustina-2.png'],
-  },
-  {
-    titolo: 'Astuccio flower accessoriato - pastelli e pennarelli brush',
-    prezzo: 21.90,
-    prezzoOfferta: 17.50,
-    immagini: ['gallery/offerte/flower-1.png', 'gallery/offerte/flower-2.png', 'gallery/offerte/flower-3.png', 'gallery/offerte/flower-4.png', 'gallery/offerte/flower-5.png'],
-  },
-  {
-    titolo: 'Pochette Hello Kitty - fucsia',
-    prezzo: 13.90,
-    prezzoOfferta: 11.10,
-    immagini: ['gallery/offerte/hk-1.png', 'gallery/offerte/hk-2.png', 'gallery/offerte/hk-3.png'],
-  },
-  {
-    titolo: 'Pochette Hello Kitty - Lilla',
-    prezzo: 13.90,
-    prezzoOfferta: 11.10,
-    immagini: ['gallery/offerte/lilla-1.png', 'gallery/offerte/lilla-2.png'],
-  },
-  {
-    titolo: 'Memo tag',
-    prezzo: 4.00,
-    prezzoOfferta: 2.99,
-    immagini: ['gallery/offerte/memo-tag-1.png'],
-  },
-  {
-    titolo: 'Notebook Tinta unita zoo',
-    prezzo: 4.00,
-    prezzoOfferta: 2.99,
-    immagini: ['gallery/offerte/notebook-zoo-1.png', 'gallery/offerte/notebook-zoo-2.png'],
-  },
-  {
-    titolo: 'Astuccio triplo Hello Kitty - lilla',
-    prezzo: 14.90,
-    prezzoOfferta: 11.90,
-    immagini: ['gallery/offerte/triplo-1.png', 'gallery/offerte/triplo-2.png', 'gallery/offerte/triplo-3.png'],
-  },
-  {
-    titolo: 'Astuccio triplo Hello Kitty - fucsia',
-    prezzo: 14.90,
-    prezzoOfferta: 11.90,
-    immagini: ['gallery/offerte/triplo-fucsia-1.png', 'gallery/offerte/triplo-fucsia-2.png', 'gallery/offerte/triplo-fucsia-3.png'],
-  },
-  {
-    titolo: 'Astuccio pesce con scatola da 5 matitoni e temperino',
-    prezzo: 15.00,
-    prezzoOfferta: 12.00,
-    immagini: ['gallery/offerte/Astuccio-pesce-1.png', 'gallery/offerte/astuccio-pesce-2.png'],
-  },
-  {
-    titolo: 'Astuccio skyroll accessoriato - rosso',
-    prezzo: 25.00,
-    prezzoOfferta: 20.00,
-    immagini: ['gallery/offerte/Astuccio-skyroll-accessoriato-1.png', 'gallery/offerte/Astuccio-skyroll-accessoriato-2.png'],
-  },
-  {
-    titolo: 'Astuccio skyroll accessoriato - nero',
-    prezzo: 25.00,
-    prezzoOfferta: 20.00,
-    immagini: ['gallery/offerte/Astuccio-skyroll-accessoriato-nero-1.png', 'gallery/offerte/Astuccio-skyroll-accessoriato-nero-2.png'],
-  },
-  {
-    titolo: 'Valigetta accessoriata deluxe',
-    prezzo: 100.00,
-    prezzoOfferta: 80.00,
-    immagini: ['gallery/offerte/deluxe-1.png', 'gallery/offerte/deluxe-2.png'],
-  },
-  {
-    titolo: 'Scatola 72 pastelli - mina 4.2mm',
-    prezzo: 40.00,
-    prezzoOfferta: 32.00,
-    immagini: ['gallery/offerte/pastelli-72.png'],
-  },
-];
+const OFFERTE = SEZIONI_GALLERIA.flatMap(s => s.prodotti).filter(p => p.prezzoOfferta != null);
