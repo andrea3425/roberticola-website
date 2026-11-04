@@ -289,7 +289,7 @@ const pages = {
       <div class="hero-content">
         <div class="hero-inner">
           <h1>Roberticola</h1>
-          <p class="hero-tagline">Crea, colora, gioca!</p>
+          <p class="hero-tagline">Fuori fa freddo, qui c'&egrave; un mondo da scoprire!</p>
           <div class="hero-actions">
             <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
             <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
@@ -635,19 +635,21 @@ let pathPrecedente = null;
 
 const profonditaPagina = (path) => (path === '/' ? 0 : path.startsWith('/galleria/') ? 2 : 1);
 const inGalleriaPath = (path) => path === '/galleria' || path.startsWith('/galleria/');
-const traHomeEOfferte = (a, b) => (a === '/' && b === '/offerte') || (a === '/offerte' && b === '/');
+// Sezione del sito a cui appartiene una pagina: le categorie dei prodotti
+// fanno parte della sezione Prodotti.
+const sezioneDi = (path) => (inGalleriaPath(path) ? '/galleria' : path);
 
 // Tra l'elenco delle categorie e una categoria (in entrambi i sensi) lo
 // schermo diventa tutto viola e le due linee ondulate della home lo
 // attraversano. Finché il viola non copre tutto resta visibile una copia
 // ferma della pagina vecchia; quando il viola svanisce si è nella nuova.
-// Lo stesso succede passando dalla Home alle Offerte e viceversa.
+// Passando invece da una sezione all'altra (Home, Prodotti, Novità,
+// Offerte) c'è la transizione invernale con la neve.
 function preparaTransizioneCategoria(path) {
   const prima = pathPrecedente;
-  const traCategorie = prima !== null && prima !== path &&
-    inGalleriaPath(prima) && inGalleriaPath(path);
-  if (!(traCategorie || traHomeEOfferte(prima, path)) ||
+  if (prima === null || prima === path ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+  const inverno = sezioneDi(prima) !== sezioneDi(path);
 
   let vecchia;
   let copia;
@@ -667,20 +669,46 @@ function preparaTransizioneCategoria(path) {
   copia.classList.add('pagina-uscente');
   copia.style.backgroundColor = getComputedStyle(vecchia).backgroundColor;
   const verso = profonditaPagina(path) > profonditaPagina(prima) ? 'avanti' : 'indietro';
-  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso };
+  return { copia, topSchermo: vecchia.getBoundingClientRect().top, verso, inverno };
+}
+
+// Transizione invernale: notte blu, un grande fiocco di neve che compare al
+// centro e tanti fiocchi che cadono.
+const FIOCCO_SVG = `<svg viewBox="-20 -20 40 40"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M0 -17 L0 17 M-14.7 -8.5 L14.7 8.5 M-14.7 8.5 L14.7 -8.5"/>
+  <path d="M-4.5 -13 L0 -8.5 L4.5 -13 M-4.5 13 L0 8.5 L4.5 13 M-13.5 -2.6 L-7.4 -4.3 L-9 -10.4 M13.5 2.6 L7.4 4.3 L9 10.4 M-13.5 2.6 L-7.4 4.3 L-9 10.4 M13.5 -2.6 L7.4 -4.3 L9 -10.4"/>
+</g></svg>`;
+
+function veloInvernoHtml() {
+  let neve = '';
+  for (let i = 0; i < 28; i++) {
+    const x = Math.round(Math.random() * 100);
+    const size = 10 + Math.round(Math.random() * 26);
+    const ritardo = (Math.random() * 0.35).toFixed(2);
+    const giri = Math.random() < 0.5 ? -1 : 1;
+    neve += `<span class="velo-fiocco" style="left:${x}%;width:${size}px;animation-delay:${ritardo}s;--giro:${giri * 180}deg">${FIOCCO_SVG}</span>`;
+  }
+  return `<div class="velo-neve">${neve}</div><div class="velo-fiocco-grande">${FIOCCO_SVG}</div>`;
 }
 
 function avviaTransizioneCategoria(transizione) {
   if (!transizione) return;
-  const { copia, topSchermo, verso } = transizione;
+  const { copia, topSchermo, verso, inverno } = transizione;
   copia.style.top = `${topSchermo - app.getBoundingClientRect().top}px`;
   app.prepend(copia);
   app.classList.add('in-transizione');
 
   document.querySelector('.velo-transizione')?.remove();
   const velo = document.createElement('div');
-  velo.className = `velo-transizione ${verso}`;
+  velo.className = `velo-transizione ${verso}${inverno ? ' inverno' : ''}`;
   velo.setAttribute('aria-hidden', 'true');
+
+  if (inverno) {
+    velo.innerHTML = veloInvernoHtml();
+    document.body.appendChild(velo);
+    rimuoviVelo(velo, copia);
+    return;
+  }
 
   // Le onde sono disegnate alla larghezza reale dello schermo, così la
   // linea attraversa tutto lo schermo con lo spessore giusto.

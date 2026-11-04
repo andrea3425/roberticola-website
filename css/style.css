@@ -397,7 +397,9 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   margin-top: 0.25rem;
   font-family: var(--font-script);
   font-weight: 700;
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  max-width: 30rem;
   color: var(--body-color);
 }
 
@@ -1117,6 +1119,50 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   0% { stroke-dashoffset: var(--lunghezza); }
   50% { stroke-dashoffset: 0; }
   100% { stroke-dashoffset: calc(var(--lunghezza) * -1); }
+}
+
+/* Variante invernale, passando da una sezione all'altra: notte blu, un
+   grande fiocco di neve al centro e tanti fiocchi che cadono. */
+.velo-transizione.inverno {
+  background: radial-gradient(circle at 50% 40%, #3b5fb8 0%, #1d2a6b 55%, var(--viola-profondo) 100%);
+  overflow: hidden;
+}
+
+.velo-fiocco {
+  position: absolute;
+  top: -40px;
+  color: #ffffff;
+  opacity: 0.9;
+  animation: fiocco-cade 1.15s ease-in both;
+}
+
+.velo-fiocco svg,
+.velo-fiocco-grande svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes fiocco-cade {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(110vh) rotate(var(--giro)); }
+}
+
+.velo-fiocco-grande {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(36vw, 200px);
+  color: #ffffff;
+  filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.6));
+  animation: fiocco-grande 1.4s ease both;
+}
+
+@keyframes fiocco-grande {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(-60deg); }
+  35% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+  80% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(20deg); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.1) rotate(30deg); }
 }
 
 /* ---------- Novit&agrave; ---------- */
