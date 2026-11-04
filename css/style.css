@@ -1705,3 +1705,13 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
     gap: 1rem;
   }
 }
+
+/* ---------- Inverno ----------
+   Disegnini invernali (fiocchi di neve, pupazzo, alberello, regalo...) sullo
+   sfondo della parte iniziale della Home. Per toglierli basta cancellare
+   questo blocco. */
+.hero {
+  background-image: url('../public/inverno-home.svg');
+  background-repeat: repeat;
+  background-size: 360px 360px;
+}
