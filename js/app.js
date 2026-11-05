@@ -172,7 +172,7 @@ function prodottoCardHtml(prodotto) {
   const sconto = etichettaSconto(prodotto);
 
   return `
-    <article class="prodotto-card" data-prodotto-index="${index}">
+    <article class="prodotto-card${prodotto.inEvidenza && prodotto.prezzoOfferta != null ? ' prodotto-evidenza' : ''}" data-prodotto-index="${index}">
       <div class="prodotto-immagine">
         <img src="${primaImmagine}" alt="${prodotto.titolo}">
         ${sconto ? `<span class="badge-sconto">${sconto}</span>` : ''}

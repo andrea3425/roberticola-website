@@ -517,6 +517,7 @@ const SEZIONI_GALLERIA = [
         titolo: 'Valigetta accessoriata deluxe',
         prezzo: 100.00,
         prezzoOfferta: 80.00,
+        inEvidenza: true,
         immagini: ['gallery/offerte/deluxe-1.png', 'gallery/offerte/deluxe-2.png'],
       },
     ],
@@ -940,6 +941,7 @@ const SEZIONI_GALLERIA = [
         titolo: 'Scatola 72 pastelli - mina 4.2mm',
         prezzo: 40.00,
         prezzoOfferta: 32.00,
+        inEvidenza: true,
         immagini: ['gallery/offerte/pastelli-72.png'],
       },
     ],
@@ -1285,4 +1287,8 @@ const SEZIONI_GALLERIA = [
 //     prezzoOfferta: 29.90,
 //     immagini: ['gallery/astucci/giallo-1.png'],
 //   },
-const OFFERTE = SEZIONI_GALLERIA.flatMap(s => s.prodotti).filter(p => p.prezzoOfferta != null);
+// Offerte: prima i prodotti "inEvidenza" (con la cornice), poi tutti gli
+// altri dal risparmio più alto (in euro) a quello più basso.
+const OFFERTE = SEZIONI_GALLERIA.flatMap(s => s.prodotti)
+  .filter(p => p.prezzoOfferta != null)
+  .sort((a, b) => (!!b.inEvidenza - !!a.inEvidenza) || ((b.prezzo - b.prezzoOfferta) - (a.prezzo - a.prezzoOfferta)));
