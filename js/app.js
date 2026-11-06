@@ -330,7 +330,7 @@ const pages = {
                 </div>
                 <div class="contatti-riga">
                   <dt>Telefono</dt>
-                  <dd><a href="tel:+390746578079">0746 578079</a></dd>
+                  <dd><a href="tel:+390746802570">0746 802570</a></dd>
                 </div>
                 <div class="contatti-riga">
                   <dt>Email</dt>
@@ -352,6 +352,18 @@ const pages = {
               <span class="contatti-instagram-testo">
                 Seguici su Instagram<br>
                 <strong>@roberticola_store</strong>
+              </span>
+            </a>
+
+            <a href="https://wa.me/390746802570" target="_blank" rel="noopener" class="contatti-instagram contatti-whatsapp">
+              <span class="contatti-instagram-icona" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/>
+                </svg>
+              </span>
+              <span class="contatti-instagram-testo">
+                Scrivici su WhatsApp<br>
+                <strong>0746 802570</strong>
               </span>
             </a>
           </div>

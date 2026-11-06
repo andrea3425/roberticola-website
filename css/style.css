@@ -673,14 +673,14 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
 .contatti-colonna {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .contatti-card {
   background: var(--paper);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
-  padding: 2rem;
+  padding: 1.5rem 1.6rem;
 }
 
 .contatti-instagram {
@@ -718,6 +718,15 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   height: 22px;
 }
 
+.contatti-whatsapp .contatti-instagram-icona {
+  background: #25d366;
+}
+
+.contatti-whatsapp .contatti-instagram-icona svg {
+  width: 24px;
+  height: 24px;
+}
+
 .contatti-instagram-testo {
   font-size: 0.95rem;
   font-weight: 600;
@@ -731,11 +740,11 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
 }
 
 .contatti-card dl {
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.1rem;
 }
 
 .contatti-riga {
-  padding: 0.85rem 0;
+  padding: 0.6rem 0;
   border-bottom: 1px solid var(--border);
 }
 
