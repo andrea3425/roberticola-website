@@ -2834,3 +2834,27 @@ body.natale .categorie-natale .categoria-caption h4 {
   body.natale .page-natale-sezione .prodotto-caption h4 { font-size: 0.78rem; }
   body.natale .page-natale-sezione .prodotto-prezzo { font-size: 0.78rem; }
 }
+
+/* Telefono: in Home prima la casella Natale, poi Offerte, poi Prodotti. */
+@media (max-width: 680px) {
+  body.natale .hero-actions .btn-natale { order: -1; }
+}
+
+/* Pagina Natale: le due caselle più grandi; Cornici in blu (il verde si
+   confondeva con lo sfondo verde della pagina). */
+body.natale .categorie-natale {
+  grid-template-columns: repeat(2, minmax(0, 430px));
+  gap: 2.5rem;
+}
+
+body.natale .categorie-natale .categoria-card:nth-child(1) { --fascia: #1f4fa3; }
+
+body.natale .categorie-natale .categoria-caption h4 { font-size: 1.7rem; }
+
+@media (max-width: 680px) {
+  body.natale .categorie-natale {
+    grid-template-columns: minmax(0, 340px);
+    justify-content: center;
+    gap: 2.75rem;
+  }
+}
