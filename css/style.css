@@ -1756,6 +1756,7 @@ body[data-theme="home"] #site-nav a.nav-evidenza {
   #site-nav.open a:nth-of-type(4) { transition-delay: 0.18s; }
   #site-nav.open a:nth-of-type(5) { transition-delay: 0.22s; }
   #site-nav.open a:nth-of-type(6) { transition-delay: 0.26s; }
+  #site-nav.open a:nth-of-type(7) { transition-delay: 0.3s; }
 
   #site-nav a::after {
     bottom: -6px;
@@ -1885,4 +1886,494 @@ body,
   background-repeat: repeat;
   background-size: 440px 440px;
   background-attachment: fixed;
+}
+
+/* ==========================================================
+   NATALE
+   Si accende con class="natale" sul <body> (index.html): per tornare ai
+   colori di sempre basta togliere quella parola.
+   Barra in alto verde con scritte rosse e logo scuro. Home rossa,
+   Prodotti / Novità / Offerte / Natale verdone, dentro una categoria
+   bianco neve.
+   ========================================================== */
+
+body.natale {
+  --natale-rosso: #a3202a;
+  --natale-rosso-scuro: #7d151c;
+  --natale-rosso-profondo: #5a1016;
+  --natale-verde: #1f5c3c;
+  --natale-verde-medio: #2f7a4d;
+  --natale-verde-scuro: #143d27;
+  --natale-crema: #fff4e0;
+  --natale-neve: #f7efe2;
+  --natale-oro: #e8c15a;
+  --natale-giallo: #ffd23f;
+  --natale-barra: var(--natale-verde);
+  --natale-rosso-vivo: #f0484f;
+
+  /* I colori "viola" e "verde acqua" del sito diventano rosso e verde. */
+  --viola-glicine: #fdeeee;
+  --viola-lilla: #f0b9b9;
+  --viola-orchidea: #c9414a;
+  --viola-acceso: var(--natale-rosso);
+  --viola-profondo: var(--natale-rosso-profondo);
+  --verde-tenue: #eef5ee;
+  --verde-menta: #b9dcc2;
+  --verde-acqua: var(--natale-verde-medio);
+  --verde-turchese: var(--natale-verde);
+  --verde-petrolio: var(--natale-verde-scuro);
+  --verde-chiarissimo: #fbf7f0;
+  --verde-acqua-chiaro: var(--natale-crema);
+  --verde-categoria: var(--natale-neve);
+  --shadow-hover: 0 10px 18px -6px rgba(35, 31, 32, 0.14), 0 30px 46px -18px rgba(20, 61, 39, 0.45);
+
+  --motivo-inverno: url('../public/natale-bianco.svg');
+}
+
+/* Barra in alto: uguale in tutte le pagine. */
+body.natale[data-theme] {
+  --header-bg: var(--natale-barra);
+  --nav-color: #ffffff;
+}
+
+/* Barra in alto senza riga sotto: stacco netto col colore della pagina. */
+body.natale #site-header {
+  border-bottom: none;
+}
+
+body.natale .logo { color: #ffffff; }
+
+body.natale #site-nav a {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+/* Novità, Prodotti e Natale in grassetto rosso. */
+body.natale #site-nav a.nav-evidenza,
+body.natale.in-categoria #site-nav a.nav-evidenza {
+  color: var(--natale-rosso-vivo);
+  font-weight: 800;
+}
+
+body.natale #site-nav a.nav-evidenza::after { background: var(--natale-rosso-vivo); }
+
+/* Home: rosso natalizio, scritte bianche e crema. */
+body.natale[data-theme="home"],
+body.natale .pagina-uscente.tema-home {
+  --section-bg: var(--natale-rosso);
+  --chrome-bg: var(--natale-verde-scuro);
+  --chrome-text: var(--natale-crema);
+  --heading-color: var(--natale-crema);
+  --section-title-color: #ffffff;
+  --body-color: #fde8e4;
+  --faint-color: #f7cfc9;
+  --emphasis-color: var(--natale-oro);
+  --card-heading: var(--natale-verde);
+  --btn-bg: var(--natale-verde);
+  --btn-color: #ffffff;
+  --btn-bg-hover: var(--natale-verde-scuro);
+  --icon-grad: linear-gradient(135deg, var(--natale-rosso), var(--natale-rosso-scuro));
+  --ring-color: rgba(232, 193, 90, 0.35);
+}
+
+/* Prodotti, Novità, Offerte, Natale: verdone, scritte crema. */
+body.natale[data-theme="secondary"] {
+  --section-bg: var(--natale-verde);
+  --chrome-bg: var(--natale-rosso-scuro);
+  --chrome-text: var(--natale-crema);
+  --heading-color: var(--natale-crema);
+  --section-title-color: var(--natale-crema);
+  --body-color: #e3f1e6;
+  --faint-color: #b9dcc2;
+  --emphasis-color: var(--natale-oro);
+  --card-heading: var(--natale-rosso);
+  --btn-bg: var(--natale-rosso);
+  --btn-color: #ffffff;
+  --btn-bg-hover: var(--natale-rosso-scuro);
+  --icon-grad: linear-gradient(135deg, var(--natale-verde-medio), var(--natale-verde));
+  --ring-color: rgba(232, 193, 90, 0.35);
+  --motivo-inverno: url('../public/natale-bianco.svg');
+}
+
+/* Dentro una categoria: bianco neve, titoli rossi, testi verdi. */
+body.natale[data-theme="secondary"].in-categoria,
+body.natale .page-gallery-sezione {
+  --section-bg: var(--natale-neve);
+  --heading-color: var(--natale-rosso);
+  --body-color: var(--natale-verde);
+  --faint-color: var(--natale-verde-medio);
+}
+
+body.natale[data-theme="secondary"].in-categoria {
+  --chrome-bg: var(--natale-verde-scuro);
+  --chrome-text: var(--natale-crema);
+  --motivo-inverno: url('../public/natale-rosso.svg');
+}
+
+/* Logo in filigrana scuro, a contrasto con lo sfondo. */
+body.natale .section-watermark,
+body.natale .nav-watermark {
+  filter: none;
+  opacity: 0.32;
+}
+
+body.natale .page-gallery .section-watermark-chiaro {
+  filter: none;
+  opacity: 0.12;
+}
+
+body.natale .nav-watermark { opacity: 0.12; }
+
+body.natale .page-gallery h2,
+body.natale .page-gallery .section-lead,
+body.natale .galleria-indietro,
+body.natale .novita-archivio h3,
+body.natale .offerte-vuota {
+  color: var(--heading-color);
+}
+
+/* Linee ondulate della Home: gialla e verde. */
+body.natale .sezione-divider .divider-linea-1 { stroke: var(--natale-giallo); opacity: 1; }
+body.natale .sezione-divider .divider-linea-2 { stroke: #2f8a52; }
+
+body.natale .orari-table { border-color: var(--natale-oro); }
+body.natale .orari-table th { color: var(--natale-oro); }
+body.natale .orari-table th.oggi,
+body.natale .orari-table td.oggi { color: #ffd877; }
+
+/* Disegnini di sfondo un po' più grandi. */
+body.natale,
+body.natale .hero,
+body.natale .sezione-divider,
+body.natale .servizi,
+body.natale .contatti,
+body.natale .orari,
+body.natale .page-gallery {
+  background-size: 720px 720px;
+}
+
+/* ---------- Home ---------- */
+
+/* Immagine grande che prende metà pagina e sfuma nel rosso. */
+/* Le due persone scontornate direttamente sul rosso, con la linea di
+   contorno (e una lineetta più sottile) solo sul lato sinistro. */
+body.natale .hero-media {
+  width: 52%;
+  right: 1.5%;
+  padding: 1.5rem 0;
+}
+
+body.natale .hero-media-img {
+  object-fit: contain;
+  object-position: center;
+  -webkit-mask-image: none;
+  mask-image: none;
+  filter: drop-shadow(0 16px 26px rgba(40, 0, 5, 0.35));
+}
+
+/* Scritta "Roberticola": bianca, carattere da biglietto di auguri, senza contorno. */
+body.natale .hero h1 {
+  font-family: 'Berkshire Swash', var(--font-logo);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 7vw, 4.8rem);
+  line-height: 1.05;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+/* Casella "Natale": verde, scritta crema, stellina che dondola e bagliore
+   dorato che pulsa, come la casella Offerte. */
+.btn-natale {
+  position: relative;
+  background: #22743f;
+  color: var(--natale-crema);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 0 rgba(232, 193, 90, 0.7), var(--shadow-soft);
+  animation: natale-pulsa 2s ease-out 1s infinite;
+}
+
+.btn-natale:hover {
+  background: var(--natale-verde);
+}
+
+.btn-natale::after {
+  content: '\2605';
+  position: absolute;
+  top: -10px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--natale-rosso);
+  font-size: 1.05rem;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  animation: stellina-dondola 1.6s ease-in-out infinite;
+}
+
+.btn-natale:hover::after {
+  animation-duration: 0.5s;
+}
+
+@keyframes natale-pulsa {
+  0% { box-shadow: 0 0 0 0 rgba(232, 193, 90, 0.7), var(--shadow-soft); }
+  70% { box-shadow: 0 0 0 14px rgba(232, 193, 90, 0), var(--shadow-soft); }
+  100% { box-shadow: 0 0 0 0 rgba(232, 193, 90, 0), var(--shadow-soft); }
+}
+
+@keyframes stellina-dondola {
+  0%, 100% { transform: rotate(-14deg); }
+  50% { transform: rotate(14deg) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-natale,
+  .btn-natale::after { animation: none; }
+}
+
+/* "Prodotti" sotto, lunga quanto le due caselle sopra. */
+body.natale .hero-actions .btn-novita {
+  color: var(--natale-verde);
+}
+
+@media (max-width: 900px) {
+  body.natale .hero {
+    min-height: 0;
+  }
+
+  body.natale .hero-media {
+    width: 100%;
+    right: auto;
+    height: min(92vw, 440px);
+    padding: 1.25rem 1.25rem 0;
+  }
+}
+
+@media (max-width: 680px) {
+  body.natale .hero-media {
+    height: min(84vw, 340px);
+    padding-top: 1rem;
+  }
+
+  body.natale .hero-content {
+    margin-top: 0;
+    padding-top: 0.6rem;
+  }
+
+  body.natale .hero h1 {
+    font-size: 2.8rem;
+  }
+}
+
+/* ---------- Transizione col trenino (tra le sezioni) ---------- */
+
+.velo-transizione.treno {
+  background: linear-gradient(180deg, #0c2a1a 0%, var(--natale-verde) 40%);
+  overflow: hidden;
+  animation: velo-treno 5.4s ease both;
+}
+
+@keyframes velo-treno {
+  0% { opacity: 0; }
+  5% { opacity: 1; }
+  91% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.velo-cielo {
+  position: absolute;
+  inset: 0;
+}
+
+.velo-stellina {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--natale-oro);
+  box-shadow: 0 0 6px 2px rgba(232, 193, 90, 0.6);
+  animation: stellina-brilla 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes stellina-brilla {
+  from { opacity: 0.3; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+.velo-neve-lenta {
+  animation-duration: 2.6s;
+}
+
+.velo-scena {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.velo-treno-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+/* ---------- Transizione con la neve (tra le categorie) ---------- */
+
+.velo-transizione.neve-natale {
+  background: linear-gradient(180deg, var(--natale-rosso-scuro) 0%, var(--natale-rosso) 100%);
+  overflow: hidden;
+}
+
+.velo-transizione.neve-natale .velo-fiocco-disegnato .tratto-1 { stroke: var(--natale-oro); }
+.velo-transizione.neve-natale .velo-fiocco-disegnato .tratto-2 { stroke: #ffffff; }
+.velo-transizione.neve-natale .velo-cumulo .cumulo-1 { fill: var(--natale-crema); }
+.velo-transizione.neve-natale .velo-cumulo .cumulo-2 { fill: #ffffff; }
+
+.velo-fiocchetto {
+  position: absolute;
+  top: -40px;
+  overflow: visible;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 9px;
+  stroke-linecap: round;
+  opacity: 0.9;
+  animation: fiocchetto-cade 1.25s linear both;
+}
+
+@keyframes fiocchetto-cade {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to { transform: translate(-30px, 110vh) rotate(220deg); }
+}
+
+/* Schermi medi (tablet): con 7 voci il menu si stringe per non finire
+   sopra il logo. */
+@media (min-width: 681px) and (max-width: 1080px) {
+  #site-header { padding-left: 1.25rem; padding-right: 1.25rem; }
+  #site-nav { gap: 1rem; }
+  #site-nav a { font-size: 0.86rem; }
+  .logo-icon { height: 38px; }
+  .logo { height: 16px; }
+}
+
+/* ---------- Natale: logo piccolo in alto a destra ---------- */
+body.natale .section-watermark,
+body.natale .page-gallery .section-watermark {
+  top: 4.5rem;
+  left: auto;
+  right: 6%;
+  width: 120px;
+  transform: rotate(-8deg);
+}
+
+@media (max-width: 680px) {
+  body.natale .section-watermark,
+  body.natale .page-gallery .section-watermark {
+    top: 3rem;
+    right: 5%;
+    width: 76px;
+    max-width: none;
+  }
+}
+
+/* ---------- Natale: caselle dei servizi come pacchi regalo ----------
+   Carta a pois, nastro che gira intorno alla scatola e fiocco sopra.
+   Ogni pacco ha una carta e un nastro diversi. */
+body.natale .servizi-grid {
+  margin-top: 3.75rem;
+  row-gap: 2.75rem;
+}
+
+body.natale .servizio-card {
+  --carta: #fffaf2;
+  --pois: rgba(163, 32, 42, 0.09);
+  --nastro: var(--natale-verde);
+  position: relative;
+  padding-right: 4rem;
+  background:
+    linear-gradient(90deg, transparent calc(100% - 50px), var(--nastro) calc(100% - 50px), var(--nastro) calc(100% - 32px), transparent calc(100% - 32px)),
+    linear-gradient(180deg, transparent 56px, var(--nastro) 56px, var(--nastro) 72px, transparent 72px),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0, rgba(0, 0, 0, 0.06) 12px, transparent 12px),
+    radial-gradient(circle, var(--pois) 2.5px, transparent 3px) 0 0 / 20px 20px,
+    var(--carta);
+}
+
+body.natale .servizio-card::before {
+  content: '';
+  position: absolute;
+  top: -42px;
+  right: -3px;
+  width: 88px;
+  height: 52px;
+  background: var(--nastro);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform-origin: 50% 80%;
+  transition: transform 0.25s ease;
+}
+
+body.natale .servizio-card:hover::before {
+  transform: rotate(-8deg) scale(1.12);
+}
+
+body.natale .servizio-card:nth-child(4n + 2) { --carta: #eaf5ec; --pois: rgba(31, 92, 60, 0.1); --nastro: #d9a93a; }
+body.natale .servizio-card:nth-child(4n + 3) { --carta: #fdeceb; --pois: rgba(163, 32, 42, 0.08); --nastro: var(--natale-verde); }
+body.natale .servizio-card:nth-child(4n + 4) { --carta: #fff4d9; --pois: rgba(232, 193, 90, 0.25); --nastro: #2f8a52; }
+
+body.natale .servizio-icona {
+  position: relative;
+  box-shadow: 0 0 0 4px var(--carta), 0 10px 20px -10px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- Natale: scritte secondarie in corsivo elegante ---------- */
+body.natale {
+  --font-script: 'Parisienne', 'Caveat', cursive;
+}
+
+body.natale .hero-tagline {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  /* oro chiarissimo, per staccarsi dal bianco del nome del negozio */
+  color: #f5dc9c;
+}
+
+body.natale .servizi .section-lead,
+body.natale .page-gallery .section-lead {
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+}
+
+body.natale .eyebrow {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 1.55rem;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 0.3rem;
+}
+
+/* Nome della categoria: come la scritta Roberticola della Home, in rosso. */
+body.natale .page-gallery-sezione h2 {
+  font-family: 'Berkshire Swash', var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 6vw, 3.6rem);
+  color: var(--natale-rosso);
+}
+
+@media (max-width: 680px) {
+  body.natale .hero-tagline { font-size: 1.45rem; }
+}
+
+/* Nomi delle categorie nella pagina Prodotti: in rosso. */
+body.natale .categoria-caption h4 {
+  color: var(--natale-rosso);
+  font-weight: 700;
 }

@@ -1276,6 +1276,240 @@ const SEZIONI_GALLERIA = [
   },
 ];
 
+// Sezione NATALE (casella "Natale" della Home e voce "Natale" del menu),
+// divisa in due: Cornici e Cartoleria. Le foto sono nella cartella
+// gallery/natale. Scrivi qui sotto nomi e prezzi (prezzo: 12.50 con il punto;
+// null = "Prezzo su richiesta"). Si può mettere anche "prezzoOfferta".
+const NATALE_SEZIONI = [
+  {
+    id: 'cornici',
+    titolo: 'Cornici',
+    prodotti: [
+      {
+        titolo: 'Alberello portafoto blu con stelle',
+        prezzo: null,
+        immagini: ['gallery/natale/alberelli_1.png', 'gallery/natale/alberello_2.png'],
+      },
+      {
+        titolo: 'Stella portafoto azzurra con pupazzo di neve',
+        prezzo: null,
+        immagini: ['gallery/natale/appese_1.png', 'gallery/natale/appese_2.png'],
+      },
+      {
+        titolo: 'Stella portafoto blu "Merry Christmas"',
+        prezzo: null,
+        immagini: ['gallery/natale/appese_3.png', 'gallery/natale/appese_4.png'],
+      },
+      {
+        titolo: 'Stella portafoto "Buon Natale"',
+        prezzo: null,
+        immagini: ['gallery/natale/appese_5.png', 'gallery/natale/appese_6.png'],
+      },
+      {
+        titolo: 'Stella portafoto gialla con renna',
+        prezzo: null,
+        immagini: ['gallery/natale/appese_7.png', 'gallery/natale/appese_8.png'],
+      },
+      {
+        titolo: 'Babbo Natale portafoto',
+        prezzo: null,
+        immagini: ['gallery/natale/babbo_1.png', 'gallery/natale/babbo_2.png'],
+      },
+      {
+        titolo: 'Cornice Babbo Natale e renne',
+        prezzo: null,
+        immagini: ['gallery/natale/babbo_renne_1.png', 'gallery/natale/babbo_renne_2.png'],
+      },
+      {
+        titolo: 'Cornice "Buon Natale" con pupazzo di neve',
+        prezzo: null,
+        immagini: ['gallery/natale/buonnatale_pupazzo_1.png'],
+      },
+      {
+        titolo: 'Casetta di pan di zenzero portafoto',
+        prezzo: null,
+        immagini: ['gallery/natale/casetta_neve_1.png', 'gallery/natale/casetta_neve_3.png', 'gallery/natale/casetta_neve_2.png'],
+      },
+      {
+        titolo: 'Casetta portafoto verde e rossa',
+        prezzo: null,
+        immagini: ['gallery/natale/cornice_tonda_casetta_1.png', 'gallery/natale/cornice_casetta_3.png', 'gallery/natale/cornice_casetta_2.png'],
+      },
+      {
+        titolo: 'Cornice grande con renna e campanella',
+        prezzo: null,
+        immagini: ['gallery/natale/cornice_grande_rennacampanella.png'],
+      },
+      {
+        titolo: 'Cornice grande con renna',
+        prezzo: null,
+        immagini: ['gallery/natale/cornice_hgrande_renna.png'],
+      },
+      {
+        titolo: 'Cornicetta mini con gufetti',
+        prezzo: null,
+        immagini: ['gallery/natale/cornicetta_mini.png'],
+      },
+      {
+        titolo: 'Doppia stella portafoto',
+        prezzo: null,
+        immagini: ['gallery/natale/doppia_stella_1.png', 'gallery/natale/doppia_stella_2.png'],
+      },
+      {
+        titolo: 'Mini cornice dorata con campanelle',
+        prezzo: null,
+        immagini: ['gallery/natale/mini_cornice_1.png', 'gallery/natale/mini_cornice_2.png'],
+      },
+      {
+        titolo: 'Mini cornice dorata con stella di Natale',
+        prezzo: null,
+        immagini: ['gallery/natale/mini_cornice_fiore_1.png', 'gallery/natale/mini_cornice_fiore_2.png'],
+      },
+      {
+        titolo: 'Pallina portafoto dorata',
+        prezzo: null,
+        immagini: ['gallery/natale/pallina_1.png', 'gallery/natale/pallina_4.png', 'gallery/natale/pallina_2.png'],
+      },
+      {
+        titolo: 'Pallina portafoto rossa',
+        prezzo: null,
+        immagini: ['gallery/natale/pallina_3.png', 'gallery/natale/pallina_2.png'],
+      },
+      {
+        titolo: 'Pattino portafoto',
+        prezzo: null,
+        immagini: ['gallery/natale/pattino_1.png', 'gallery/natale/pattino_2.png'],
+      },
+      {
+        titolo: 'Cornice pupazzo di neve "Merry Christmas"',
+        prezzo: null,
+        immagini: ['gallery/natale/pupazzo_merry_1.png', 'gallery/natale/pupazzo_merry_2.png'],
+      },
+      {
+        titolo: 'Cornice rossa con omino di pan di zenzero',
+        prezzo: null,
+        immagini: ['gallery/natale/red_biscotto_1.png'],
+      },
+      {
+        titolo: 'Cornice rossa "Merry Christmas"',
+        prezzo: null,
+        immagini: ['gallery/natale/red_biscotto_merry.png'],
+      },
+      {
+        titolo: 'Cornice rossa con pupazzo di neve',
+        prezzo: null,
+        immagini: ['gallery/natale/red_pupazzo_1.png'],
+      },
+      {
+        titolo: 'Stella portafoto "Merry Christmas"',
+        prezzo: null,
+        immagini: ['gallery/natale/stella_1.png', 'gallery/natale/stella_2.png'],
+      },
+      {
+        titolo: 'Tazza portafoto con omino di pan di zenzero',
+        prezzo: null,
+        immagini: ['gallery/natale/tazza_1.png', 'gallery/natale/tazza_2.png'],
+      },
+      {
+        titolo: 'Tondo portafoto "Buon Natale" ghirlanda',
+        prezzo: null,
+        immagini: ['gallery/natale/tondo_1.png', 'gallery/natale/tondo_2.png'],
+      },
+      {
+        titolo: 'Tondo portafoto blu "Ho ho ho"',
+        prezzo: null,
+        immagini: ['gallery/natale/tondo_3.png', 'gallery/natale/tondo_4.png'],
+      },
+      {
+        titolo: 'Tondo portafoto con caramelle',
+        prezzo: null,
+        immagini: ['gallery/natale/tondo_5.png', 'gallery/natale/tondo_6.png'],
+      },
+      {
+        titolo: 'Tondo portafoto "Buon Natale" dorato',
+        prezzo: null,
+        immagini: ['gallery/natale/tondo_7.png', 'gallery/natale/tondo_8.png'],
+      },
+      {
+        titolo: 'Tondo portafoto con zampette',
+        prezzo: null,
+        immagini: ['gallery/natale/tondo_9.png', 'gallery/natale/tondo_10.png'],
+      },
+      {
+        titolo: 'Portafoto triplo',
+        prezzo: null,
+        immagini: ['gallery/natale/triplo_1.png', 'gallery/natale/triplo_2.png'],
+      },
+    ],
+  },
+  {
+    id: 'cartoleria',
+    titolo: 'Cartoleria',
+    prodotti: [
+      {
+        titolo: 'Calendario dell\'Avvento degli Elfi',
+        prezzo: null,
+        immagini: ['gallery/natale/calendario_1.png', 'gallery/natale/calendario_2.png', 'gallery/natale/calendario_3.png', 'gallery/natale/calendario_4.png'],
+      },
+      {
+        titolo: 'Calendario dell\'Avvento Beauty',
+        prezzo: null,
+        immagini: ['gallery/natale/calendario_beauty_1.png', 'gallery/natale/calendario_beauty_2.png', 'gallery/natale/calendario_beauty_3.png'],
+      },
+      {
+        titolo: 'Calza natalizia Tinta Unita Kids',
+        prezzo: null,
+        immagini: ['gallery/natale/calza_1.png', 'gallery/natale/calza_2.png'],
+      },
+      {
+        titolo: 'Calzini natalizi',
+        prezzo: null,
+        immagini: ['gallery/natale/calzini_1.png', 'gallery/natale/calzini_2.png'],
+      },
+      {
+        titolo: 'Gomma gigante albero di Natale',
+        prezzo: null,
+        immagini: ['gallery/natale/gomma_albero.png'],
+      },
+      {
+        titolo: 'Gomma gigante Babbo Natale',
+        prezzo: null,
+        immagini: ['gallery/natale/gomma_babbo.png'],
+      },
+      {
+        titolo: 'Kit decorazioni da colorare',
+        prezzo: null,
+        immagini: ['gallery/natale/kit_1.png', 'gallery/natale/kit_2.png', 'gallery/natale/kit_3.png'],
+      },
+      {
+        titolo: 'Libro "La luce degli Elfi"',
+        prezzo: null,
+        immagini: ['gallery/natale/libro_1.png', 'gallery/natale/libro_2.png', 'gallery/natale/libro_3.png', 'gallery/natale/libro_4.png'],
+      },
+      {
+        titolo: 'Libro "Il soldatino di legno"',
+        prezzo: null,
+        immagini: ['gallery/natale/libro_verde_1.png', 'gallery/natale/libro_verde_2.png', 'gallery/natale/libro_verde_3.png', 'gallery/natale/libro_verde_4.png'],
+      },
+      {
+        titolo: 'Set matite natalizie',
+        prezzo: null,
+        immagini: ['gallery/natale/matite_set.png'],
+      },
+      {
+        titolo: 'Penne natalizie',
+        prezzo: null,
+        immagini: ['gallery/natale/penne_1.png'],
+      },
+      {
+        titolo: 'Stickers di Natale',
+        prezzo: null,
+        immagini: ['gallery/natale/sticker_1.png'],
+      },
+    ],
+  },
+];
+
 // Prodotti in offerta: per mettere in offerta un prodotto basta aggiungergli
 // "prezzoOfferta" (il prezzo scontato) nella sua sezione qui sopra. Comparirà
 // nella sezione con il prezzo barrato e anche nella pagina Offerte.
@@ -1289,6 +1523,6 @@ const SEZIONI_GALLERIA = [
 //   },
 // Offerte: prima i prodotti "inEvidenza" (con la cornice), poi tutti gli
 // altri dal risparmio più alto (in euro) a quello più basso.
-const OFFERTE = SEZIONI_GALLERIA.flatMap(s => s.prodotti)
+const OFFERTE = [...SEZIONI_GALLERIA, ...NATALE_SEZIONI].flatMap(s => s.prodotti)
   .filter(p => p.prezzoOfferta != null)
   .sort((a, b) => (!!b.inEvidenza - !!a.inEvidenza) || ((b.prezzo - b.prezzoOfferta) - (a.prezzo - a.prezzoOfferta)));

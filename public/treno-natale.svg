@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 330" width="460" height="330">
+  <!-- Trenino di Natale per la transizione tra le sezioni del sito.
+       Locomotiva nera e oro vista di tre quarti che viene verso chi guarda,
+       Babbo Natale che saluta, due elfi, renne e regali nei vagoni.
+       Le animazioni sono qui dentro. -->
+  <style>
+    .saluta { transform-origin: 262px 152px; animation: saluta 0.5s ease-in-out infinite alternate; }
+    @keyframes saluta { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
+    .saluta-elfo { transform-origin: 66px 262px; animation: saluta 0.4s ease-in-out infinite alternate; }
+    .fumo { fill: #ffffff; transform-box: fill-box; transform-origin: center; opacity: 0; animation: fumo 1.2s ease-out infinite; }
+    .fumo.b { animation-delay: 0.4s; }
+    .fumo.c { animation-delay: 0.8s; }
+    @keyframes fumo {
+      0% { opacity: 0.95; transform: translate(0, 0) scale(0.5); }
+      100% { opacity: 0; transform: translate(60px, -46px) scale(2.2); }
+    }
+    .corpo { animation: sobbalza 0.24s ease-in-out infinite alternate; }
+    @keyframes sobbalza { to { transform: translateY(-1.5px); } }
+    .raggi { transform-box: fill-box; transform-origin: center; animation: gira 0.5s linear infinite; }
+    @keyframes gira { to { transform: rotate(-360deg); } }
+    .lucina { animation: brilla 0.6s ease-in-out infinite alternate; }
+    .lucina:nth-child(2n) { animation-delay: 0.3s; }
+    @keyframes brilla { from { opacity: 0.5; } to { opacity: 1; } }
+  </style>
+  <defs>
+    <linearGradient id="nero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#55556a"/><stop offset="0.3" stop-color="#1f1f2a"/><stop offset="1" stop-color="#08080c"/>
+    </linearGradient>
+    <linearGradient id="rosso" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2434a"/><stop offset="0.55" stop-color="#b3202a"/><stop offset="1" stop-color="#7d151c"/>
+    </linearGradient>
+    <linearGradient id="oro" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe7a0"/><stop offset="0.5" stop-color="#e2b54a"/><stop offset="1" stop-color="#a87a22"/>
+    </linearGradient>
+    <linearGradient id="legno" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8a5a36"/><stop offset="1" stop-color="#4e2e1a"/>
+    </linearGradient>
+    <linearGradient id="pelle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffd9bd"/><stop offset="1" stop-color="#f0b28e"/>
+    </linearGradient>
+    <linearGradient id="renna" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c7905f"/><stop offset="1" stop-color="#8a5a36"/>
+    </linearGradient>
+    <linearGradient id="neve" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dde6ee"/>
+    </linearGradient>
+    <radialGradient id="faro" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#fffdf0"/><stop offset="0.45" stop-color="#ffe066"/><stop offset="1" stop-color="#c98a1a"/>
+    </radialGradient>
+    <radialGradient id="bagliore">
+      <stop offset="0" stop-color="#fff3b0" stop-opacity="0.85"/><stop offset="1" stop-color="#fff3b0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ruota" cx="0.4" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#e2434a"/><stop offset="1" stop-color="#8e1a23"/>
+    </radialGradient>
+    <!-- ruota vista un po' di lato: raggio 1, si ingrandisce con scale() -->
+    <g id="ruotina">
+      <ellipse rx="0.78" ry="1" fill="url(#ruota)" stroke="#f4efe6" stroke-width="0.14"/>
+      <g transform="scale(0.78 1)">
+        <g class="raggi">
+          <path d="M-0.8 0H0.8M0 -0.8V0.8M-0.56 -0.56L0.56 0.56M-0.56 0.56L0.56 -0.56" stroke="#f4efe6" stroke-width="0.09"/>
+        </g>
+      </g>
+      <ellipse rx="0.18" ry="0.23" fill="url(#oro)"/>
+    </g>
+    <!-- testa di renna (centro del muso in 0,0) -->
+    <g id="testa-renna">
+      <path d="M-9 -26C-12 -38 -18 -44 -26 -48M-15 -36L-24 -36M-19 -42L-17 -50M9 -26C12 -38 18 -44 26 -48M15 -36L24 -36M19 -42L17 -50" stroke="#6b4a3a" stroke-width="3.6" stroke-linecap="round" fill="none"/>
+      <ellipse cx="-15" cy="-18" rx="9" ry="4.5" fill="url(#renna)" transform="rotate(-25 -15 -18)"/>
+      <ellipse cx="15" cy="-18" rx="9" ry="4.5" fill="url(#renna)" transform="rotate(25 15 -18)"/>
+      <path d="M-11 -20C-13 -2 -7 10 0 12C7 10 13 -2 11 -20C9 -30 -9 -30 -11 -20Z" fill="url(#renna)"/>
+      <ellipse cx="0" cy="5" rx="8.5" ry="7" fill="#e3c19a"/>
+      <circle cx="-5" cy="-10" r="2" fill="#2b1d1a"/><circle cx="5" cy="-10" r="2" fill="#2b1d1a"/>
+      <circle cx="-4.3" cy="-10.7" r="0.7" fill="#ffffff"/><circle cx="5.7" cy="-10.7" r="0.7" fill="#ffffff"/>
+      <ellipse cx="0" cy="1" rx="4" ry="3" fill="#3a2418"/>
+      <path d="M-3 7Q0 9.5 3 7" stroke="#6b4a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    </g>
+    <!-- vagone di legno con le renne (largo 110, alto 100 sopra le ruote) -->
+    <g id="vagone">
+      <rect x="62" y="-4" width="26" height="26" rx="2" fill="#e0262f"/>
+      <path d="M75 -4V22M62 9H88" stroke="#ffd23f" stroke-width="3.5"/>
+      <rect x="86" y="6" width="22" height="18" rx="2" fill="#2f9a5a"/>
+      <path d="M97 6V24" stroke="#ffffff" stroke-width="3"/>
+      <use href="#testa-renna" transform="translate(30 12)"/>
+      <use href="#testa-renna" transform="translate(62 20) scale(0.85)"/>
+      <rect x="0" y="22" width="110" height="74" rx="6" fill="url(#legno)"/>
+      <path d="M0 40H110M0 58H110M0 76H110" stroke="#3e2414" stroke-width="2" opacity="0.6"/>
+      <rect x="-3" y="20" width="116" height="7" rx="3" fill="url(#oro)"/>
+      <path d="M-4 24C6 14 18 22 30 16C44 10 58 22 74 16C88 11 100 20 114 18L114 27L-4 27Z" fill="url(#neve)"/>
+      <circle cx="55" cy="60" r="17" fill="none" stroke="#2f7a4d" stroke-width="8"/>
+      <circle cx="47" cy="51" r="2.4" fill="#e0262f"/><circle cx="64" cy="55" r="2.4" fill="#e0262f"/><circle cx="50" cy="72" r="2.4" fill="#e0262f"/>
+      <path d="M55 76L46 85L55 82L64 85Z" fill="#e0262f"/>
+      <rect x="-2" y="94" width="114" height="9" rx="4" fill="#5a1016"/>
+      <use href="#ruotina" transform="translate(20 104) scale(11)"/>
+      <use href="#ruotina" transform="translate(90 104) scale(11)"/>
+    </g>
+  </defs>
+
+  <!-- ombra -->
+  <ellipse cx="200" cy="318" rx="200" ry="11" fill="rgba(0,0,0,0.22)"/>
+
+  <!-- fumo che esce dal comignolo e va all'indietro -->
+  <circle class="fumo" cx="128" cy="40" r="17"/>
+  <circle class="fumo b" cx="128" cy="40" r="17"/>
+  <circle class="fumo c" cx="128" cy="40" r="17"/>
+
+  <g class="corpo">
+    <!-- vagoni con le renne, più piccoli quelli più lontani -->
+    <use href="#vagone" transform="translate(386 168) scale(0.6)"/>
+    <use href="#vagone" transform="translate(300 152) scale(0.82)"/>
+
+    <!-- cabina con Babbo Natale -->
+    <rect x="218" y="156" width="84" height="98" rx="8" fill="url(#rosso)"/>
+    <path d="M226 202C224 162 236 142 256 142C278 142 290 162 288 202Z" fill="url(#rosso)"/>
+    <path d="M238 152C246 158 266 158 276 152L272 202L242 202Z" fill="#ffffff"/>
+    <rect x="232" y="182" width="52" height="8" fill="#2b1d1a"/>
+    <rect x="252" y="181" width="12" height="10" rx="2" fill="none" stroke="#e8c15a" stroke-width="2.5"/>
+    <circle cx="256" cy="122" r="17" fill="url(#pelle)"/>
+    <path d="M238 120C236 148 246 166 256 168C266 166 276 148 274 120C268 130 262 132 256 132C250 132 244 130 238 120Z" fill="#ffffff"/>
+    <path d="M244 131C248 126 254 127 256 130C258 127 264 126 268 131C263 134 259 133 256 131C253 133 249 134 244 131Z" fill="#f4f1ec"/>
+    <circle cx="256" cy="126" r="3.6" fill="#f2998a"/>
+    <circle cx="249.5" cy="118" r="2" fill="#2b1d1a"/><circle cx="262.5" cy="118" r="2" fill="#2b1d1a"/>
+    <circle cx="245" cy="124" r="3" fill="#f6a3a3" opacity="0.7"/><circle cx="267" cy="124" r="3" fill="#f6a3a3" opacity="0.7"/>
+    <path d="M246 113Q249.5 110 253 113M259 113Q262.5 110 266 113" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M238 108C240 88 260 82 274 90C284 96 288 106 290 114C282 106 276 104 270 106Z" fill="url(#rosso)"/>
+    <rect x="236" y="102" width="42" height="10" rx="5" fill="#ffffff"/>
+    <circle cx="291" cy="116" r="6" fill="#ffffff"/>
+    <path d="M214 196C226 188 240 196 256 191C272 186 288 196 306 192L306 200L214 201Z" fill="url(#neve)"/>
+    <rect x="226" y="208" width="68" height="36" rx="5" fill="none" stroke="url(#oro)" stroke-width="2.5"/>
+    <!-- braccio che saluta, guanto verde -->
+    <g class="saluta">
+      <path d="M262 152C276 140 284 116 288 92" stroke="url(#rosso)" stroke-width="13" stroke-linecap="round" fill="none"/>
+      <ellipse cx="288.5" cy="91" rx="8.5" ry="4.5" fill="#ffffff"/>
+      <path d="M282 89C280 78 284 70 290 70C296 70 298 78 296 89Z" fill="#2f9a5a"/>
+      <path d="M283 83C278 81 277 75 281 74" stroke="#2f9a5a" stroke-width="5" stroke-linecap="round" fill="none"/>
+    </g>
+
+    <!-- caldaia nera con le borchie dorate -->
+    <path d="M96 128L232 128Q244 182 232 236L96 236Z" fill="url(#nero)"/>
+    <path d="M100 137L228 137" stroke="#ffffff" stroke-opacity="0.2" stroke-width="6" stroke-linecap="round"/>
+    <path d="M160 129Q168 182 160 235M206 129Q214 182 206 235" stroke="url(#oro)" stroke-width="5" fill="none"/>
+    <path d="M160 129Q168 182 160 235M206 129Q214 182 206 235" stroke="#7a5a1a" stroke-width="2.2" fill="none" stroke-dasharray="0.1 9" stroke-linecap="round"/>
+    <!-- duomo -->
+    <path d="M176 129C176 108 202 108 202 129Z" fill="url(#nero)"/>
+    <ellipse cx="189" cy="110" rx="8" ry="3" fill="url(#oro)"/>
+    <!-- comignolo a imbuto con neve e agrifoglio -->
+    <path d="M118 130L118 92L140 92L140 130Z" fill="url(#nero)"/>
+    <path d="M98 64Q129 56 160 64L146 94L112 94Z" fill="url(#nero)"/>
+    <ellipse cx="129" cy="64" rx="31" ry="8" fill="#15151c" stroke="url(#oro)" stroke-width="3"/>
+    <path d="M100 75Q129 68 158 75" stroke="#e8c15a" stroke-width="2.4" fill="none" stroke-dasharray="0.1 7" stroke-linecap="round"/>
+    <rect x="114" y="92" width="30" height="6" fill="url(#oro)"/>
+    <path d="M98 64C100 54 114 50 120 56C126 48 142 50 146 56C154 52 162 58 160 64C146 67 110 67 98 64Z" fill="url(#neve)"/>
+    <path d="M122 52C114 42 104 42 100 48C108 50 112 52 122 52ZM138 52C146 42 156 42 160 48C152 50 148 52 138 52ZM130 50C128 40 120 36 116 38C120 44 124 48 130 50Z" fill="#2f7a4d"/>
+    <circle cx="126" cy="50" r="3.8" fill="#e0262f"/><circle cx="133" cy="49" r="3.8" fill="#e0262f"/><circle cx="129.5" cy="44" r="3.8" fill="#e0262f"/>
+    <!-- ghirlanda con fiocchi e palline sulla caldaia -->
+    <path d="M104 142C124 160 146 160 160 146C176 160 196 160 206 146C216 154 224 154 230 148" stroke="#2f7a4d" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <path d="M104 142C124 160 146 160 160 146C176 160 196 160 206 146C216 154 224 154 230 148" stroke="#1f5c3c" stroke-width="4" fill="none" stroke-dasharray="3 6" stroke-linecap="round"/>
+    <circle cx="122" cy="153" r="3.4" fill="#e0262f"/><circle cx="140" cy="156" r="3.4" fill="#ffd23f"/><circle cx="180" cy="155" r="3.4" fill="#e0262f"/><circle cx="214" cy="152" r="3.4" fill="#7cc8ff"/>
+    <path d="M160 146L151 140L151 152ZM160 146L169 140L169 152Z" fill="#e0262f"/>
+    <!-- filo di lucine dal comignolo verso i vagoni -->
+    <path d="M160 66C200 96 250 70 300 84C330 92 350 96 380 112" stroke="#2b1d1a" stroke-width="1.6" fill="none"/>
+    <g>
+      <ellipse class="lucina" cx="176" cy="80" rx="3" ry="4.6" fill="#ffd23f"/>
+      <ellipse class="lucina" cx="196" cy="86" rx="3" ry="4.6" fill="#ff5b5b"/>
+      <ellipse class="lucina" cx="306" cy="89" rx="3" ry="4.6" fill="#6fd98a"/>
+      <ellipse class="lucina" cx="328" cy="95" rx="3" ry="4.6" fill="#7cc8ff"/>
+      <ellipse class="lucina" cx="350" cy="100" rx="3" ry="4.6" fill="#ffd23f"/>
+      <ellipse class="lucina" cx="370" cy="107" rx="3" ry="4.6" fill="#ff5b5b"/>
+    </g>
+    <!-- muso con le borchie e il faro acceso -->
+    <ellipse cx="96" cy="182" rx="40" ry="54" fill="#17171e"/>
+    <ellipse cx="96" cy="182" rx="40" ry="54" fill="none" stroke="url(#oro)" stroke-width="4.5"/>
+    <ellipse cx="96" cy="182" rx="35" ry="48" fill="none" stroke="#e8c15a" stroke-width="3.6" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+    <ellipse cx="96" cy="182" rx="28" ry="39" fill="#26262f"/>
+    <circle cx="92" cy="174" r="54" fill="url(#bagliore)"/>
+    <ellipse cx="92" cy="174" rx="16" ry="18" fill="url(#faro)" stroke="url(#oro)" stroke-width="3.5"/>
+    <!-- fiocco rosso sul muso -->
+    <path d="M96 226L84 218L84 234ZM96 226L108 218L108 234Z" fill="#e0262f"/>
+    <circle cx="96" cy="226" r="4.5" fill="#b3202a"/>
+    <!-- elfo seduto sul muso -->
+    <path d="M70 136C68 128 72 122 80 122C88 122 92 128 90 136Z" fill="#2f7a4d"/>
+    <circle cx="80" cy="115" r="10" fill="url(#pelle)"/>
+    <path d="M70 114L61 108L70 119ZM90 114L99 108L90 119Z" fill="#f0b28e"/>
+    <circle cx="76.5" cy="114" r="1.5" fill="#2b1d1a"/><circle cx="83.5" cy="114" r="1.5" fill="#2b1d1a"/>
+    <path d="M76.5 119Q80 122 83.5 119" stroke="#a3202a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <path d="M69 109C71 94 86 92 92 102C97 94 106 94 108 101C102 99 97 103 90 109Z" fill="#2f7a4d"/>
+    <rect x="68" y="104" width="24" height="7" rx="3.5" fill="#e0262f"/>
+    <circle cx="109" cy="101" r="4" fill="#e8c15a"/>
+    <!-- telaio, spazzaneve rosso e ruote rosse -->
+    <rect x="62" y="232" width="246" height="17" rx="5" fill="url(#rosso)"/>
+    <rect x="62" y="239" width="246" height="3" fill="#e8c15a"/>
+    <path d="M30 312L122 312L114 248L56 248Z" fill="url(#rosso)"/>
+    <path d="M48 310L62 250M68 310L76 250M88 310L90 250M106 310L104 250" stroke="#7d151c" stroke-width="4.5"/>
+    <path d="M54 249C66 241 78 247 90 242C102 238 112 245 118 248Z" fill="url(#neve)"/>
+    <!-- regalo sullo spazzaneve -->
+    <rect x="98" y="276" width="34" height="28" rx="3" fill="#2f9a5a"/>
+    <path d="M115 276V304M98 290H132" stroke="#e0262f" stroke-width="4"/>
+    <use href="#ruotina" transform="translate(140 286) scale(14)"/>
+    <use href="#ruotina" transform="translate(184 278) scale(24)"/>
+    <use href="#ruotina" transform="translate(240 276) scale(24)"/>
+    <path d="M184 278L240 276" stroke="url(#oro)" stroke-width="5" stroke-linecap="round"/>
+    <!-- elfo in piedi davanti che saluta -->
+    <path d="M46 296C44 280 50 270 58 270C66 270 72 280 70 296Z" fill="#2f7a4d"/>
+    <rect x="48" y="294" width="9" height="14" rx="3" fill="#1f5c3c"/><rect x="59" y="294" width="9" height="14" rx="3" fill="#1f5c3c"/>
+    <circle cx="58" cy="262" r="9.5" fill="url(#pelle)"/>
+    <path d="M48.5 261L41 256L49 266ZM67.5 261L75 256L67 266Z" fill="#f0b28e"/>
+    <circle cx="55" cy="261" r="1.4" fill="#2b1d1a"/><circle cx="61" cy="261" r="1.4" fill="#2b1d1a"/>
+    <path d="M55 266Q58 268.5 61 266" stroke="#a3202a" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <path d="M47 257C48 243 62 240 68 249C71 242 78 243 79 248C73 247 70 251 66 256Z" fill="#e0262f"/>
+    <rect x="47" y="253" width="22" height="6" rx="3" fill="#ffffff"/>
+    <circle cx="80" cy="248" r="3.4" fill="#ffffff"/>
+    <g class="saluta-elfo">
+      <path d="M66 278C74 270 78 262 80 254" stroke="#2f7a4d" stroke-width="6" stroke-linecap="round" fill="none"/>
+      <circle cx="80.5" cy="252" r="4" fill="url(#pelle)"/>
+    </g>
+  </g>
+</svg>
