@@ -2877,3 +2877,6 @@ body.natale .categorie-natale .categoria-card:nth-child(1) .link-scopri {
   color: var(--natale-verde);
   text-decoration-color: rgba(31, 92, 60, 0.4);
 }
+
+/* Natale: niente alone chiaro in alto a destra nella sezione dei servizi. */
+body.natale .servizi::before { display: none; }
