@@ -2867,4 +2867,13 @@ body.natale .categorie-natale .categoria-caption {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+/* Casella Cornici bianca: nome in rosso e link in verde per leggerli. */
+body.natale .categorie-natale .categoria-card:nth-child(1) { --fascia: #ffffff; }
+body.natale .categorie-natale .categoria-card:nth-child(1) .categoria-caption h4 { color: var(--natale-rosso); }
+body.natale .categorie-natale .categoria-card:nth-child(1) .link-scopri {
+  color: var(--natale-verde);
+  text-decoration-color: rgba(31, 92, 60, 0.4);
 }
