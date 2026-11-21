@@ -5,7 +5,7 @@ const app = document.getElementById('app');
 // (trenino tra le sezioni, neve tra le categorie dei prodotti).
 const NATALE = document.body.classList.contains('natale');
 const LOGO = NATALE
-  ? { home: 'bianco', pagine: 'bianco', categoria: 'bianco', filigranaHome: 'rosso-scuro', filigranaPagine: 'verde-scuro', filigranaCategoria: 'rosso' }
+  ? { home: 'cappello', pagine: 'cappello', categoria: 'cappello', filigranaHome: 'rosso-scuro', filigranaPagine: 'verde-scuro', filigranaCategoria: 'rosso' }
   : { home: 'teal', pagine: 'viola', categoria: 'teal', filigranaHome: 'viola', filigranaPagine: 'teal', filigranaCategoria: 'teal' };
 const IMMAGINE_HOME = NATALE ? 'public/immagine-home-natale.webp' : 'public/immagine-home-inverno.jpg';
 
@@ -135,7 +135,30 @@ function orariTableHtml() {
   `).join('');
 }
 
+// Natale: gli orari sono cartellini regalo appesi a una ghirlanda con le
+// lucine, da lunedì a domenica; quello di oggi è rosso.
+function orariCartelliniHtml() {
+  const oggi = new Date().getDay();
+  const ordine = [1, 2, 3, 4, 5, 6, 0];
+  return `
+    <div class="orari-cartellini">
+      ${ordine.map(i => {
+        const r = ORARI[i];
+        return `
+        <div class="cartellino${i === oggi ? ' oggi' : ''}">
+          <div class="cartellino-carta">
+            ${i === oggi ? '<span class="cartellino-oggi">Oggi</span>' : ''}
+            <span class="cartellino-giorno">${r.giorno}</span>
+            <span class="cartellino-ore">${r.fasce.map(([a, b]) => `${formatOra(a)}&ndash;${formatOra(b)}`).join('<br>')}</span>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
 function orariGrandeHtml() {
+  if (NATALE) return orariCartelliniHtml();
   const oggi = new Date().getDay();
   const intestazioni = ORARI.map((r, i) => `<th class="${i === oggi ? 'oggi' : ''}">${r.giorno}</th>`).join('');
   const celle = ORARI.map((r, i) => `
@@ -279,10 +302,10 @@ function offertePaginaHtml() {
   `;
 }
 
-function galleriaSezioneHtml(sezione, indietro = { href: '#/galleria', testo: 'Tutte le categorie' }) {
+function galleriaSezioneHtml(sezione, indietro = { href: '#/galleria', testo: 'Tutte le categorie' }, classe = '') {
   const n = sezione.prodotti.length;
   return `
-    <section class="page page-gallery page-gallery-sezione">
+    <section class="page page-gallery page-gallery-sezione ${classe}">
       <img src="public/logo_icona-${LOGO.filigranaCategoria}.png" alt="" class="section-watermark section-watermark-chiaro">
       <div class="section-inner">
         <a href="${indietro.href}" class="galleria-indietro">&larr; ${indietro.testo}</a>
@@ -450,7 +473,8 @@ function closeNav() {
 function updateLogoColor(theme, inCategoria) {
   const suffix = inCategoria ? LOGO.categoria : (theme === 'home' ? LOGO.home : LOGO.pagine);
   document.getElementById('logo-icon-img').src = `public/logo_icona-${suffix}.png`;
-  document.getElementById('logo-text-img').src = `public/logo_scritta-${suffix}.png`;
+  // A Natale il simbolo è rosso col cappellino di Babbo Natale, la scritta resta bianca.
+  document.getElementById('logo-text-img').src = `public/logo_scritta-${suffix === 'cappello' ? 'bianco' : suffix}.png`;
 }
 
 let modalProdotto = null;
@@ -748,211 +772,113 @@ function veloInvernoHtml() {
     </svg>`;
 }
 
-// Natale, tra una sezione e l'altra: notte verde con stelline e neve e
-// una ferrovia che, vista in prospettiva, arriva da sinistra in lontananza
-// e fa una curva morbida fino a chi guarda. Il trenino (locomotiva e tre
-// vagoni, disegni in public/treno-*.svg) la percorre: ogni pezzo segue la
-// curva per conto suo, così il treno si piega mentre gira.
-const TRENO_PEZZI = [
-  // Un pezzo unico: il treno visto di tre quarti che viene verso chi guarda.
-  // file, larghezza, proporzione, punto che poggia sul binario (davanti alle ruote), distanza
-  { src: 'public/treno-natale.svg', larg: 1, alt: 330 / 460, ax: 0.4, ay: 0.94, dist: 0, fisso: true },
-]
+// Natale, tra una sezione e l'altra: schermo rosso come la transizione
+// della neve e un lungo trenino disegnato a linee bianche e dorate (come il
+// grande fiocco di neve) che passa dritto da destra a sinistra, grande
+// quanto lo schermo. Babbo Natale guida, dietro i vagoni con i regali,
+// l'albero di Natale e il pupazzo di neve. Cade la neve.
+function trenoLinee() {
+  const ruota = (x, y, r) => `
+    <circle cx="${x}" cy="${y}" r="${r}"/>
+    <g class="treno-ruota"><path d="M${x - r * 0.7} ${y}H${x + r * 0.7}M${x} ${y - r * 0.7}V${y + r * 0.7}M${x - r * 0.5} ${y - r * 0.5}L${x + r * 0.5} ${y + r * 0.5}M${x - r * 0.5} ${y + r * 0.5}L${x + r * 0.5} ${y - r * 0.5}"/></g>`;
+  const vagone = (x0, carico, colore = '') => `
+    <g class="${colore}"><rect x="${x0 + 10}" y="108" width="200" height="62" rx="8"/>
+    <path d="M${x0 + 10} 128H${x0 + 210}"/></g>
+    <path d="M${x0 + 2} 172H${x0 + 218}"/>
+    ${ruota(x0 + 55, 192, 18)}${ruota(x0 + 165, 192, 18)}
+    <path d="M${x0 - 20} 160H${x0 + 10}"/>
+    ${carico}`;
+  const regali = (x0) => `
+    <g class="blu"><rect x="${x0 + 25}" y="62" width="50" height="46" rx="3"/><path d="M${x0 + 50} 62V108M${x0 + 25} 84H${x0 + 75}"/></g>
+    <path d="M${x0 + 50} 62C${x0 + 40} 44 ${x0 + 26} 50 ${x0 + 50} 62C${x0 + 74} 50 ${x0 + 60} 44 ${x0 + 50} 62"/>
+    <g class="verde"><rect x="${x0 + 85}" y="40" width="58" height="68" rx="3"/><path d="M${x0 + 114} 40V108M${x0 + 85} 72H${x0 + 143}"/></g>
+    <path d="M${x0 + 114} 40C${x0 + 102} 20 ${x0 + 86} 28 ${x0 + 114} 40C${x0 + 142} 28 ${x0 + 126} 20 ${x0 + 114} 40"/>
+    <rect x="${x0 + 153}" y="74" width="42" height="34" rx="3"/><path d="M${x0 + 174} 74V108"/>`;
+  const albero = (x0) => `
+    <path class="verde" d="M${x0 + 110} 14L${x0 + 135} 46H${x0 + 124}L${x0 + 150} 76H${x0 + 136}L${x0 + 164} 104H${x0 + 56}L${x0 + 84} 76H${x0 + 70}L${x0 + 96} 46H${x0 + 85}Z"/>
+    <path d="M${x0 + 110} -2L${x0 + 114} 8L${x0 + 124} 8L${x0 + 116} 14L${x0 + 119} 24L${x0 + 110} 18L${x0 + 101} 24L${x0 + 104} 14L${x0 + 96} 8L${x0 + 106} 8Z"/>
+    <circle class="blu" cx="${x0 + 100}" cy="60" r="4"/><circle cx="${x0 + 122}" cy="88" r="4"/><circle cx="${x0 + 92}" cy="92" r="4"/><circle cx="${x0 + 118}" cy="56" r="3"/>
+    <path d="M${x0 + 88} 70Q${x0 + 110} 80 ${x0 + 132} 66"/>`;
+  const pupazzo = (x0) => `
+    <circle cx="${x0 + 110}" cy="80" r="28"/><circle cx="${x0 + 110}" cy="36" r="18"/>
+    <path class="verde" d="M${x0 + 94} 20H${x0 + 126}M${x0 + 100} 20V0H${x0 + 120}V20"/>
+    <path d="M${x0 + 84} 72L${x0 + 60} 56M${x0 + 136} 72L${x0 + 160} 56"/>
+    <path class="blu" d="M${x0 + 96} 52Q${x0 + 110} 60 ${x0 + 124} 52L${x0 + 128} 70"/>
+    <circle cx="${x0 + 104}" cy="32" r="1.5"/><circle cx="${x0 + 116}" cy="32" r="1.5"/><path d="M${x0 + 110} 38L${x0 + 122} 42"/>
+    <circle cx="${x0 + 110}" cy="76" r="2"/><circle cx="${x0 + 110}" cy="90" r="2"/>`;
+  return `
+    <!-- locomotiva, rivolta a sinistra -->
+    <path d="M8 196L44 150V196Z"/>
+    <path d="M60 92H196V164H60A36 36 0 0 1 60 92Z"/>
+    <path d="M100 92V164M150 92V164"/>
+    <path d="M70 46H114L104 68V92H82V68Z"/>
+    <path d="M122 92A16 16 0 0 1 154 92"/>
+    <rect x="30" y="74" width="22" height="18" rx="3"/>
+    <path d="M24 78L6 72M24 86L4 88M26 94L10 104"/>
+    <path d="M186 40H290M196 40V164M196 164H284V40"/>
+    <rect x="208" y="58" width="62" height="48" rx="5"/>
+    <!-- Babbo Natale nel finestrino -->
+    <path d="M226 82H254"/>
+    <path d="M228 82L238 62L258 70"/><circle cx="262" cy="72" r="4"/>
+    <path d="M228 82C226 104 252 104 252 82"/>
+    <path d="M230 92Q239 112 250 92"/>
+    <circle cx="235" cy="88" r="1.2"/><circle cx="245" cy="88" r="1.2"/>
+    <path d="M26 172H292"/>
+    ${ruota(95, 186, 28)}${ruota(162, 186, 28)}${ruota(250, 194, 18)}
+    <path d="M95 186H162"/>
+    <path d="M292 160H320"/>
+    ${vagone(320, regali(320))}
+    ${vagone(560, albero(560), 'verde')}
+    ${vagone(800, pupazzo(800), 'blu')}
+    ${vagone(1040, regali(1040))}`;
+}
 
-// La ferrovia: una linea morbida a "S" che passa per alcuni punti scelti a
-// mano (x da 0 a 1 = larghezza dello schermo, y da 0 = orizzonte a 1 = dove
-// si ferma il treno). Entra da sinistra in lontananza, ondeggia a destra e
-// a sinistra e arriva al centro davanti a chi guarda. Più è in basso, più è
-// vicina e quindi più grande.
-const FERROVIA = [
-  [0.72, 0], [0.55, 0.5], [0.38, 1], [0.261, 1.35],
-]
+function veloTrenoDisegnoHtml() {
+  const bracci = 'M0 -60 L0 60 M-52 -30 L52 30 M-52 30 L52 -30 ' +
+    'M-14 -46 L0 -32 L14 -46 M-14 46 L0 32 L14 46 ' +
+    'M-47 -11 L-28 -16 L-33 -35 M47 11 L28 16 L33 35 ' +
+    'M-47 11 L-28 16 L-33 35 M47 -11 L28 -16 L33 -35';
+  let neve = '';
+  for (let i = 0; i < 22; i++) {
+    const size = 12 + Math.round(Math.random() * 18);
+    neve += `<svg class="velo-fiocchetto velo-fiocchetto-lento" viewBox="-70 -70 140 140" style="left:${(Math.random() * 100).toFixed(1)}%;width:${size}px;animation-delay:${(Math.random() * 2.6).toFixed(2)}s"><path d="${bracci}"/></svg>`;
+  }
+  for (let i = 0; i < 30; i++) {
+    const size = 4 + Math.round(Math.random() * 6);
+    neve += `<span class="velo-neve-punto velo-neve-lenta" style="left:${(Math.random() * 100).toFixed(1)}%;width:${size}px;height:${size}px;background:#ffffff;animation-delay:${(Math.random() * 2.6).toFixed(2)}s"></span>`;
+  }
+  const linee = trenoLinee();
+  const fumo = [0, 0.3, 0.6].map(r => `<circle class="treno-fumo-linea" cx="92" cy="34" r="16" style="animation-delay:${r}s"/>`).join('');
+  return `
+    <div class="velo-neve">${neve}</div>
+    <svg class="velo-cumulo velo-cumulo-fermo" viewBox="0 0 1200 160" preserveAspectRatio="none">
+      <path class="cumulo-1" d="M0 50 C150 20 300 30 450 45 C600 60 750 25 900 40 C1050 55 1130 35 1200 45 L1200 160 L0 160 Z"/>
+      <path class="cumulo-2" d="M0 95 C180 75 330 110 520 90 C700 72 860 112 1020 95 C1110 88 1160 92 1200 96 L1200 160 L0 160 Z"/>
+    </svg>
+    <div class="velo-binario"></div>
+    <svg class="velo-treno-linee" viewBox="0 -20 1270 240">
+      <g class="tratto-1">${linee}${fumo}</g>
+      <g class="tratto-2">${linee}${fumo}</g>
+    </svg>`;
+}
 
-function percorsoTreno() {
+function animaTrenoDisegno(velo) {
   const W = window.innerWidth;
   const H = window.innerHeight;
-  const orizzonte = H * 0.42;
-  const arrivo = H * 0.985;
-  const L = Math.min(W * 0.95, (H * 0.62) / TRENO_PEZZI[0].alt);
-  const P = FERROVIA.map(([x, y]) => ({ x: x * W, y: orizzonte + y * (arrivo - orizzonte) }));
-  // Curva morbida che passa per tutti i punti (Catmull-Rom).
-  const punti = [];
-  for (let i = 0; i < P.length - 1; i++) {
-    const p0 = P[Math.max(0, i - 1)];
-    const p1 = P[i];
-    const p2 = P[i + 1];
-    const p3 = P[Math.min(P.length - 1, i + 2)];
-    for (let k = 0; k < 60; k++) {
-      const t = k / 60;
-      const t2 = t * t;
-      const t3 = t2 * t;
-      const c = (a, b, c2, d) => 0.5 * (2 * b + (-a + c2) * t + (2 * a - 5 * b + 4 * c2 - d) * t2 + (-a + 3 * b - 3 * c2 + d) * t3);
-      punti.push({ x: c(p0.x, p1.x, p2.x, p3.x), y: c(p0.y, p1.y, p2.y, p3.y) });
-    }
-  }
-  punti.push({ ...P[P.length - 1] });
-  // Grandezza (prospettiva), direzione e distanze lungo il binario: sullo
-  // schermo e "nel mondo" (dove i pezzi lontani contano di più).
-  let lungo = 0;
-  let mondo = 0;
-  let fermata = 0;
-  punti.forEach((p, i) => {
-    p.s = 0.05 + 0.95 * Math.max(0, (p.y - orizzonte) / (arrivo - orizzonte));
-    const a = punti[Math.max(0, i - 1)];
-    const b = punti[Math.min(punti.length - 1, i + 1)];
-    const dx = b.x - a.x;
-    const dy = b.y - a.y;
-    const len = Math.hypot(dx, dy) || 1;
-    p.tx = dx / len;
-    p.ty = dy / len;
-    if (i) {
-      const passo = Math.hypot(p.x - punti[i - 1].x, p.y - punti[i - 1].y);
-      lungo += passo;
-      mondo += passo / (L * Math.max(0.05, p.s));
-    }
-    p.lungo = lungo;
-    p.mondo = mondo;
-    if (p.y <= arrivo + 0.5) fermata = i;
-  });
-  // Punto del binario a una certa distanza "nel mondo".
-  const inMondo = (m) => {
-    let lo = 0;
-    let hi = punti.length - 1;
-    m = Math.max(0, Math.min(punti[hi].mondo, m));
-    while (hi - lo > 1) {
-      const c = (lo + hi) >> 1;
-      if (punti[c].mondo < m) lo = c; else hi = c;
-    }
-    const a = punti[lo];
-    const b = punti[hi];
-    const f = b.mondo > a.mondo ? (m - a.mondo) / (b.mondo - a.mondo) : 0;
-    const mix = (k) => a[k] + (b[k] - a[k]) * f;
-    return { x: mix('x'), y: mix('y'), s: mix('s'), tx: mix('tx'), ty: mix('ty') };
-  };
-  const partenza = punti.findIndex(p => p.x > -60);
-  return { W, H, L, orizzonte, punti, inMondo, partenza, fermata };
+  const treno = velo.querySelector('.velo-treno-linee');
+  // Alto circa metà schermo; le ruote poggiano sul binario.
+  const h = Math.min(H * 0.62, W * 0.9);
+  const w = (h * 1270) / 240;
+  const base = H * 0.86;
+  treno.style.width = `${w}px`;
+  treno.style.height = `${h}px`;
+  treno.style.top = `${base - (h * 228) / 240}px`;
+  velo.querySelector('.velo-binario').style.top = `${base - 2}px`;
+  treno.animate(
+    [{ transform: `translateX(${W}px)` }, { transform: `translateX(${-w}px)` }],
+    { duration: 3800, delay: 150, fill: 'both', easing: 'cubic-bezier(0.3, 0, 0.7, 1)' },
+  );
 }
-
-function veloTrenoHtml(percorso) {
-  const { W, H, L, orizzonte, punti } = percorso;
-  let stelle = '';
-  for (let i = 0; i < 24; i++) {
-    stelle += `<span class="velo-stellina" style="left:${(Math.random() * 100).toFixed(1)}%;top:${(Math.random() * 36).toFixed(1)}%;animation-delay:${(Math.random() * 0.8).toFixed(2)}s"></span>`;
-  }
-  let neve = '';
-  for (let i = 0; i < 40; i++) {
-    const size = 3 + Math.round(Math.random() * 6);
-    neve += `<span class="velo-neve-punto velo-neve-lenta" style="left:${(Math.random() * 100).toFixed(1)}%;width:${size}px;height:${size}px;background:#ffffff;animation-delay:${(Math.random() * 3).toFixed(2)}s"></span>`;
-  }
-
-  // Rotaie e traversine: si allargano avvicinandosi; dove il binario
-  // corre di lato (lontano) le rotaie si vedono schiacciate.
-  const g = 0.16 * L;
-  const fuori = (x) => x < -80 || x > W + 80;
-  const lato = (p, k) => ({ x: p.x - p.ty * k * p.s, y: p.y + p.tx * k * p.s * 0.35 });
-  let rotaie = '';
-  let traversine = '';
-  let prossima = 0;
-  punti.forEach((p, i) => {
-    if (!i || fuori(p.x)) return;
-    const q = punti[i - 1];
-    for (const v of [-g, g]) {
-      const A = lato(q, v);
-      const B = lato(p, v);
-      rotaie += `<line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke-width="${Math.max(0.8, 0.016 * L * p.s).toFixed(2)}"/>`;
-    }
-    if (p.mondo >= prossima) {
-      prossima = p.mondo + 0.1;
-      const A = lato(p, -g * 1.45);
-      const B = lato(p, g * 1.45);
-      traversine += `<line x1="${A.x.toFixed(1)}" y1="${A.y.toFixed(1)}" x2="${B.x.toFixed(1)}" y2="${B.y.toFixed(1)}" stroke-width="${Math.max(1, 0.03 * L * p.s).toFixed(2)}"/>`;
-    }
-  });
-
-  // Abeti innevati sparsi ai lati della ferrovia (i lontani dietro).
-  const abete = (x, y, h) => {
-    const w = h * 0.62;
-    const piano = (y0, y1, mezzo) => `M${x} ${y0} L${x + mezzo} ${y1} Q${x} ${y1 - h * 0.08} ${x - mezzo} ${y1} Z`;
-    return `<g>
-      <rect x="${x - h * 0.05}" y="${y - h * 0.08}" width="${h * 0.1}" height="${h * 0.1}" fill="#5a3620"/>
-      <path d="${piano(y - h * 0.55, y - h * 0.06, w / 2)}" fill="#1f5c3c"/>
-      <path d="${piano(y - h * 0.8, y - h * 0.32, w * 0.4)}" fill="#24693f"/>
-      <path d="${piano(y - h, y - h * 0.58, w * 0.28)}" fill="#2f7a4d"/>
-      <path d="M${x - w * 0.18} ${y - h * 0.62} Q${x} ${y - h * 0.68} ${x + w * 0.2} ${y - h * 0.6} M${x - w * 0.32} ${y - h * 0.36} Q${x} ${y - h * 0.42} ${x + w * 0.34} ${y - h * 0.34} M${x - w * 0.46} ${y - h * 0.1} Q${x} ${y - h * 0.16} ${x + w * 0.48} ${y - h * 0.08}" stroke="#ffffff" stroke-width="${Math.max(1.2, h * 0.05)}" stroke-linecap="round" fill="none"/>
-      <path d="M${x - w * 0.1} ${y - h * 0.93} L${x} ${y - h} L${x + w * 0.1} ${y - h * 0.93} Z" fill="#ffffff"/>
-    </g>`;
-  };
-  const alberi = [];
-  for (let i = 0; i < 30; i++) {
-    const fy = ((i * 7919) % 1000) / 1000;
-    const x = (((i * 104729) % 1000) / 1000) * W * 1.1 - W * 0.05;
-    const y = orizzonte + 4 + Math.pow(fy, 1.6) * (H - orizzonte) * 0.75;
-    const s = 0.05 + 0.95 * (y - orizzonte) / (H * 0.985 - orizzonte);
-    const vicino = punti.some(p => Math.abs(p.y - y) < 0.3 * L * s && Math.abs(p.x - x) < 0.7 * L * s);
-    if (!vicino) alberi.push({ x, y, h: 0.45 * L * s + 8 });
-  }
-  const alberiHtml = alberi.sort((m, n) => m.y - n.y).map(t => abete(t.x, t.y, t.h)).join('');
-
-  const pezzi = TRENO_PEZZI.map((pz, i) => ({ ...pz, i })).reverse().map(pz =>
-    `<img class="velo-treno-img" data-pezzo="${pz.i}" src="${pz.src}" alt="" style="width:${(pz.larg * L).toFixed(0)}px;height:${(pz.larg * L * pz.alt).toFixed(0)}px;opacity:0">`).join('');
-
-  return `
-    <div class="velo-cielo">${stelle}</div>
-    <svg class="velo-scena" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
-      <path d="M0 ${orizzonte + 10} C${W * 0.2} ${orizzonte - 40} ${W * 0.35} ${orizzonte - 30} ${W * 0.5} ${orizzonte - 6} C${W * 0.65} ${orizzonte + 14} ${W * 0.8} ${orizzonte - 44} ${W} ${orizzonte - 8} L${W} ${H} L0 ${H} Z" fill="#e6eef0"/>
-      <rect x="0" y="${orizzonte + 6}" width="${W}" height="${H}" fill="#fff8ee"/>
-      <g stroke="#8a6a55" stroke-linecap="round">${traversine}</g>
-      <g stroke="#6b5a55" stroke-linecap="round">${rotaie}</g>
-      ${alberiHtml}
-    </svg>
-    ${pezzi}
-    <div class="velo-cielo">${neve}</div>`;
-}
-
-// Fa percorrere il binario al trenino: parte piano, scorre e rallenta
-// dolcemente arrivando, grande, al centro davanti a chi guarda.
-function animaTreno(velo, percorso) {
-  const { L, punti, inMondo, partenza, fermata } = percorso;
-  const N = 160;
-  const da = punti[partenza].lungo;
-  const a = punti[fermata].lungo;
-  // Distanza "nel mondo" della locomotiva quando ha percorso una certa
-  // strada sullo schermo: il movimento sullo schermo resta morbido e
-  // continuo, i vagoni restano agganciati alla giusta distanza.
-  const mondoA = (lungo) => {
-    const i = Math.max(1, punti.findIndex(p => p.lungo >= lungo));
-    const p0 = punti[i - 1];
-    const p1 = punti[i];
-    const f = (lungo - p0.lungo) / ((p1.lungo - p0.lungo) || 1);
-    return p0.mondo + (p1.mondo - p0.mondo) * f;
-  };
-  velo.querySelectorAll('.velo-treno-img').forEach(img => {
-    const pz = TRENO_PEZZI[Number(img.dataset.pezzo)];
-    const w = pz.larg * L;
-    const h = w * pz.alt;
-    const fotogrammi = [];
-    for (let k = 0; k <= N; k++) {
-      const u = k / N;
-      // Parte deciso e rallenta dolcemente arrivando.
-      const dolce = (1 - Math.cos(u * Math.PI)) / 2;
-      const p = inMondo(mondoA(da + dolce * (a - da)) - pz.dist);
-      // Inclinazione morbida secondo la curva; quando il binario va verso
-      // sinistra il pezzo si gira, quando viene verso di noi si stringe.
-      const angolo = (Math.atan2(p.ty, Math.abs(p.tx)) * 180) / Math.PI;
-      const giro = pz.fisso ? 0 : Math.max(-9, Math.min(12, angolo * 0.2)) * Math.sign(p.tx || 1);
-      const lato = p.tx / (Math.hypot(p.tx, p.ty * 1.6) || 1);
-      const verso = pz.fisso || lato >= 0 ? 1 : -1;
-      const stretto = pz.fisso ? 1 : 0.55 + 0.45 * Math.abs(lato);
-      fotogrammi.push({
-        transform: `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px) rotate(${giro.toFixed(2)}deg) scale(${(p.s * stretto * verso).toFixed(4)}, ${p.s.toFixed(4)}) translate(${(-pz.ax * w).toFixed(1)}px, ${(-pz.ay * h).toFixed(1)}px)`,
-      });
-    }
-    img.style.opacity = '1';
-    img.animate(fotogrammi, { duration: 4600, delay: 150, fill: 'both', easing: 'linear' });
-  });
-}
-
-if (NATALE) TRENO_PEZZI.forEach(pz => { new Image().src = pz.src; });
 
 // Natale, tra l'elenco delle categorie e una categoria: schermo rosso,
 // un grande fiocco di neve che si disegna al centro (bianco e oro), tanti
@@ -1000,11 +926,11 @@ function avviaTransizioneCategoria(transizione) {
   velo.setAttribute('aria-hidden', 'true');
 
   if (NATALE) {
-    velo.classList.add(inverno ? 'treno' : 'neve-natale');
-    const percorso = inverno ? percorsoTreno() : null;
-    velo.innerHTML = inverno ? veloTrenoHtml(percorso) : veloNeveHtml();
+    velo.classList.add('neve-natale');
+    if (inverno) velo.classList.add('treno-disegno');
+    velo.innerHTML = inverno ? veloTrenoDisegnoHtml() : veloNeveHtml();
     document.body.appendChild(velo);
-    if (inverno) animaTreno(velo, percorso);
+    if (inverno) animaTrenoDisegno(velo);
     rimuoviVelo(velo, copia);
     return;
   }
@@ -1069,7 +995,7 @@ function render() {
     html = offertePaginaHtml();
   } else if (path.startsWith('/natale/')) {
     const sezione = NATALE_SEZIONI.find(s => s.id === path.slice('/natale/'.length));
-    html = sezione ? galleriaSezioneHtml(sezione, { href: '#/natale', testo: 'Torna a Natale' }) : natalePaginaHtml();
+    html = sezione ? galleriaSezioneHtml(sezione, { href: '#/natale', testo: 'Torna a Natale' }, 'page-natale-sezione') : natalePaginaHtml();
   } else if (inNatale) {
     html = natalePaginaHtml();
   } else {

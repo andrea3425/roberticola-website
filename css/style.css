@@ -1898,7 +1898,7 @@ body,
    ========================================================== */
 
 body.natale {
-  --natale-rosso: #a3202a;
+  --natale-rosso: #bd1e2d;
   --natale-rosso-scuro: #7d151c;
   --natale-rosso-profondo: #5a1016;
   --natale-verde: #1f5c3c;
@@ -2169,18 +2169,18 @@ body.natale .hero-actions .btn-novita {
   }
 }
 
-/* ---------- Transizione col trenino (tra le sezioni) ---------- */
+/* ---------- Transizione col trenino (tra le sezioni) ----------
+   Stesso fondo rosso e stesse linee (oro sotto, bianco sopra) del grande
+   fiocco di neve: un lungo trenino disegnato passa da destra a sinistra. */
 
-.velo-transizione.treno {
-  background: linear-gradient(180deg, #0c2a1a 0%, var(--natale-verde) 40%);
-  overflow: hidden;
-  animation: velo-treno 5.4s ease both;
+.velo-transizione.treno-disegno {
+  animation: velo-treno 4.4s ease both;
 }
 
 @keyframes velo-treno {
   0% { opacity: 0; }
-  5% { opacity: 1; }
-  91% { opacity: 1; }
+  6% { opacity: 1; }
+  90% { opacity: 1; }
   100% { opacity: 0; }
 }
 
@@ -2189,39 +2189,68 @@ body.natale .hero-actions .btn-novita {
   inset: 0;
 }
 
-.velo-stellina {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--natale-oro);
-  box-shadow: 0 0 6px 2px rgba(232, 193, 90, 0.6);
-  animation: stellina-brilla 0.7s ease-in-out infinite alternate;
-}
-
-@keyframes stellina-brilla {
-  from { opacity: 0.3; transform: scale(0.7); }
-  to { opacity: 1; transform: scale(1.2); }
-}
-
-.velo-neve-lenta {
+.velo-neve-lenta,
+.velo-fiocchetto-lento {
   animation-duration: 2.6s;
 }
 
-.velo-scena {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+.velo-cumulo.velo-cumulo-fermo {
+  height: 20vh;
+  animation: none;
 }
 
-.velo-treno-img {
+.velo-binario {
   position: absolute;
   left: 0;
-  top: 0;
-  max-width: none;
-  transform-origin: 0 0;
+  right: 0;
+  height: 5px;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px var(--natale-oro);
+}
+
+.velo-binario::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 9px;
+  height: 7px;
+  background: repeating-linear-gradient(90deg, var(--natale-oro) 0 10px, transparent 10px 34px);
+}
+
+.velo-treno-linee {
+  position: absolute;
+  left: 0;
+  overflow: visible;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   will-change: transform;
+}
+
+.velo-treno-linee .tratto-1 { stroke: var(--natale-oro); stroke-width: 9px; }
+.velo-treno-linee .tratto-2 { stroke: #ffffff; stroke-width: 4px; }
+
+.treno-ruota {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: treno-ruota-gira 0.5s linear infinite;
+}
+
+@keyframes treno-ruota-gira {
+  to { transform: rotate(-360deg); }
+}
+
+.treno-fumo-linea {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: treno-fumo-sale 0.9s ease-out infinite;
+}
+
+@keyframes treno-fumo-sale {
+  0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+  100% { opacity: 0; transform: translate(60px, -50px) scale(1.8); }
 }
 
 /* ---------- Transizione con la neve (tra le categorie) ---------- */
@@ -2283,38 +2312,33 @@ body.natale .page-gallery .section-watermark {
   }
 }
 
-/* ---------- Natale: caselle dei servizi come pacchi regalo ----------
-   Carta a pois, nastro che gira intorno alla scatola e fiocco sopra.
-   Ogni pacco ha una carta e un nastro diversi. */
+/* ---------- Natale: caselle dei servizi come pacchetti eleganti ----------
+   Casella bianca pulita, un nastro rosso sottile lungo il lato sinistro e
+   un piccolo fiocco in alto, sopra il nastro. */
 body.natale .servizi-grid {
-  margin-top: 3.75rem;
-  row-gap: 2.75rem;
+  margin-top: 3.5rem;
+  row-gap: 2.25rem;
 }
 
 body.natale .servizio-card {
-  --carta: #fffaf2;
-  --pois: rgba(163, 32, 42, 0.09);
-  --nastro: var(--natale-verde);
   position: relative;
-  padding-right: 4rem;
+  padding-left: 2.6rem;
   background:
-    linear-gradient(90deg, transparent calc(100% - 50px), var(--nastro) calc(100% - 50px), var(--nastro) calc(100% - 32px), transparent calc(100% - 32px)),
-    linear-gradient(180deg, transparent 56px, var(--nastro) 56px, var(--nastro) 72px, transparent 72px),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0, rgba(0, 0, 0, 0.06) 12px, transparent 12px),
-    radial-gradient(circle, var(--pois) 2.5px, transparent 3px) 0 0 / 20px 20px,
-    var(--carta);
+    linear-gradient(90deg, transparent 16px, var(--natale-rosso) 16px, var(--natale-rosso) 23px, transparent 23px),
+    #fffdf9;
 }
 
 body.natale .servizio-card::before {
   content: '';
   position: absolute;
-  top: -42px;
-  right: -3px;
-  width: 88px;
-  height: 52px;
-  background: var(--nastro);
+  top: -15px;
+  left: -3px;
+  width: 46px;
+  height: 28px;
+  background: var(--natale-oro);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
   transform-origin: 50% 80%;
   transition: transform 0.25s ease;
 }
@@ -2323,18 +2347,9 @@ body.natale .servizio-card:hover::before {
   transform: rotate(-8deg) scale(1.12);
 }
 
-body.natale .servizio-card:nth-child(4n + 2) { --carta: #eaf5ec; --pois: rgba(31, 92, 60, 0.1); --nastro: #d9a93a; }
-body.natale .servizio-card:nth-child(4n + 3) { --carta: #fdeceb; --pois: rgba(163, 32, 42, 0.08); --nastro: var(--natale-verde); }
-body.natale .servizio-card:nth-child(4n + 4) { --carta: #fff4d9; --pois: rgba(232, 193, 90, 0.25); --nastro: #2f8a52; }
-
-body.natale .servizio-icona {
-  position: relative;
-  box-shadow: 0 0 0 4px var(--carta), 0 10px 20px -10px rgba(0, 0, 0, 0.4);
-}
-
 /* ---------- Natale: scritte secondarie in corsivo elegante ---------- */
 body.natale {
-  --font-script: 'Parisienne', 'Caveat', cursive;
+  --font-script: 'Caveat', 'Baloo 2', cursive;
 }
 
 body.natale .hero-tagline {
@@ -2347,14 +2362,13 @@ body.natale .hero-tagline {
 
 body.natale .servizi .section-lead,
 body.natale .page-gallery .section-lead {
-  font-weight: 400;
-  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 700;
 }
 
 body.natale .eyebrow {
   font-family: var(--font-script);
-  font-weight: 400;
-  font-size: 1.55rem;
+  font-weight: 700;
+  font-size: 1.35rem;
   text-transform: none;
   letter-spacing: 0;
   margin-bottom: 0.3rem;
@@ -2376,4 +2390,447 @@ body.natale .page-gallery-sezione h2 {
 body.natale .categoria-caption h4 {
   color: var(--natale-rosso);
   font-weight: 700;
+}
+
+/* Titolo delle sezioni (Prodotti, Novità, Offerte, Natale): in rosso. */
+body.natale[data-theme="secondary"]:not(.in-categoria) .page-gallery h2 {
+  color: var(--natale-rosso-vivo);
+}
+
+/* ---------- Natale: contatti e orari come cartoline ----------
+   Bordo seghettato (come un francobollo) con la fascia a strisce rosse e
+   bianche delle buste di posta aerea. */
+body.natale .contatti-grid {
+  border: 18px solid transparent;
+  border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cdefs%3E%3Cpattern id='s' width='10' height='10' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'%3E%3Crect width='5' height='10' fill='%23c8202f'/%3E%3Crect x='5' width='5' height='10' fill='%23ffffff'/%3E%3C/pattern%3E%3Cmask id='m'%3E%3Crect width='60' height='60' fill='%23fff'/%3E%3Cg fill='%23000'%3E%3Ccircle cx='5' cy='0' r='3.6'/%3E%3Ccircle cx='5' cy='60' r='3.6'/%3E%3Ccircle cx='0' cy='5' r='3.6'/%3E%3Ccircle cx='60' cy='5' r='3.6'/%3E%3Ccircle cx='15' cy='0' r='3.6'/%3E%3Ccircle cx='15' cy='60' r='3.6'/%3E%3Ccircle cx='0' cy='15' r='3.6'/%3E%3Ccircle cx='60' cy='15' r='3.6'/%3E%3Ccircle cx='25' cy='0' r='3.6'/%3E%3Ccircle cx='25' cy='60' r='3.6'/%3E%3Ccircle cx='0' cy='25' r='3.6'/%3E%3Ccircle cx='60' cy='25' r='3.6'/%3E%3Ccircle cx='35' cy='0' r='3.6'/%3E%3Ccircle cx='35' cy='60' r='3.6'/%3E%3Ccircle cx='0' cy='35' r='3.6'/%3E%3Ccircle cx='60' cy='35' r='3.6'/%3E%3Ccircle cx='45' cy='0' r='3.6'/%3E%3Ccircle cx='45' cy='60' r='3.6'/%3E%3Ccircle cx='0' cy='45' r='3.6'/%3E%3Ccircle cx='60' cy='45' r='3.6'/%3E%3Ccircle cx='55' cy='0' r='3.6'/%3E%3Ccircle cx='55' cy='60' r='3.6'/%3E%3Ccircle cx='0' cy='55' r='3.6'/%3E%3Ccircle cx='60' cy='55' r='3.6'/%3E%3C/g%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)'%3E%3Crect width='60' height='60' fill='%23fffdf9'/%3E%3Cpath fill-rule='evenodd' fill='url(%23s)' d='M6 6H54V54H6ZM14 14V46H46V14Z'/%3E%3C/g%3E%3C/svg%3E") 18 fill round;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 10px 16px rgba(40, 0, 5, 0.35));
+}
+
+/* Contatti: un'unica cartolina con tutto dentro. A sinistra i recapiti
+   (come il messaggio sul retro di una cartolina), una riga tratteggiata
+   in mezzo e a destra la mappa. */
+body.natale .contatti-grid {
+  padding: 1.25rem 1.4rem;
+  gap: 1.75rem;
+}
+
+body.natale .contatti-colonna {
+  gap: 0.6rem;
+  padding-right: 1.75rem;
+  border-right: 2px dashed rgba(189, 30, 45, 0.35);
+}
+
+body.natale .contatti-card,
+body.natale .contatti-instagram {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+body.natale .contatti-card { padding: 0 0 0.4rem; }
+
+body.natale .contatti-instagram {
+  padding: 0.7rem 0 0.2rem;
+  border-top: 1px solid var(--border);
+}
+
+body.natale .contatti-instagram:hover {
+  transform: translateX(4px);
+  box-shadow: none;
+}
+
+body.natale .contatti-mappa {
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+@media (max-width: 780px) {
+  body.natale .contatti-colonna {
+    padding-right: 0;
+    padding-bottom: 1.25rem;
+    border-right: none;
+    border-bottom: 2px dashed rgba(189, 30, 45, 0.35);
+  }
+}
+
+/* Orari dentro la cartolina: scritte scure su fondo chiaro. */
+body.natale .orari-tabella-wrap {
+  display: inline-block;
+  max-width: 100%;
+  margin-top: 2.5rem;
+}
+
+body.natale .orari-table {
+  border: none;
+  border-radius: 0;
+}
+
+body.natale .orari-table th { color: var(--natale-verde); }
+body.natale .orari-table td { color: var(--ink); }
+body.natale .orari-table th.oggi,
+body.natale .orari-table td.oggi { color: var(--natale-rosso); }
+
+/* Nastro dei pacchetti dei servizi: verde. */
+body.natale .servizio-card {
+  background:
+    linear-gradient(90deg, transparent 16px, #1f7a45 16px, #1f7a45 23px, transparent 23px),
+    #fffdf9;
+}
+
+/* Simbolo del logo col cappellino: un po' più alto per far stare il cappello. */
+body.natale .logo-icon { height: 50px; margin-top: -4px; }
+@media (min-width: 681px) and (max-width: 1080px) {
+  body.natale .logo-icon { height: 41px; }
+}
+
+/* ---------- Natale: orari come cartellini regalo appesi ---------- */
+body.natale .orari-tabella-wrap {
+  display: block;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+body.natale .orari-cartellini {
+  --passo: 144px;
+  display: inline-flex;
+  gap: 14px;
+  padding: 40px 0 12px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='40' viewBox='0 0 144 40'%3E%3Cpath d='M0 4Q72 58 144 4' fill='none' stroke='%231f5c3c' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M0 4Q72 58 144 4' fill='none' stroke='%232f8a52' stroke-width='3' stroke-dasharray='2 5' stroke-linecap='round'/%3E%3Cellipse cx='28.8' cy='26.7' rx='3.4' ry='5' fill='%23ffd23f'/%3E%3Crect x='26.3' y='20.7' width='5' height='3' fill='%23c9a54a'/%3E%3Cellipse cx='57.6' cy='35.5' rx='3.4' ry='5' fill='%23ff5b5b'/%3E%3Crect x='55.1' y='29.5' width='5' height='3' fill='%23c9a54a'/%3E%3Cellipse cx='86.4' cy='35.5' rx='3.4' ry='5' fill='%237ee08f'/%3E%3Crect x='83.9' y='29.5' width='5' height='3' fill='%23c9a54a'/%3E%3Cellipse cx='115.2' cy='26.7' rx='3.4' ry='5' fill='%237cc8ff'/%3E%3Crect x='112.7' y='20.7' width='5' height='3' fill='%23c9a54a'/%3E%3C/svg%3E") repeat-x;
+  background-size: var(--passo) 40px;
+  background-position: 65px 0;
+}
+
+body.natale .cartellino {
+  --giu: 6px;
+  position: relative;
+  flex: none;
+  width: 130px;
+  margin-top: var(--giu);
+  transform-origin: 50% calc(-36px - var(--giu));
+  animation: cartellino-dondola 3s ease-in-out infinite alternate;
+  filter: drop-shadow(0 8px 10px rgba(40, 0, 5, 0.35));
+}
+
+body.natale .cartellino:nth-child(2n) { --giu: 22px; animation-delay: -1.5s; }
+body.natale .cartellino:nth-child(3n) { --giu: 14px; animation-delay: -0.8s; }
+
+/* il filo dorato che lo tiene appeso alla ghirlanda */
+body.natale .cartellino::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: calc(-36px - var(--giu));
+  width: 2px;
+  height: calc(36px + var(--giu) + 14px);
+  margin-left: -1px;
+  background: #e8c15a;
+}
+
+@keyframes cartellino-dondola {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(3deg); }
+}
+
+body.natale .cartellino-carta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1.9rem 0.6rem 1.1rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 14px, transparent 4.5px, #c9a54a 5px, #c9a54a 6.5px, transparent 7px),
+    #fffaf0;
+  clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%, 0 20px);
+}
+
+body.natale .cartellino-giorno {
+  font-family: var(--font-script);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--natale-rosso);
+}
+
+body.natale .cartellino-ore {
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+body.natale .cartellino.oggi .cartellino-carta {
+  background:
+    radial-gradient(circle at 50% 14px, transparent 4.5px, #ffd877 5px, #ffd877 6.5px, transparent 7px),
+    var(--natale-verde);
+}
+
+body.natale .cartellino.oggi .cartellino-giorno,
+body.natale .cartellino.oggi .cartellino-ore { color: #ffffff; }
+
+body.natale .cartellino-oggi {
+  order: 3;
+  margin-top: 0.15rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: #ffd23f;
+  color: var(--natale-verde);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.natale .cartellino { animation: none; }
+}
+
+/* Telefono: cartellini su due file (4 + 3), ognuno col suo pezzo di ghirlanda. */
+@media (max-width: 680px) {
+  body.natale .orari-tabella-wrap { overflow: visible; }
+
+  body.natale .orari-cartellini {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 46px 8px;
+    padding: 40px 0 8px;
+    background: none;
+  }
+
+  body.natale .cartellino {
+    width: calc(25% - 6px);
+  }
+
+  body.natale .cartellino::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    top: calc(-40px - var(--giu));
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='40' viewBox='0 0 100 40' preserveAspectRatio='none'%3E%3Cpath d='M0 24Q50 -16 100 24' fill='none' stroke='%231f5c3c' stroke-width='6' stroke-linecap='round'/%3E%3Cpath d='M0 24Q50 -16 100 24' fill='none' stroke='%232f8a52' stroke-width='2.5' stroke-dasharray='2 5' stroke-linecap='round'/%3E%3Cellipse cx='15.0' cy='18.4' rx='3.2' ry='4.6' fill='%23ffd23f'/%3E%3Cellipse cx='38.0' cy='9.4' rx='3.2' ry='4.6' fill='%23ff5b5b'/%3E%3Cellipse cx='62.0' cy='9.4' rx='3.2' ry='4.6' fill='%237ee08f'/%3E%3Cellipse cx='85.0' cy='18.4' rx='3.2' ry='4.6' fill='%237cc8ff'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  }
+
+  body.natale .cartellino::before {
+    top: calc(-24px - var(--giu));
+    height: calc(24px + var(--giu) + 12px);
+  }
+
+  body.natale .cartellino-carta {
+    padding: 1.6rem 0.25rem 0.8rem;
+    clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%, 0 14px);
+    background:
+      radial-gradient(circle at 50% 12px, transparent 3.5px, #c9a54a 4px, #c9a54a 5.5px, transparent 6px),
+      #fffaf0;
+  }
+
+  body.natale .cartellino.oggi .cartellino-carta {
+    background:
+      radial-gradient(circle at 50% 12px, transparent 3.5px, #ffd877 4px, #ffd877 5.5px, transparent 6px),
+      var(--natale-verde);
+  }
+
+  body.natale .cartellino-giorno { font-size: 1.05rem; }
+  body.natale .cartellino-ore { font-size: 0.74rem; }
+  body.natale .cartellino-oggi { font-size: 0.58rem; }
+}
+
+
+/* ---------- Natale: caselle Cornici e Cartoleria ----------
+   Bordo a strisce rosse e bianche (bastoncino di zucchero), fondo panna
+   con i disegnini natalizi, fascia sotto verdone o rossa e fiocco dorato. */
+body.natale .categorie-natale {
+  gap: 2.25rem;
+  margin-top: 3rem;
+}
+
+body.natale .categorie-natale .categoria-card {
+  --fascia: var(--natale-verde);
+  position: relative;
+  overflow: visible;
+  border: 9px solid transparent;
+  border-radius: 22px;
+  background:
+    linear-gradient(#fff8ec, #fff8ec) padding-box,
+    repeating-linear-gradient(-45deg, #d81f30 0 11px, #ffffff 11px 22px) border-box;
+  box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.45);
+}
+
+body.natale .categorie-natale .categoria-card:nth-child(2n) { --fascia: var(--natale-rosso); }
+
+body.natale .categorie-natale .categoria-immagine {
+  border-radius: 13px 13px 0 0;
+  overflow: hidden;
+  background: url('../public/natale-rosso.svg') 0 0 / 260px 260px, #fff8ec;
+}
+
+body.natale .categorie-natale .categoria-caption {
+  border-top: 3px solid var(--natale-oro);
+  border-radius: 0 0 13px 13px;
+  background: var(--fascia);
+  text-align: center;
+}
+
+body.natale .categorie-natale .categoria-caption h4 {
+  font-family: 'Berkshire Swash', var(--font-heading);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #ffffff;
+}
+
+body.natale .categorie-natale .link-scopri {
+  color: #ffd877;
+  text-decoration-color: rgba(255, 216, 119, 0.5);
+}
+
+/* fiocco dorato in cima alla casella */
+body.natale .categorie-natale .categoria-card::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: -34px;
+  left: 50%;
+  width: 72px;
+  height: 43px;
+  margin-left: -36px;
+  background: var(--natale-oro);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+  transition: transform 0.25s ease;
+}
+
+body.natale .categorie-natale .categoria-card:hover::before {
+  transform: rotate(-6deg) scale(1.1);
+}
+
+/* il bianco delle foto si fonde col fondo panna a disegnini */
+body.natale .categorie-natale .categoria-immagine img {
+  mix-blend-mode: multiply;
+}
+
+/* ---------- Natale: caselle dei prodotti dentro Cornici e Cartoleria ----------
+   Come le caselle Cornici e Cartoleria: bordo a strisce rosse e bianche,
+   fondo panna a disegnini, fascia sotto verdone o rossa, fiocchetto dorato. */
+body.natale .page-natale-sezione .prodotti-grid {
+  gap: 2.2rem 1.5rem;
+  margin-top: 3rem;
+}
+
+body.natale .page-natale-sezione .prodotto-card {
+  --fascia: var(--natale-verde);
+  position: relative;
+  overflow: visible;
+  border: 7px solid transparent;
+  border-radius: 20px;
+  background:
+    linear-gradient(#fff8ec, #fff8ec) padding-box,
+    repeating-linear-gradient(-45deg, #d81f30 0 9px, #ffffff 9px 18px) border-box;
+  box-shadow: 0 14px 26px -12px rgba(60, 10, 15, 0.45);
+}
+
+body.natale .page-natale-sezione .prodotto-card:nth-child(2n) { --fascia: var(--natale-rosso); }
+
+body.natale .page-natale-sezione .prodotto-immagine {
+  border-radius: 13px 13px 0 0;
+  overflow: hidden;
+  background: url('../public/natale-rosso.svg') 0 0 / 220px 220px, #fff8ec;
+}
+
+body.natale .page-natale-sezione .prodotto-immagine img {
+  mix-blend-mode: multiply;
+}
+
+body.natale .page-natale-sezione .prodotto-caption {
+  border-top: 3px solid var(--natale-oro);
+  border-radius: 0 0 13px 13px;
+  background: var(--fascia);
+  text-align: center;
+  flex: 1;
+}
+
+body.natale .page-natale-sezione .prodotto-caption h4 { color: #ffffff; }
+
+body.natale .page-natale-sezione .prodotto-prezzo,
+body.natale .page-natale-sezione .prezzo-offerta { color: #ffd877; }
+
+body.natale .page-natale-sezione .prezzo-barrato,
+body.natale .page-natale-sezione .prodotto-prezzo.su-richiesta { color: rgba(255, 255, 255, 0.85); }
+
+body.natale .page-natale-sezione .prodotto-card::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: -27px;
+  left: 50%;
+  width: 56px;
+  height: 33px;
+  margin-left: -28px;
+  background: var(--natale-oro);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 38'%3E%3Cpath d='M32 24C22 4 3 6 7 19c3 9 17 8 25 5zM32 24C42 4 61 6 57 19c-3 9-17 8-25 5z'/%3E%3Ccircle cx='32' cy='25' r='6.5'/%3E%3Cpath d='M29 29l-7 9h7l4-8zM35 29l7 9h-7l-4-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+  transition: transform 0.25s ease;
+}
+
+body.natale .page-natale-sezione .prodotto-card:hover::before {
+  transform: rotate(-6deg) scale(1.1);
+}
+
+/* Natale: caselle con bordo in tinta unita (come la fascia), fondo bianco,
+   foto più grande e descrizione più piccola. */
+body.natale .categorie-natale .categoria-card,
+body.natale .page-natale-sezione .prodotto-card {
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(var(--fascia), var(--fascia)) border-box;
+}
+
+body.natale .page-natale-sezione .prodotto-card { border-width: 5px; }
+body.natale .categorie-natale .categoria-card { border-width: 6px; }
+
+body.natale .categorie-natale .categoria-immagine,
+body.natale .page-natale-sezione .prodotto-immagine {
+  background: #ffffff;
+}
+
+body.natale .categorie-natale .categoria-immagine img,
+body.natale .page-natale-sezione .prodotto-immagine img {
+  mix-blend-mode: normal;
+  padding: 0.35rem;
+}
+
+body.natale .page-natale-sezione .prodotto-caption {
+  flex: none;
+  padding: 0.45rem 0.6rem 0.55rem;
+  border-top-width: 2px;
+}
+
+body.natale .page-natale-sezione .prodotto-caption h4 {
+  font-size: 0.88rem;
+  line-height: 1.25;
+  margin-bottom: 0.15rem;
+}
+
+body.natale .page-natale-sezione .prodotto-prezzo { font-size: 0.85rem; }
+
+body.natale .categorie-natale .categoria-caption {
+  padding: 0.5rem 0.8rem 0.6rem;
+  border-top-width: 2px;
+}
+
+body.natale .categorie-natale .categoria-caption h4 {
+  font-size: 1.35rem;
+  margin-bottom: 0.1rem;
+}
+
+@media (max-width: 680px) {
+  body.natale .page-natale-sezione .prodotto-caption h4 { font-size: 0.78rem; }
+  body.natale .page-natale-sezione .prodotto-prezzo { font-size: 0.78rem; }
 }
