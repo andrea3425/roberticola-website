@@ -77,6 +77,13 @@ function serviziGridHtml() {
 // Le novità senza "fine" restano sempre in alto.
 const NOVITA = [
   {
+    titolo: 'Antrodoco Christmas Express - Il Villaggio di Babbo Natale',
+    data: '12 e 13 Dicembre',
+    fine: '2026-12-13',
+    sommario: 'Al Chiostro Santa Chiara: animazione per bambini, laboratorio della letterina, i Tamburi di Antrodoco, tombolate, vin brul&eacute;, cr&ecirc;pes e foto con Babbo Natale!',
+    immagini: ['gallery/novita/natale-2026.jpg'],
+  },
+  {
     titolo: 'Halloween da Roberticola',
     data: '31 Ottobre',
     fine: '2026-10-31',
@@ -347,7 +354,7 @@ const pages = {
             ${NATALE ? `
             <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
             <a href="#/natale" class="btn btn-casella btn-natale">Natale</a>
-            <a href="#/galleria" class="btn btn-casella btn-novita">Prodotti</a>` : `
+            <a href="#/novita" class="btn btn-casella btn-novita">Novit&agrave; ed eventi</a>` : `
             <a href="#/offerte" class="btn btn-casella btn-offerte">Offerte</a>
             <a href="#/galleria" class="btn btn-casella btn-prodotti">Prodotti</a>
             <a href="#/novita" class="btn btn-casella btn-novita">Novit&agrave;</a>`}
