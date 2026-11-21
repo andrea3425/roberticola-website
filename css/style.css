@@ -2858,3 +2858,13 @@ body.natale .categorie-natale .categoria-caption h4 { font-size: 1.7rem; }
     gap: 2.75rem;
   }
 }
+
+/* La fascia colorata arriva sempre fino in fondo alla casella, anche quando
+   nella stessa fila un altro prodotto ha il nome su due righe. */
+body.natale .page-natale-sezione .prodotto-caption,
+body.natale .categorie-natale .categoria-caption {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
