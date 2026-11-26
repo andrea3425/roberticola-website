@@ -1283,123 +1283,6 @@ const SEZIONI_GALLERIA = [
 // null = "Prezzo su richiesta"). Si può mettere anche "prezzoOfferta".
 const NATALE_SEZIONI = [
   {
-    id: 'cornici',
-    titolo: 'Cornici',
-    copertina: 'gallery/natale/red_biscotto_1.png',
-    prodotti: [
-      {
-        titolo: 'Cornice rossa - 13x18 cm',
-        prezzo: 22.00,
-        immagini: ['gallery/natale/red_biscotto_1.png'],
-      },
-      {
-        titolo: 'Cornice rossa - "Merry Christmas"',
-        prezzo: 30.00,
-        immagini: ['gallery/natale/red_biscotto_merry.png'],
-      },
-      {
-        titolo: 'Cornice rossa - 13x18 cm',
-        prezzo: 18.00,
-        immagini: ['gallery/natale/red_pupazzo_1.png'],
-      },
-      {
-        titolo: 'Cornice Buon Natale - 13x18 cm ',
-        prezzo: 28.00,
-        immagini: ['gallery/natale/babbo_renne_1.png', 'gallery/natale/babbo_renne_2.png'],
-      },
-      {
-        titolo: 'Cornice "Buon Natale" - 13x18 cm',
-        prezzo: 30.00,
-        immagini: ['gallery/natale/buonnatale_pupazzo_1.png'],
-      },
-      {
-        titolo: 'Cornice pupazzo di neve - 13x18 cm',
-        prezzo: 26.00,
-        immagini: ['gallery/natale/pupazzo_merry_1.png', 'gallery/natale/pupazzo_merry_2.png?v=renna'],
-      },
-      {
-        titolo: 'Cornice natalizia - da parete e tavolo 20x30 cm',
-        prezzo: 20.00,
-        immagini: ['gallery/natale/cornice_grande_rennacampanella.png'],
-      },
-      {
-        titolo: 'Cornice da parete e tavolo - 20x30 cm',
-        prezzo: 20.00,
-        immagini: ['gallery/natale/cornice_hgrande_renna.png'],
-      },
-      {
-        titolo: 'Cornice mini - da appendere',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/cornicetta_mini.png'],
-      },
-      {
-        titolo: 'Cornice mini - dorata',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/mini_cornice_1.png', 'gallery/natale/mini_cornice_2.png'],
-      },
-      {
-        titolo: 'Cornice mini - con stella di Natale',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/mini_cornice_fiore_1.png', 'gallery/natale/mini_cornice_fiore_2.png'],
-      },
-      {
-        titolo: 'Portafoto personalizzabile - daappendere',
-        prezzo: 15.00,
-        immagini: ['gallery/natale/tondo_1.png', 'gallery/natale/tondo_2.png', 'gallery/natale/tondo_3.png', 'gallery/natale/tondo_4.png', 'gallery/natale/tondo_5.png', 'gallery/natale/tondo_6.png', 'gallery/natale/tondo_7.png', 'gallery/natale/tondo_8.png', 'gallery/natale/tondo_9.png', 'gallery/natale/tondo_10.png'],
-      },
-      {
-        titolo: 'Pallina portafoto - personalizzabile',
-        prezzo: 15.00,
-        immagini: ['gallery/natale/pallina_1.png', 'gallery/natale/pallina_2.png', 'gallery/natale/pallina_3.png', 'gallery/natale/pallina_4.png'],
-      },
-      {
-        titolo: 'Stella portafoto da appendere',
-        prezzo: 18.00,
-        immagini: ['gallery/natale/appese_1.png', 'gallery/natale/appese_2.png', 'gallery/natale/appese_3.png', 'gallery/natale/appese_4.png', 'gallery/natale/appese_5.png', 'gallery/natale/appese_6.png', 'gallery/natale/appese_7.png', 'gallery/natale/appese_8.png'],
-      },
-      {
-        titolo: 'Stella portafoto "Merry Christmas"',
-        prezzo: 18.00,
-        immagini: ['gallery/natale/stella_1.png', 'gallery/natale/stella_2.png'],
-      },
-      {
-        titolo: 'Portafoto stella - da appendere',
-        prezzo: 15.00,
-        immagini: ['gallery/natale/doppia_stella_1.png', 'gallery/natale/doppia_stella_2.png'],
-      },
-      {
-        titolo: 'Portafoto Babbo Natale',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/babbo_1.png', 'gallery/natale/babbo_2.png'],
-      },
-      {
-        titolo: 'Portafoto casetta pan di zenzero',
-        prezzo: 15.00,
-        immagini: ['gallery/natale/casetta_neve_1.png', 'gallery/natale/casetta_neve_2.png', 'gallery/natale/casetta_neve_3.png', 'gallery/natale/cornice_tonda_casetta_1.png', 'gallery/natale/cornice_casetta_2.png', 'gallery/natale/cornice_casetta_3.png'],
-      },
-      {
-        titolo: 'Portafoto pattino',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/pattino_1.png', 'gallery/natale/pattino_2.png'],
-      },
-      {
-        titolo: 'Portafoto personalizzabile',
-        prezzo: 15.00,
-        immagini: ['gallery/natale/tazza_1.png', 'gallery/natale/tazza_2.png'],
-      },
-      {
-        titolo: 'Portafoto tripla foto',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/triplo_1.png', 'gallery/natale/triplo_2.png'],
-      },
-      {
-        titolo: 'Alberello portafoto blu',
-        prezzo: 13.00,
-        immagini: ['gallery/natale/alberelli_1.png', 'gallery/natale/alberello_2.png'],
-      },
-    ],
-  },
-  {
     id: 'cartoleria',
     titolo: 'Cartoleria',
     prodotti: [
@@ -1462,6 +1345,123 @@ const NATALE_SEZIONI = [
         titolo: 'Stickers di Natale',
         prezzo: 2.00,
         immagini: ['gallery/natale/sticker_1.png'],
+      },
+    ],
+  },
+  {
+    id: 'cornici',
+    titolo: 'Cornici',
+    copertina: 'gallery/natale/red_biscotto_1.png',
+    prodotti: [
+      {
+        titolo: 'Cornice rossa - 13x18 cm',
+        prezzo: 22.00,
+        immagini: ['gallery/natale/red_biscotto_1.png'],
+      },
+      {
+        titolo: 'Cornice rossa - "Merry Christmas"',
+        prezzo: 30.00,
+        immagini: ['gallery/natale/red_biscotto_merry.png'],
+      },
+      {
+        titolo: 'Cornice rossa - 13x18 cm',
+        prezzo: 18.00,
+        immagini: ['gallery/natale/red_pupazzo_1.png'],
+      },
+      {
+        titolo: 'Cornice Buon Natale - 13x18 cm ',
+        prezzo: 28.00,
+        immagini: ['gallery/natale/babbo_renne_1.png', 'gallery/natale/babbo_renne_2.png'],
+      },
+      {
+        titolo: 'Cornice "Buon Natale" - 13x18 cm',
+        prezzo: 30.00,
+        immagini: ['gallery/natale/buonnatale_pupazzo_1.png'],
+      },
+      {
+        titolo: 'Cornice natalizia - da parete e tavolo 20x30 cm',
+        prezzo: 20.00,
+        immagini: ['gallery/natale/cornice_grande_rennacampanella.png'],
+      },
+      {
+        titolo: 'Cornice da parete e tavolo - 20x30 cm',
+        prezzo: 20.00,
+        immagini: ['gallery/natale/cornice_hgrande_renna.png'],
+      },
+      {
+        titolo: 'Cornice mini - da appendere',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/cornicetta_mini.png'],
+      },
+      {
+        titolo: 'Cornice mini - dorata',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/mini_cornice_1.png', 'gallery/natale/mini_cornice_2.png'],
+      },
+      {
+        titolo: 'Cornice mini - con stella di Natale',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/mini_cornice_fiore_1.png', 'gallery/natale/mini_cornice_fiore_2.png'],
+      },
+      {
+        titolo: 'Portafoto personalizzabile - daappendere',
+        prezzo: 15.00,
+        immagini: ['gallery/natale/tondo_1.png', 'gallery/natale/tondo_2.png', 'gallery/natale/tondo_3.png', 'gallery/natale/tondo_4.png', 'gallery/natale/tondo_5.png', 'gallery/natale/tondo_6.png', 'gallery/natale/tondo_7.png', 'gallery/natale/tondo_8.png', 'gallery/natale/tondo_9.png', 'gallery/natale/tondo_10.png'],
+      },
+      {
+        titolo: 'Pallina portafoto - personalizzabile',
+        prezzo: 15.00,
+        immagini: ['gallery/natale/pallina_1.png', 'gallery/natale/pallina_2.png', 'gallery/natale/pallina_3.png', 'gallery/natale/pallina_4.png'],
+      },
+      {
+        titolo: 'Stella portafoto da appendere',
+        prezzo: 18.00,
+        immagini: ['gallery/natale/appese_1.png', 'gallery/natale/appese_2.png', 'gallery/natale/appese_3.png', 'gallery/natale/appese_4.png', 'gallery/natale/appese_5.png', 'gallery/natale/appese_6.png', 'gallery/natale/appese_7.png', 'gallery/natale/appese_8.png'],
+      },
+      {
+        titolo: 'Stella portafoto "Merry Christmas"',
+        prezzo: 18.00,
+        immagini: ['gallery/natale/stella_1.png', 'gallery/natale/stella_2.png'],
+      },
+      {
+        titolo: 'Portafoto stella - da appendere',
+        prezzo: 15.00,
+        immagini: ['gallery/natale/doppia_stella_1.png', 'gallery/natale/doppia_stella_2.png'],
+      },
+      {
+        titolo: 'Portafoto Babbo Natale',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/babbo_1.png', 'gallery/natale/babbo_2.png'],
+      },
+      {
+        titolo: 'Cornice pupazzo di neve - 13x18 cm',
+        prezzo: 26.00,
+        immagini: ['gallery/natale/pupazzo_merry_1.png', 'gallery/natale/pupazzo_merry_2.png?v=renna'],
+      },
+      {
+        titolo: 'Portafoto casetta pan di zenzero',
+        prezzo: 15.00,
+        immagini: ['gallery/natale/casetta_neve_1.png', 'gallery/natale/casetta_neve_2.png', 'gallery/natale/casetta_neve_3.png', 'gallery/natale/cornice_tonda_casetta_1.png', 'gallery/natale/cornice_casetta_2.png', 'gallery/natale/cornice_casetta_3.png'],
+      },
+      {
+        titolo: 'Portafoto pattino',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/pattino_1.png', 'gallery/natale/pattino_2.png'],
+      },
+      {
+        titolo: 'Portafoto personalizzabile',
+        prezzo: 15.00,
+        immagini: ['gallery/natale/tazza_1.png', 'gallery/natale/tazza_2.png'],
+      },
+      {
+        titolo: 'Portafoto tripla foto',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/triplo_1.png', 'gallery/natale/triplo_2.png'],
+      },
+      {
+        titolo: 'Alberello portafoto blu',
+        prezzo: 13.00,
+        immagini: ['gallery/natale/alberelli_1.png', 'gallery/natale/alberello_2.png'],
       },
     ],
   },
