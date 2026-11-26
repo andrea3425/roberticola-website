@@ -1315,7 +1315,7 @@ const NATALE_SEZIONI = [
       {
         titolo: 'Cornice pupazzo di neve - 13x18 cm',
         prezzo: 26.00,
-        immagini: ['gallery/natale/pupazzo_merry_1.png', 'gallery/natale/pupazzo_merry_2.png'],
+        immagini: ['gallery/natale/pupazzo_merry_1.png', 'gallery/natale/pupazzo_merry_2.png?v=renna'],
       },
       {
         titolo: 'Cornice natalizia - da parete e tavolo 20x30 cm',
